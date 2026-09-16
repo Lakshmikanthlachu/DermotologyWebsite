@@ -61,29 +61,16 @@
   <!-- Main -->
   <div class="flex-1 min-w-0">
     <header class="sticky top-0 z-30 bg-surface/90 backdrop-blur border-b border-primary/10">
-      <div class="flex items-center justify-between px-3 sm:px-6 py-4 gap-2 sm:gap-4">
-        <div class="flex items-center gap-2 sm:gap-4 min-w-0">
-          <button data-sidebar-open aria-label="Open menu" class="lg:hidden neu-btn w-10 h-10 rounded-full flex items-center justify-center text-primary shrink-0"><i class="fa-solid fa-bars"></i></button>
-          <div class="min-w-0">
-            <h1 class="font-display text-base sm:text-xl font-bold truncate">Clinic Overview</h1>
-            <p class="text-xs text-ink-soft truncate">Friday, September 04, 2026</p>
-          </div>
-        </div>
-        <div class="flex items-center gap-1.5 sm:gap-3 shrink-0">
-          <div class="relative hidden md:block">
-            <i class="fa-solid fa-magnifying-glass absolute top-1/2 -translate-y-1/2 start-4 text-ink-soft text-sm"></i>
-            <input type="text" placeholder="Search patients, appointments..." class="input-premium !py-2.5 !ps-11 w-64" data-admin-global-search>
-          </div>
-          <button type="button" data-mobile-search-toggle aria-label="Search" aria-expanded="false" class="md:hidden neu-btn w-10 h-10 rounded-full flex items-center justify-center text-primary shrink-0"><i class="fa-solid fa-magnifying-glass text-sm"></i></button>
+      <div class="flex flex-wrap items-center gap-2 sm:gap-4 px-3 sm:px-6 py-4">
+        <button data-sidebar-open aria-label="Open menu" class="order-1 lg:hidden neu-btn w-10 h-10 rounded-full flex items-center justify-center text-primary shrink-0"><i class="fa-solid fa-bars"></i></button>
+        <div class="order-2 sm:order-3 flex items-center gap-1.5 sm:gap-3 shrink-0 ms-auto sm:ms-0">
           <button data-dir-toggle title="Toggle LTR / RTL layout" aria-label="Toggle RTL layout" class="neu-btn w-10 h-10 rounded-full flex items-center justify-center text-primary shrink-0"><i class="fa-solid fa-arrow-right-arrow-left text-sm"></i></button>
           <button data-theme-toggle class="toggle-track shrink-0"><span class="toggle-thumb"></span></button>
           <button type="button" data-demo-toast="Notifications — connect a real backend to populate this feed." aria-label="Notifications" class="relative neu-btn w-10 h-10 rounded-full flex items-center justify-center text-primary shrink-0"><i class="fa-solid fa-bell"></i><span class="absolute top-1.5 end-2 w-2 h-2 rounded-full bg-accent ring-2 ring-surface"></span></button>
         </div>
-      </div>
-      <div id="mobile-admin-search" class="hidden md:hidden px-6 pb-4">
-        <div class="relative">
-          <i class="fa-solid fa-magnifying-glass absolute top-1/2 -translate-y-1/2 start-4 text-ink-soft text-sm"></i>
-          <input type="text" placeholder="Search patients, appointments..." class="input-premium !py-2.5 !ps-11 w-full" data-admin-global-search>
+        <div class="order-3 sm:order-2 min-w-0 w-full sm:w-auto sm:flex-1">
+          <h1 class="font-display text-base sm:text-xl font-bold truncate">Clinic Overview</h1>
+          <p class="text-xs text-ink-soft truncate"><span class="sm:hidden">Fri, Sep 4</span><span class="hidden sm:inline">Friday, September 04, 2026</span></p>
         </div>
       </div>
     </header>
@@ -403,18 +390,6 @@
 (function () {
   const toast = (msg) => { if (window.soleneToast) window.soleneToast(msg); };
 
-  /* ---------- Mobile header search toggle ---------- */
-  const mobileSearchToggle = document.querySelector('[data-mobile-search-toggle]');
-  const mobileSearchPanel = document.getElementById('mobile-admin-search');
-  if (mobileSearchToggle && mobileSearchPanel) {
-    mobileSearchToggle.addEventListener('click', () => {
-      const isOpen = !mobileSearchPanel.classList.contains('hidden');
-      mobileSearchPanel.classList.toggle('hidden');
-      mobileSearchToggle.setAttribute('aria-expanded', String(!isOpen));
-      if (!isOpen) mobileSearchPanel.querySelector('input')?.focus();
-    });
-  }
-
   /* ---------- Patients: live search ---------- */
   const patientsTbody = document.querySelector('[data-patients-tbody]');
   const patientsSearch = document.querySelector('[data-patients-search]');
@@ -498,26 +473,6 @@
   if (ordersFilter) {
     ordersFilter.addEventListener('change', () => filterOrders(ordersFilter.value));
   }
-
-  /* ---------- Header global search — filters whichever table is active ---------- */
-  document.querySelectorAll('[data-admin-global-search]').forEach((input) => {
-    input.addEventListener('input', () => {
-      const activeTab = document.querySelector('[data-tab-btn].is-active')?.getAttribute('data-tab-btn');
-      if (activeTab === 'users' && patientsSearch) {
-        patientsSearch.value = input.value;
-        filterPatients(input.value);
-      } else if (activeTab === 'orders' && ordersFilter) {
-        // Free-text search on the orders table: match against row text
-        // directly (bypassing the status <select>, which is a separate filter).
-        const q = input.value.trim().toLowerCase();
-        Array.from(ordersTbody.querySelectorAll('tr')).forEach((row) => {
-          row.style.display = !q || row.textContent.toLowerCase().includes(q) ? '' : 'none';
-        });
-      } else if (input.value.trim()) {
-        toast('Switch to the Patients or Appointments tab to search that data.');
-      }
-    });
-  });
 
   /* ---------- Generic modal open/close ---------- */
   const modalOverlay = document.getElementById('admin-modal-overlay');
