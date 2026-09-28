@@ -141,72 +141,37 @@
   </div>
 </aside>
 
-<!-- ================= PATIENT DASHBOARD (below navbar) ================= -->
-<div class="flex min-h-screen pt-[76px] sm:pt-[80px] lg:pt-[86px]">
-  <!-- Sidebar overlay (mobile) -->
-  <div id="sidebar-overlay" class="hidden fixed top-[76px] sm:top-[80px] lg:top-[86px] inset-x-0 bottom-0 bg-black/50 z-40 lg:hidden"></div>
+<!-- ================= PATIENT DASHBOARD (below navbar) =================
+     Single-level layout: one sticky pill tab-bar under the shared site
+     header, full-width content below it. No second sidebar/drawer, so
+     there is only ever ONE hamburger button on this page (the site
+     menu, top-right) — nothing to confuse it with on mobile. Every
+     surface here (tab bar, cards, tables) uses the same theme-aware
+     tokens as the rest of the site, so light/dark mode stay consistent
+     instead of mixing in a permanently-dark panel. ================= -->
+<div class="pt-[76px] sm:pt-[80px] lg:pt-[86px] min-h-screen">
 
-  <!-- Sidebar -->
-  <aside id="dash-sidebar" class="fixed lg:sticky top-[76px] sm:top-[80px] lg:top-[86px] h-[calc(100vh-76px)] sm:h-[calc(100vh-80px)] lg:h-[calc(100vh-86px)] w-72 bg-ink-fixed text-white z-40 -translate-x-full lg:translate-x-0 transition-transform duration-300 flex flex-col shrink-0 shadow-2xl border-e border-white/5">
-    <div class="p-5 flex items-center gap-2.5 border-b border-white/10 min-w-0">
-      <span class="icon-chip-dark shrink-0"><i class="fa-solid fa-droplet"></i></span>
-      <span class="font-display text-base font-bold truncate">Solene <span class="text-accent">Patient</span></span>
-      <button data-sidebar-close aria-label="Close menu" class="ms-auto lg:hidden w-8 h-8 flex items-center justify-center rounded-full bg-white/10 shrink-0"><i class="fa-solid fa-xmark"></i></button>
-    </div>
-
-    <div class="p-5 border-b border-white/10">
-      <div class="flex items-center gap-3 min-w-0">
-        <img loading="lazy" class="w-12 h-12 rounded-full object-cover ring-2 ring-white/15 shrink-0" src="https://images.unsplash.com/photo-1544005313-94ddf0286df2?q=80&w=200&auto=format&fit=crop" alt="Hannah R.">
-        <div class="min-w-0">
-          <p class="font-semibold text-sm truncate">Hannah R.</p>
-          <p class="text-xs text-white/50 truncate">Patient ID #SC-20458</p>
+  <!-- Tab bar -->
+  <div class="sticky top-[76px] sm:top-[80px] lg:top-[86px] z-30 bg-surface/95 backdrop-blur border-b border-primary/10">
+    <div class="max-w-7xl mx-auto px-3 sm:px-6 lg:px-8">
+      <div class="flex items-center gap-3 py-3 sm:py-4 min-w-0">
+        <div class="flex items-center gap-2.5 shrink-0 pe-3 sm:pe-4 border-e border-primary/10 min-w-0">
+          <img loading="lazy" class="w-9 h-9 rounded-full object-cover shrink-0" src="https://images.unsplash.com/photo-1544005313-94ddf0286df2?q=80&w=200&auto=format&fit=crop" alt="Hannah R.">
+          <span class="hidden sm:block text-sm font-bold truncate max-w-[7rem]">Hannah R.</span>
         </div>
+        <nav class="flex-1 flex items-center gap-2 overflow-x-auto no-scrollbar min-w-0">
+          <button data-tab-btn="overview" class="filter-chip is-active shrink-0 !py-2 !px-4 !text-xs sm:!text-sm whitespace-nowrap">Overview</button>
+          <button data-tab-btn="appointments" class="filter-chip shrink-0 !py-2 !px-4 !text-xs sm:!text-sm whitespace-nowrap">Appointments</button>
+          <button data-tab-btn="records" class="filter-chip shrink-0 !py-2 !px-4 !text-xs sm:!text-sm whitespace-nowrap">Records</button>
+          <button data-tab-btn="billing" class="filter-chip shrink-0 !py-2 !px-4 !text-xs sm:!text-sm whitespace-nowrap">Billing</button>
+          <button data-tab-btn="settings" class="filter-chip shrink-0 !py-2 !px-4 !text-xs sm:!text-sm whitespace-nowrap">Settings</button>
+        </nav>
+        <a href="contact.html" class="btn btn-primary !py-2.5 !px-5 !text-xs !hidden sm:!inline-flex shrink-0 whitespace-nowrap">Book Appointment</a>
       </div>
-      <div class="mt-4 flex items-center justify-between gap-3 rounded-2xl bg-white/[.06] border border-white/10 px-4 py-3">
-        <div class="min-w-0">
-          <p class="text-[.65rem] font-bold uppercase tracking-wide text-white/45">Next Visit</p>
-          <p class="text-sm font-bold truncate">Sep 18 · 10:30 AM</p>
-        </div>
-        <span class="text-[.65rem] font-bold uppercase tracking-wide px-2.5 py-1 rounded-full bg-accent/20 text-accent shrink-0">Radiance</span>
-      </div>
     </div>
+  </div>
 
-    <nav class="flex-1 p-4 space-y-1 overflow-y-auto">
-      <button data-tab-btn="overview" class="sidebar-link is-active w-full flex items-center gap-3 px-3 py-2.5 rounded-xl font-medium text-sm transition"><span class="icon-chip-dark !w-8 !h-8 !text-xs shrink-0"><i class="fa-solid fa-gauge"></i></span> Overview</button>
-      <button data-tab-btn="appointments" class="sidebar-link w-full flex items-center gap-3 px-3 py-2.5 rounded-xl font-medium text-sm transition"><span class="icon-chip-dark !w-8 !h-8 !text-xs shrink-0"><i class="fa-solid fa-calendar-check"></i></span> Appointments</button>
-      <button data-tab-btn="history" class="sidebar-link w-full flex items-center gap-3 px-3 py-2.5 rounded-xl font-medium text-sm transition"><span class="icon-chip-dark !w-8 !h-8 !text-xs shrink-0"><i class="fa-solid fa-clock-rotate-left"></i></span> Treatment History</button>
-      <button data-tab-btn="photos" class="sidebar-link w-full flex items-center gap-3 px-3 py-2.5 rounded-xl font-medium text-sm transition"><span class="icon-chip-dark !w-8 !h-8 !text-xs shrink-0"><i class="fa-solid fa-images"></i></span> Progress Photos</button>
-      <button data-tab-btn="prescriptions" class="sidebar-link w-full flex items-center gap-3 px-3 py-2.5 rounded-xl font-medium text-sm transition"><span class="icon-chip-dark !w-8 !h-8 !text-xs shrink-0"><i class="fa-solid fa-prescription-bottle-medical"></i></span> Prescriptions</button>
-      <button data-tab-btn="payments" class="sidebar-link w-full flex items-center gap-3 px-3 py-2.5 rounded-xl font-medium text-sm transition"><span class="icon-chip-dark !w-8 !h-8 !text-xs shrink-0"><i class="fa-solid fa-credit-card"></i></span> Payment History</button>
-      <button data-tab-btn="settings" class="sidebar-link w-full flex items-center gap-3 px-3 py-2.5 rounded-xl font-medium text-sm transition"><span class="icon-chip-dark !w-8 !h-8 !text-xs shrink-0"><i class="fa-solid fa-gear"></i></span> Settings</button>
-    </nav>
-
-    <div class="p-4 border-t border-white/10 space-y-1">
-      <a href="contact.html" class="sidebar-link w-full flex items-center gap-3 px-3 py-2.5 rounded-xl font-medium text-sm transition"><span class="icon-chip-dark !w-8 !h-8 !text-xs shrink-0"><i class="fa-solid fa-circle-question"></i></span> Help &amp; Support</a>
-      <a href="index.html" class="sidebar-link w-full flex items-center gap-3 px-3 py-2.5 rounded-xl font-medium text-sm transition"><span class="icon-chip-dark !w-8 !h-8 !text-xs shrink-0"><i class="fa-solid fa-arrow-right-from-bracket"></i></span> Log Out</a>
-    </div>
-  </aside>
-
-  <!-- Main -->
-  <div class="flex-1 min-w-0">
-    <!-- Topbar -->
-    <header class="sticky top-[76px] sm:top-[80px] lg:top-[86px] z-30 bg-surface/90 backdrop-blur border-b border-primary/10">
-      <div class="flex items-center justify-between px-4 sm:px-6 lg:px-8 py-4 gap-3 min-w-0">
-        <div class="flex items-center gap-3 sm:gap-4 min-w-0">
-          <button data-sidebar-open aria-label="Open menu" class="lg:hidden neu-btn w-10 h-10 rounded-full flex items-center justify-center text-primary shrink-0"><i class="fa-solid fa-bars"></i></button>
-          <div class="min-w-0">
-            <h1 class="font-display text-lg sm:text-xl font-bold truncate">Welcome back, Hannah</h1>
-            <p class="text-xs text-ink-soft truncate">Here's what's happening with your care.</p>
-          </div>
-        </div>
-        <div class="flex items-center gap-2 sm:gap-3 shrink-0">
-          <button aria-label="Notifications" class="relative neu-btn w-10 h-10 rounded-full flex items-center justify-center text-primary shrink-0"><i class="fa-solid fa-bell"></i><span class="absolute top-1.5 end-2 w-2 h-2 rounded-full bg-accent ring-2 ring-surface"></span></button>
-          <a href="contact.html" class="btn btn-primary !py-2.5 !px-5 text-sm !hidden sm:!inline-flex whitespace-nowrap">Book Appointment</a>
-        </div>
-      </div>
-    </header>
-
-    <main class="p-4 sm:p-6 lg:p-8">
+  <main class="max-w-7xl mx-auto px-3 sm:px-6 lg:px-8 py-6 sm:py-8">
 
       <!-- ============ OVERVIEW ============ -->
       <div data-tab-panel="overview">
@@ -221,13 +186,13 @@
             </div>
             <div class="flex flex-wrap gap-3 shrink-0">
               <a href="contact.html" class="btn btn-primary !py-2.5 !px-5 text-sm whitespace-nowrap">Book Appointment</a>
-              <button type="button" data-tab-btn="payments" class="btn btn-outline !py-2.5 !px-5 text-sm whitespace-nowrap">View Billing</button>
+              <button type="button" data-tab-btn="billing" class="btn btn-outline !py-2.5 !px-5 text-sm whitespace-nowrap">View Billing</button>
             </div>
           </div>
         </div>
 
         <!-- Stat cards -->
-        <div class="grid sm:grid-cols-2 lg:grid-cols-4 gap-5">
+        <div class="grid sm:grid-cols-3 gap-5">
           <div class="card-premium p-6 flex items-start gap-4 min-w-0">
             <span class="icon-badge shrink-0"><i class="fa-solid fa-calendar-check"></i></span>
             <div class="min-w-0">
@@ -236,21 +201,14 @@
             </div>
           </div>
           <div class="card-premium p-6 flex items-start gap-4 min-w-0">
-            <span class="icon-badge-accent shrink-0"><i class="fa-solid fa-clock-rotate-left"></i></span>
-            <div class="min-w-0">
-              <p class="text-2xl font-display font-bold truncate">14</p>
-              <p class="text-xs text-ink-soft mt-1">Total Visits</p>
-            </div>
-          </div>
-          <div class="card-premium p-6 flex items-start gap-4 min-w-0">
-            <span class="icon-badge shrink-0"><i class="fa-solid fa-prescription-bottle-medical"></i></span>
+            <span class="icon-badge-accent shrink-0"><i class="fa-solid fa-prescription-bottle-medical"></i></span>
             <div class="min-w-0">
               <p class="text-2xl font-display font-bold truncate">2</p>
               <p class="text-xs text-ink-soft mt-1">Active Prescriptions</p>
             </div>
           </div>
           <div class="card-premium p-6 flex items-start gap-4 min-w-0">
-            <span class="icon-badge-accent shrink-0"><i class="fa-solid fa-credit-card"></i></span>
+            <span class="icon-badge shrink-0"><i class="fa-solid fa-credit-card"></i></span>
             <div class="min-w-0">
               <p class="text-2xl font-display font-bold truncate">$0.00</p>
               <p class="text-xs text-ink-soft mt-1">Balance Due</p>
@@ -311,144 +269,106 @@
               <tr><td class="px-6 py-4 font-semibold">Laser Resurfacing Follow-Up</td><td class="px-6 py-4">Dr. Ava Bennett</td><td class="px-6 py-4 whitespace-nowrap">Sep 18, 2026</td><td class="px-6 py-4"><span class="px-3 py-1 rounded-full bg-primary/10 text-primary text-xs font-semibold whitespace-nowrap">Confirmed</span></td><td class="px-6 py-4 text-end"><button type="button" data-appt-details-btn class="text-primary font-semibold whitespace-nowrap">Details</button></td></tr>
               <tr><td class="px-6 py-4 font-semibold">Acne Consultation</td><td class="px-6 py-4">Dr. Sofia Reyes</td><td class="px-6 py-4 whitespace-nowrap">Aug 02, 2026</td><td class="px-6 py-4"><span class="px-3 py-1 rounded-full bg-blush text-ink-soft text-xs font-semibold whitespace-nowrap">Completed</span></td><td class="px-6 py-4 text-end"><button type="button" data-appt-details-btn class="text-primary font-semibold whitespace-nowrap">Details</button></td></tr>
               <tr><td class="px-6 py-4 font-semibold">HydraFacial</td><td class="px-6 py-4">Dr. Ava Bennett</td><td class="px-6 py-4 whitespace-nowrap">Jun 21, 2026</td><td class="px-6 py-4"><span class="px-3 py-1 rounded-full bg-blush text-ink-soft text-xs font-semibold whitespace-nowrap">Completed</span></td><td class="px-6 py-4 text-end"><button type="button" data-appt-details-btn class="text-primary font-semibold whitespace-nowrap">Details</button></td></tr>
-              <tr><td class="px-6 py-4 font-semibold">Laser Resurfacing (Session 1)</td><td class="px-6 py-4">Dr. James Whitfield</td><td class="px-6 py-4 whitespace-nowrap">May 15, 2026</td><td class="px-6 py-4"><span class="px-3 py-1 rounded-full bg-red-500/10 text-red-500 text-xs font-semibold whitespace-nowrap">Cancelled</span></td><td class="px-6 py-4 text-end"><button type="button" data-appt-details-btn class="text-primary font-semibold whitespace-nowrap">Details</button></td></tr>
             </tbody>
           </table>
         </div>
       </div>
 
-      <!-- ============ TREATMENT HISTORY ============ -->
-      <div data-tab-panel="history" class="hidden">
-        <h2 class="font-display text-xl font-bold mb-6">Treatment History</h2>
-        <div class="space-y-5 ps-9 border-s-2 border-primary/20 min-w-0">
-          <div class="relative min-w-0">
-            <span class="absolute -start-[2.35rem] top-6 w-4 h-4 rounded-full bg-primary border-[3px] border-surface"></span>
-            <div class="card-premium p-6 min-w-0">
-              <div class="flex flex-wrap items-center justify-between gap-2"><h3 class="font-bold">Laser Resurfacing — Session 3</h3><span class="text-xs text-ink-soft shrink-0 whitespace-nowrap">Aug 02, 2026</span></div>
-              <p class="text-sm text-ink-soft mt-2">Performed by Dr. Ava Bennett. Skin response excellent, redness resolved within 3 days.</p>
-            </div>
-          </div>
-          <div class="relative min-w-0">
-            <span class="absolute -start-[2.35rem] top-6 w-4 h-4 rounded-full bg-primary border-[3px] border-surface"></span>
-            <div class="card-premium p-6 min-w-0">
-              <div class="flex flex-wrap items-center justify-between gap-2"><h3 class="font-bold">HydraFacial</h3><span class="text-xs text-ink-soft shrink-0 whitespace-nowrap">Jun 21, 2026</span></div>
-              <p class="text-sm text-ink-soft mt-2">Routine hydration and exfoliation treatment. No adverse reaction noted.</p>
-            </div>
-          </div>
-          <div class="relative min-w-0">
-            <span class="absolute -start-[2.35rem] top-6 w-4 h-4 rounded-full bg-primary border-[3px] border-surface"></span>
-            <div class="card-premium p-6 min-w-0">
-              <div class="flex flex-wrap items-center justify-between gap-2"><h3 class="font-bold">Laser Resurfacing — Session 2</h3><span class="text-xs text-ink-soft shrink-0 whitespace-nowrap">May 15, 2026</span></div>
-              <p class="text-sm text-ink-soft mt-2">Performed by Dr. James Whitfield. Continued improvement in acne scar texture.</p>
-            </div>
-          </div>
-          <div class="relative min-w-0">
-            <span class="absolute -start-[2.35rem] top-6 w-4 h-4 rounded-full bg-primary border-[3px] border-surface"></span>
-            <div class="card-premium p-6 min-w-0">
-              <div class="flex flex-wrap items-center justify-between gap-2"><h3 class="font-bold">Initial Consultation &amp; Skin Mapping</h3><span class="text-xs text-ink-soft shrink-0 whitespace-nowrap">Mar 04, 2026</span></div>
-              <p class="text-sm text-ink-soft mt-2">Full skin analysis completed. Treatment plan established for acne scarring.</p>
-            </div>
-          </div>
-        </div>
-      </div>
+      <!-- ============ RECORDS (treatment history + progress photo + prescriptions, combined into one tab to keep dashboard navigation short) ============ -->
+      <div data-tab-panel="records" class="hidden">
+        <h2 class="font-display text-xl font-bold mb-6">Health Records</h2>
 
-      <!-- ============ PROGRESS PHOTOS (PRIVATE) ============ -->
-      <div data-tab-panel="photos" class="hidden">
-        <div class="flex flex-wrap items-center justify-between gap-3 mb-2">
-          <h2 class="font-display text-xl font-bold">My Progress Photos</h2>
-          <button type="button" data-upload-photo-btn class="btn btn-primary !py-2.5 !px-5 text-sm whitespace-nowrap"><i class="fa-solid fa-camera"></i> Upload Photo</button>
-        </div>
-        <p class="text-sm text-ink-soft mb-6"><i class="fa-solid fa-lock text-primary me-1"></i> Only visible to you and your care team.</p>
-        <input type="file" accept="image/*" id="photo-upload-input" class="hidden">
-        <div data-photos-grid class="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
+        <div class="grid lg:grid-cols-2 gap-6">
           <div class="min-w-0">
-            <div class="ba-slider shadow-soft">
-              <img class="ba-before" style="filter:grayscale(.35) brightness(.82) contrast(.95)" src="https://images.unsplash.com/photo-1544005313-94ddf0286df2?q=80&w=800&auto=format&fit=crop" alt="Progress photo March 2026" data-no-fallback>
-              <img class="ba-after" src="https://images.unsplash.com/photo-1544005313-94ddf0286df2?q=80&w=800&auto=format&fit=crop" alt="Progress photo August 2026" data-no-fallback>
-              <span class="ba-label start-4">Mar 2026</span><span class="ba-label end-4">Aug 2026</span><div class="ba-handle"></div>
+            <h3 class="text-xs font-bold uppercase tracking-wide text-ink-soft mb-4">Treatment History</h3>
+            <div class="space-y-4 ps-8 border-s-2 border-primary/20 min-w-0">
+              <div class="relative min-w-0">
+                <span class="absolute -start-[2.15rem] top-5 w-3.5 h-3.5 rounded-full bg-primary border-[3px] border-surface"></span>
+                <div class="card-premium p-5 min-w-0">
+                  <div class="flex flex-wrap items-center justify-between gap-2"><h4 class="font-bold text-sm">Laser Resurfacing — Session 3</h4><span class="text-xs text-ink-soft shrink-0 whitespace-nowrap">Aug 02, 2026</span></div>
+                  <p class="text-xs text-ink-soft mt-2">Dr. Ava Bennett · skin response excellent, redness resolved within 3 days.</p>
+                </div>
+              </div>
+              <div class="relative min-w-0">
+                <span class="absolute -start-[2.15rem] top-5 w-3.5 h-3.5 rounded-full bg-primary border-[3px] border-surface"></span>
+                <div class="card-premium p-5 min-w-0">
+                  <div class="flex flex-wrap items-center justify-between gap-2"><h4 class="font-bold text-sm">HydraFacial</h4><span class="text-xs text-ink-soft shrink-0 whitespace-nowrap">Jun 21, 2026</span></div>
+                  <p class="text-xs text-ink-soft mt-2">Routine hydration and exfoliation treatment. No adverse reaction noted.</p>
+                </div>
+              </div>
+              <div class="relative min-w-0">
+                <span class="absolute -start-[2.15rem] top-5 w-3.5 h-3.5 rounded-full bg-primary border-[3px] border-surface"></span>
+                <div class="card-premium p-5 min-w-0">
+                  <div class="flex flex-wrap items-center justify-between gap-2"><h4 class="font-bold text-sm">Initial Consultation &amp; Skin Mapping</h4><span class="text-xs text-ink-soft shrink-0 whitespace-nowrap">Mar 04, 2026</span></div>
+                  <p class="text-xs text-ink-soft mt-2">Full skin analysis completed. Treatment plan established for acne scarring.</p>
+                </div>
+              </div>
             </div>
-            <p class="text-center text-sm font-semibold mt-3">Acne Scar Treatment Progress</p>
+
+            <h3 class="text-xs font-bold uppercase tracking-wide text-ink-soft mb-4 mt-8">Progress Photos <span class="normal-case font-medium text-ink-soft/70">· private</span></h3>
+            <div class="card-premium p-4 min-w-0">
+              <div class="ba-slider shadow-soft">
+                <img class="ba-before" style="filter:grayscale(.35) brightness(.82) contrast(.95)" src="https://images.unsplash.com/photo-1544005313-94ddf0286df2?q=80&w=800&auto=format&fit=crop" alt="Progress photo March 2026" data-no-fallback>
+                <img class="ba-after" src="https://images.unsplash.com/photo-1544005313-94ddf0286df2?q=80&w=800&auto=format&fit=crop" alt="Progress photo August 2026" data-no-fallback>
+                <span class="ba-label start-4">Mar 2026</span><span class="ba-label end-4">Aug 2026</span><div class="ba-handle"></div>
+              </div>
+              <p class="text-center text-xs font-semibold mt-3">Acne Scar Treatment Progress</p>
+            </div>
           </div>
-          <button type="button" data-upload-photo-btn class="card-premium aspect-[4/5] flex flex-col items-center justify-center text-center p-6 border-2 border-dashed border-primary/20 w-full cursor-pointer hover:border-primary/50 transition">
-            <i class="fa-solid fa-cloud-arrow-up text-3xl text-primary/50"></i>
-            <p class="text-sm font-semibold mt-4">Add a new photo</p>
-            <p class="text-xs text-ink-soft mt-1">Track your progress over time</p>
-          </button>
+
+          <div class="min-w-0">
+            <h3 class="text-xs font-bold uppercase tracking-wide text-ink-soft mb-4">Prescriptions</h3>
+            <div class="space-y-4">
+              <div class="card-premium p-5 min-w-0">
+                <div class="flex items-start gap-3 min-w-0">
+                  <span class="icon-badge !w-11 !h-11 !text-sm shrink-0"><i class="fa-solid fa-prescription-bottle-medical"></i></span>
+                  <div class="flex-1 min-w-0">
+                    <div class="flex items-start justify-between gap-2">
+                      <h3 class="font-bold text-sm min-w-0">Tretinoin 0.025% Cream</h3>
+                      <span class="text-xs font-semibold px-2.5 py-0.5 rounded-full bg-primary/10 text-primary shrink-0 whitespace-nowrap">Active</span>
+                    </div>
+                    <p class="text-xs text-ink-soft mt-1">Nightly · Refills: 2 remaining</p>
+                  </div>
+                </div>
+                <button type="button" data-refill-btn class="btn btn-outline !py-2 w-full mt-4 !text-xs">Request Refill</button>
+              </div>
+              <div class="card-premium p-5 min-w-0">
+                <div class="flex items-start gap-3 min-w-0">
+                  <span class="icon-badge !w-11 !h-11 !text-sm shrink-0"><i class="fa-solid fa-pills"></i></span>
+                  <div class="flex-1 min-w-0">
+                    <div class="flex items-start justify-between gap-2">
+                      <h3 class="font-bold text-sm min-w-0">Doxycycline 100mg</h3>
+                      <span class="text-xs font-semibold px-2.5 py-0.5 rounded-full bg-primary/10 text-primary shrink-0 whitespace-nowrap">Active</span>
+                    </div>
+                    <p class="text-xs text-ink-soft mt-1">Twice daily · Refills: 0 remaining</p>
+                  </div>
+                </div>
+                <button type="button" data-refill-btn class="btn btn-outline !py-2 w-full mt-4 !text-xs">Request Refill</button>
+              </div>
+            </div>
+          </div>
         </div>
       </div>
 
-      <!-- ============ PRESCRIPTIONS ============ -->
-      <div data-tab-panel="prescriptions" class="hidden">
-        <h2 class="font-display text-xl font-bold mb-6">My Prescriptions</h2>
-        <div class="grid sm:grid-cols-2 gap-5">
-          <div class="card-premium p-6 min-w-0">
-            <div class="flex items-start gap-3 min-w-0">
-              <span class="icon-badge shrink-0"><i class="fa-solid fa-prescription-bottle-medical"></i></span>
-              <div class="flex-1 min-w-0">
-                <div class="flex items-start justify-between gap-2">
-                  <h3 class="font-bold min-w-0">Tretinoin 0.025% Cream</h3>
-                  <span class="text-xs font-semibold px-3 py-1 rounded-full bg-primary/10 text-primary shrink-0 whitespace-nowrap">Active</span>
-                </div>
-                <p class="text-sm text-ink-soft mt-1">Prescribed by Dr. Sofia Reyes</p>
-              </div>
-            </div>
-            <p class="text-sm text-ink-soft mt-4">Apply a pea-sized amount to affected areas nightly. Refills: 2 remaining.</p>
-            <button type="button" data-refill-btn class="btn btn-outline !py-2.5 w-full mt-5 text-sm">Request Refill</button>
-          </div>
-          <div class="card-premium p-6 min-w-0">
-            <div class="flex items-start gap-3 min-w-0">
-              <span class="icon-badge shrink-0"><i class="fa-solid fa-pills"></i></span>
-              <div class="flex-1 min-w-0">
-                <div class="flex items-start justify-between gap-2">
-                  <h3 class="font-bold min-w-0">Doxycycline 100mg</h3>
-                  <span class="text-xs font-semibold px-3 py-1 rounded-full bg-primary/10 text-primary shrink-0 whitespace-nowrap">Active</span>
-                </div>
-                <p class="text-sm text-ink-soft mt-1">Prescribed by Dr. Sofia Reyes</p>
-              </div>
-            </div>
-            <p class="text-sm text-ink-soft mt-4">Take one tablet twice daily with food for 8 weeks. Refills: 0 remaining.</p>
-            <button type="button" data-refill-btn class="btn btn-outline !py-2.5 w-full mt-5 text-sm">Request Refill</button>
-          </div>
-          <div class="card-premium p-6 opacity-70 min-w-0">
-            <div class="flex items-start gap-3 min-w-0">
-              <span class="icon-badge shrink-0"><i class="fa-solid fa-flask-vial"></i></span>
-              <div class="flex-1 min-w-0">
-                <div class="flex items-start justify-between gap-2">
-                  <h3 class="font-bold min-w-0">Hydroquinone 4% Cream</h3>
-                  <span class="text-xs font-semibold px-3 py-1 rounded-full bg-blush text-ink-soft shrink-0 whitespace-nowrap">Completed</span>
-                </div>
-                <p class="text-sm text-ink-soft mt-1">Prescribed by Dr. Ava Bennett</p>
-              </div>
-            </div>
-            <p class="text-sm text-ink-soft mt-4">12-week course completed March 2026.</p>
-          </div>
-        </div>
-      </div>
-
-      <!-- ============ PAYMENT HISTORY ============ -->
-      <div data-tab-panel="payments" class="hidden">
-        <div class="grid sm:grid-cols-3 gap-5 mb-6">
+      <!-- ============ BILLING ============ -->
+      <div data-tab-panel="billing" class="hidden">
+        <div class="grid sm:grid-cols-2 gap-5 mb-6">
           <div class="card-premium p-6 flex items-start gap-4 min-w-0">
             <span class="icon-badge shrink-0"><i class="fa-solid fa-sack-dollar"></i></span>
             <div class="min-w-0"><p class="text-xs text-ink-soft">Total Spent (2026)</p><p class="text-2xl font-display font-bold mt-1 truncate">$2,140</p></div>
           </div>
           <div class="card-premium p-6 flex items-start gap-4 min-w-0">
-            <span class="icon-badge-accent shrink-0"><i class="fa-solid fa-award"></i></span>
-            <div class="min-w-0"><p class="text-xs text-ink-soft">Membership Plan</p><p class="text-2xl font-display font-bold mt-1 truncate">Radiance</p></div>
-          </div>
-          <div class="card-premium p-6 flex items-start gap-4 min-w-0">
-            <span class="icon-badge shrink-0"><i class="fa-solid fa-circle-check"></i></span>
+            <span class="icon-badge-accent shrink-0"><i class="fa-solid fa-circle-check"></i></span>
             <div class="min-w-0"><p class="text-xs text-ink-soft">Balance Due</p><p class="text-2xl font-display font-bold mt-1 text-primary truncate">$0.00</p></div>
           </div>
         </div>
         <div class="card-premium overflow-x-auto">
-          <table class="w-full table-premium min-w-[680px]">
+          <table class="w-full table-premium min-w-[640px]">
             <thead><tr><th class="px-6 py-4">Invoice</th><th class="px-6 py-4">Description</th><th class="px-6 py-4">Date</th><th class="px-6 py-4">Amount</th><th class="px-6 py-4">Status</th><th class="px-6 py-4"></th></tr></thead>
             <tbody class="text-sm">
               <tr><td class="px-6 py-4 font-semibold whitespace-nowrap">#INV-1042</td><td class="px-6 py-4">Laser Resurfacing — Session 3</td><td class="px-6 py-4 whitespace-nowrap">Aug 02, 2026</td><td class="px-6 py-4 font-bold whitespace-nowrap">$349.00</td><td class="px-6 py-4"><span class="px-3 py-1 rounded-full bg-primary/10 text-primary text-xs font-semibold whitespace-nowrap">Paid</span></td><td class="px-6 py-4 text-end"><button type="button" data-receipt-btn class="text-primary font-semibold whitespace-nowrap">Receipt</button></td></tr>
               <tr><td class="px-6 py-4 font-semibold whitespace-nowrap">#INV-1031</td><td class="px-6 py-4">HydraFacial</td><td class="px-6 py-4 whitespace-nowrap">Jun 21, 2026</td><td class="px-6 py-4 font-bold whitespace-nowrap">$89.00</td><td class="px-6 py-4"><span class="px-3 py-1 rounded-full bg-primary/10 text-primary text-xs font-semibold whitespace-nowrap">Paid</span></td><td class="px-6 py-4 text-end"><button type="button" data-receipt-btn class="text-primary font-semibold whitespace-nowrap">Receipt</button></td></tr>
               <tr><td class="px-6 py-4 font-semibold whitespace-nowrap">#INV-1019</td><td class="px-6 py-4">Laser Resurfacing — Session 2</td><td class="px-6 py-4 whitespace-nowrap">May 15, 2026</td><td class="px-6 py-4 font-bold whitespace-nowrap">$349.00</td><td class="px-6 py-4"><span class="px-3 py-1 rounded-full bg-primary/10 text-primary text-xs font-semibold whitespace-nowrap">Paid</span></td><td class="px-6 py-4 text-end"><button type="button" data-receipt-btn class="text-primary font-semibold whitespace-nowrap">Receipt</button></td></tr>
-              <tr><td class="px-6 py-4 font-semibold whitespace-nowrap">#INV-1004</td><td class="px-6 py-4">Initial Consultation</td><td class="px-6 py-4 whitespace-nowrap">Mar 04, 2026</td><td class="px-6 py-4 font-bold whitespace-nowrap">$129.00</td><td class="px-6 py-4"><span class="px-3 py-1 rounded-full bg-primary/10 text-primary text-xs font-semibold whitespace-nowrap">Paid</span></td><td class="px-6 py-4 text-end"><button type="button" data-receipt-btn class="text-primary font-semibold whitespace-nowrap">Receipt</button></td></tr>
             </tbody>
           </table>
         </div>
@@ -471,14 +391,13 @@
             <input type="email" value="hannah.r@example.com" placeholder="Email" class="input-premium sm:col-span-2">
             <input type="tel" value="+1 (555) 987-6543" placeholder="Phone" class="input-premium sm:col-span-2">
             <label class="sm:col-span-2 flex items-center gap-3 text-sm text-ink-soft"><input type="checkbox" checked class="rounded shrink-0"> Email me appointment reminders</label>
-            <label class="sm:col-span-2 flex items-center gap-3 text-sm text-ink-soft"><input type="checkbox" checked class="rounded shrink-0"> SMS reminders</label>
             <button class="btn btn-primary sm:col-span-2">Save Changes</button>
           </form>
+          <a href="index.html" class="w-full flex items-center justify-center gap-2 text-sm text-ink-soft font-semibold mt-5 pt-5 border-t border-primary/10 hover:text-primary transition"><i class="fa-solid fa-arrow-right-from-bracket"></i> Log Out</a>
         </div>
       </div>
 
-    </main>
-  </div>
+  </main>
 </div>
 
 <!-- ============ DASHBOARD MODALS (demo — client-side only) ============ -->
