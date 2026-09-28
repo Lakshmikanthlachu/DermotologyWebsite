@@ -1,0 +1,746 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Admin Dashboard | Solene Dermatology &amp; Skin Clinic</title>
+<meta name="description" content="Solene Clinic admin dashboard — analytics, patient management, appointments and messages.">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ccircle cx='50' cy='50' r='50' fill='%232563EB'/%3E%3Ctext x='50' y='68' font-size='58' fill='%23EC4899' text-anchor='middle' font-family='sans-serif'%3ES%3C/text%3E%3C/svg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:wght@500;600;700;800;900&family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+<script src="https://cdn.tailwindcss.com"></script>
+<script>
+  tailwind.config = { darkMode: 'class', theme: { extend: {
+    fontFamily: { display: ['Bricolage Grotesque','sans-serif'], sans: ['Plus Jakarta Sans','sans-serif'] },
+    boxShadow: { soft: '0 10px 30px -10px rgba(37,99,235,0.16)', premium: '0 20px 60px -15px rgba(37,99,235,0.32)' },
+    colors: {
+      ink: 'rgb(var(--color-ink) / <alpha-value>)',
+      'ink-soft': 'rgb(var(--color-ink-soft) / <alpha-value>)',
+      primary: 'rgb(var(--color-primary) / <alpha-value>)',
+      accent: 'rgb(var(--color-accent) / <alpha-value>)',
+      cream: 'rgb(var(--color-cream) / <alpha-value>)',
+      surface: 'rgb(var(--color-cream) / <alpha-value>)',
+      blush: 'rgb(var(--color-blush) / <alpha-value>)'
+    }
+  } } }
+</script>
+<link rel="stylesheet" href="css/style.css">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.min.js"></script>
+</head>
+<body class="bg-surface text-ink font-sans antialiased">
+
+<div class="flex min-h-screen">
+  <div id="sidebar-overlay" class="hidden fixed inset-0 bg-black/50 z-40 lg:hidden"></div>
+
+  <!-- Sidebar -->
+  <aside id="dash-sidebar" class="fixed lg:sticky top-0 h-screen w-72 bg-ink-fixed text-white z-50 -translate-x-full lg:translate-x-0 transition-transform duration-300 flex flex-col shrink-0 shadow-2xl border-e border-white/5">
+    <div class="p-6 flex items-center gap-2.5 border-b border-white/10">
+      <span class="w-10 h-10 rounded-full bg-white/10 border border-white/15 flex items-center justify-center text-white text-lg"><i class="fa-solid fa-droplet"></i></span>
+      <span class="font-display text-lg font-bold">Solene <span class="text-accent">Admin</span></span>
+      <button data-sidebar-close aria-label="Close menu" class="ms-auto lg:hidden w-8 h-8 flex items-center justify-center rounded-full bg-white/10"><i class="fa-solid fa-xmark"></i></button>
+    </div>
+    <div class="p-6 flex items-center gap-3 border-b border-white/10">
+      <img loading="lazy" class="w-12 h-12 rounded-full object-cover" src="https://images.unsplash.com/photo-1537368910025-700350fe46c7?q=80&w=200&auto=format&fit=crop" alt="Admin Sofia Reyes">
+      <div><p class="font-semibold text-sm">Dr. Sofia Reyes</p><p class="text-xs text-white/50">Clinic Administrator</p></div>
+    </div>
+    <nav class="flex-1 p-4 space-y-1 overflow-y-auto">
+      <button data-tab-btn="analytics" class="sidebar-link is-active w-full flex items-center gap-3 px-4 py-3 rounded-xl font-medium text-sm transition"><i class="fa-solid fa-chart-line w-5"></i> Analytics</button>
+      <button data-tab-btn="users" class="sidebar-link w-full flex items-center gap-3 px-4 py-3 rounded-xl font-medium text-sm transition"><i class="fa-solid fa-users w-5"></i> Patients</button>
+      <button data-tab-btn="orders" class="sidebar-link w-full flex items-center gap-3 px-4 py-3 rounded-xl font-medium text-sm transition"><i class="fa-solid fa-calendar-days w-5"></i> Appointments</button>
+      <button data-tab-btn="messages" class="sidebar-link w-full flex items-center gap-3 px-4 py-3 rounded-xl font-medium text-sm transition"><i class="fa-solid fa-envelope w-5"></i> Messages <span class="ms-auto bg-accent text-white dark:text-[#1F2937] text-[10px] font-bold w-5 h-5 rounded-full flex items-center justify-center">4</span></button>
+      <button data-tab-btn="doctors-tab" class="sidebar-link w-full flex items-center gap-3 px-4 py-3 rounded-xl font-medium text-sm transition"><i class="fa-solid fa-user-doctor w-5"></i> Doctors</button>
+      <button data-tab-btn="settings-tab" class="sidebar-link w-full flex items-center gap-3 px-4 py-3 rounded-xl font-medium text-sm transition"><i class="fa-solid fa-gear w-5"></i> Settings</button>
+    </nav>
+    <div class="p-4 border-t border-white/10">
+      <a href="index.html" class="sidebar-link w-full flex items-center gap-3 px-4 py-3 rounded-xl font-medium text-sm transition"><i class="fa-solid fa-arrow-right-from-bracket w-5"></i> Log Out</a>
+    </div>
+  </aside>
+
+  <!-- Main -->
+  <div class="flex-1 min-w-0">
+    <header class="sticky top-0 z-30 bg-surface/90 backdrop-blur border-b border-primary/10">
+      <div class="flex flex-wrap items-center gap-2 sm:gap-4 px-3 sm:px-6 py-4">
+        <button data-sidebar-open aria-label="Open menu" class="order-1 lg:hidden neu-btn w-10 h-10 rounded-full flex items-center justify-center text-primary shrink-0"><i class="fa-solid fa-bars"></i></button>
+        <div class="order-2 sm:order-3 flex items-center gap-1.5 sm:gap-3 shrink-0 ms-auto sm:ms-0">
+          <button data-dir-toggle title="Toggle LTR / RTL layout" aria-label="Toggle RTL layout" class="neu-btn w-10 h-10 rounded-full flex items-center justify-center text-primary shrink-0"><i class="fa-solid fa-arrow-right-arrow-left text-sm"></i></button>
+          <button data-theme-toggle class="toggle-track shrink-0"><span class="toggle-thumb"></span></button>
+          <button type="button" data-demo-toast="Notifications — connect a real backend to populate this feed." aria-label="Notifications" class="relative neu-btn w-10 h-10 rounded-full flex items-center justify-center text-primary shrink-0"><i class="fa-solid fa-bell"></i><span class="absolute top-1.5 end-2 w-2 h-2 rounded-full bg-accent ring-2 ring-surface"></span></button>
+        </div>
+        <div class="order-3 sm:order-2 min-w-0 w-full sm:w-auto sm:flex-1">
+          <h1 class="font-display text-base sm:text-xl font-bold truncate">Clinic Overview</h1>
+          <p class="text-xs text-ink-soft truncate"><span class="sm:hidden">Fri, Sep 4</span><span class="hidden sm:inline">Friday, September 04, 2026</span></p>
+        </div>
+      </div>
+    </header>
+
+    <main class="p-6 lg:p-8">
+
+      <!-- ============ ANALYTICS ============ -->
+      <div data-tab-panel="analytics">
+        <div class="grid sm:grid-cols-2 lg:grid-cols-4 gap-5">
+          <div class="card-premium p-6">
+            <div class="flex items-center justify-between"><i class="fa-solid fa-sack-dollar text-primary text-xl"></i><span class="text-xs font-semibold text-primary bg-primary/10 px-2 py-1 rounded-full">+12.4%</span></div>
+            <p class="text-2xl font-display font-bold mt-4">$184,320</p>
+            <p class="text-xs text-ink-soft mt-1">Revenue (This Month)</p>
+          </div>
+          <div class="card-premium p-6">
+            <div class="flex items-center justify-between"><i class="fa-solid fa-users text-primary text-xl"></i><span class="text-xs font-semibold text-primary bg-primary/10 px-2 py-1 rounded-full">+8.1%</span></div>
+            <p class="text-2xl font-display font-bold mt-4">2,318</p>
+            <p class="text-xs text-ink-soft mt-1">Active Patients</p>
+          </div>
+          <div class="card-premium p-6">
+            <div class="flex items-center justify-between"><i class="fa-solid fa-calendar-check text-primary text-xl"></i><span class="text-xs font-semibold text-red-500 bg-red-500/10 px-2 py-1 rounded-full">-2.3%</span></div>
+            <p class="text-2xl font-display font-bold mt-4">146</p>
+            <p class="text-xs text-ink-soft mt-1">Appointments This Week</p>
+          </div>
+          <div class="card-premium p-6">
+            <div class="flex items-center justify-between"><i class="fa-solid fa-star text-primary text-xl"></i><span class="text-xs font-semibold text-primary bg-primary/10 px-2 py-1 rounded-full">+0.2</span></div>
+            <p class="text-2xl font-display font-bold mt-4">4.9 / 5</p>
+            <p class="text-xs text-ink-soft mt-1">Patient Satisfaction</p>
+          </div>
+        </div>
+
+        <div class="grid lg:grid-cols-3 gap-6 mt-6">
+          <div class="lg:col-span-2 card-premium p-7">
+            <div class="flex items-center justify-between mb-6">
+              <h3 class="font-display font-bold text-lg">Revenue Overview</h3>
+              <select class="input-premium !py-2 !px-3 !w-auto text-sm" data-revenue-range><option value="6">Last 6 Months</option><option value="12">Last 12 Months</option></select>
+            </div>
+            <canvas id="revenueChart" height="120"></canvas>
+          </div>
+          <div class="card-premium p-7">
+            <h3 class="font-display font-bold text-lg mb-6">Treatments By Category</h3>
+            <canvas id="treatmentChart" height="220"></canvas>
+          </div>
+        </div>
+
+        <div class="grid lg:grid-cols-3 gap-6 mt-6">
+          <div class="lg:col-span-2 card-premium p-7">
+            <h3 class="font-display font-bold text-lg mb-6">Weekly Appointments</h3>
+            <canvas id="apptChart" height="110"></canvas>
+          </div>
+          <div class="card-premium p-7">
+            <h3 class="font-display font-bold text-lg mb-5">Top Performing Doctors</h3>
+            <div class="space-y-5">
+              <div class="flex items-center gap-3">
+                <img loading="lazy" class="w-10 h-10 rounded-full object-cover" src="https://images.unsplash.com/photo-1622253692010-333f2da6031d?q=80&w=100&auto=format&fit=crop" alt="Dr. Ava Bennett">
+                <div class="flex-1"><p class="font-semibold text-sm">Dr. Ava Bennett</p><div class="w-full h-1.5 rounded-full bg-blush mt-1.5 overflow-hidden"><div class="h-full bg-primary" style="width:92%"></div></div></div>
+                <span class="text-xs font-bold text-ink-soft">92%</span>
+              </div>
+              <div class="flex items-center gap-3">
+                <img loading="lazy" class="w-10 h-10 rounded-full object-cover" src="https://images.unsplash.com/photo-1580489944761-15a19d654956?q=80&w=100&auto=format&fit=crop" alt="Dr. James Whitfield">
+                <div class="flex-1"><p class="font-semibold text-sm">Dr. James Whitfield</p><div class="w-full h-1.5 rounded-full bg-blush mt-1.5 overflow-hidden"><div class="h-full bg-primary" style="width:87%"></div></div></div>
+                <span class="text-xs font-bold text-ink-soft">87%</span>
+              </div>
+              <div class="flex items-center gap-3">
+                <img loading="lazy" class="w-10 h-10 rounded-full object-cover" src="https://images.unsplash.com/photo-1537368910025-700350fe46c7?q=80&w=100&auto=format&fit=crop" alt="Dr. Sofia Reyes">
+                <div class="flex-1"><p class="font-semibold text-sm">Dr. Sofia Reyes</p><div class="w-full h-1.5 rounded-full bg-blush mt-1.5 overflow-hidden"><div class="h-full bg-primary" style="width:81%"></div></div></div>
+                <span class="text-xs font-bold text-ink-soft">81%</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- ============ PATIENTS (USERS) ============ -->
+      <div data-tab-panel="users" class="hidden">
+        <div class="flex flex-wrap items-center justify-between gap-4 mb-6">
+          <h2 class="font-display text-xl font-bold">Patients <span class="text-ink-soft font-normal text-base" data-patients-count>(2,318)</span></h2>
+          <div class="flex flex-wrap gap-3 w-full sm:w-auto">
+            <div class="relative flex-1 sm:flex-initial min-w-0"><i class="fa-solid fa-magnifying-glass absolute top-1/2 -translate-y-1/2 start-4 text-ink-soft text-sm"></i><input type="text" placeholder="Search patients..." class="input-premium !py-2.5 !ps-11 w-full sm:w-56" data-patients-search></div>
+            <button type="button" data-open-modal="patient-modal" class="btn btn-primary !py-2.5 !px-5 text-sm shrink-0">+ Add Patient</button>
+          </div>
+        </div>
+        <div class="card-premium overflow-x-auto">
+          <table class="w-full table-premium min-w-[720px]">
+            <thead><tr><th class="px-6 py-4"><input type="checkbox" data-select-all-patients aria-label="Select all patients"></th><th class="px-6 py-4">Patient</th><th class="px-6 py-4">Email</th><th class="px-6 py-4">Last Visit</th><th class="px-6 py-4">Plan</th><th class="px-6 py-4">Status</th><th class="px-6 py-4"></th></tr></thead>
+            <tbody class="text-sm" data-patients-tbody>
+              <tr>
+                <td class="px-6 py-4"><input type="checkbox" data-row-checkbox></td>
+                <td class="px-6 py-4"><div class="flex items-center gap-3"><img loading="lazy" class="w-9 h-9 rounded-full object-cover" src="https://images.unsplash.com/photo-1544005313-94ddf0286df2?q=80&w=100&auto=format&fit=crop" alt="Hannah R."><span class="font-semibold">Hannah R.</span></div></td>
+                <td class="px-6 py-4 text-ink-soft">hannah.r@example.com</td><td class="px-6 py-4">Aug 02, 2026</td><td class="px-6 py-4">Radiance</td>
+                <td class="px-6 py-4"><span class="px-3 py-1 rounded-full bg-primary/10 text-primary text-xs font-semibold">Active</span></td>
+                <td class="px-6 py-4 text-end"><button type="button" data-row-menu-btn aria-label="Patient actions" class="text-primary w-9 h-9 rounded-full hover:bg-blush flex items-center justify-center ms-auto transition"><i class="fa-solid fa-ellipsis"></i></button></td>
+              </tr>
+              <tr>
+                <td class="px-6 py-4"><input type="checkbox" data-row-checkbox></td>
+                <td class="px-6 py-4"><div class="flex items-center gap-3"><img loading="lazy" class="w-9 h-9 rounded-full object-cover" src="https://images.unsplash.com/photo-1519345182560-3f2917c472ef?q=80&w=100&auto=format&fit=crop" alt="Marcus T."><span class="font-semibold">Marcus T.</span></div></td>
+                <td class="px-6 py-4 text-ink-soft">marcus.t@example.com</td><td class="px-6 py-4">Jul 29, 2026</td><td class="px-6 py-4">Essential</td>
+                <td class="px-6 py-4"><span class="px-3 py-1 rounded-full bg-primary/10 text-primary text-xs font-semibold">Active</span></td>
+                <td class="px-6 py-4 text-end"><button type="button" data-row-menu-btn aria-label="Patient actions" class="text-primary w-9 h-9 rounded-full hover:bg-blush flex items-center justify-center ms-auto transition"><i class="fa-solid fa-ellipsis"></i></button></td>
+              </tr>
+              <tr>
+                <td class="px-6 py-4"><input type="checkbox" data-row-checkbox></td>
+                <td class="px-6 py-4"><div class="flex items-center gap-3"><img loading="lazy" class="w-9 h-9 rounded-full object-cover" src="https://images.unsplash.com/photo-1487412720507-e7ab37603c6f?q=80&w=100&auto=format&fit=crop" alt="David K."><span class="font-semibold">David K.</span></div></td>
+                <td class="px-6 py-4 text-ink-soft">david.k@example.com</td><td class="px-6 py-4">Jun 18, 2026</td><td class="px-6 py-4">Prestige</td>
+                <td class="px-6 py-4"><span class="px-3 py-1 rounded-full bg-primary/10 text-primary text-xs font-semibold">Active</span></td>
+                <td class="px-6 py-4 text-end"><button type="button" data-row-menu-btn aria-label="Patient actions" class="text-primary w-9 h-9 rounded-full hover:bg-blush flex items-center justify-center ms-auto transition"><i class="fa-solid fa-ellipsis"></i></button></td>
+              </tr>
+              <tr>
+                <td class="px-6 py-4"><input type="checkbox" data-row-checkbox></td>
+                <td class="px-6 py-4"><div class="flex items-center gap-3"><img loading="lazy" class="w-9 h-9 rounded-full object-cover" src="https://images.unsplash.com/photo-1573497019940-1c28c88b4f3e?q=80&w=100&auto=format&fit=crop" alt="Priya S."><span class="font-semibold">Priya S.</span></div></td>
+                <td class="px-6 py-4 text-ink-soft">priya.s@example.com</td><td class="px-6 py-4">Feb 11, 2026</td><td class="px-6 py-4">—</td>
+                <td class="px-6 py-4"><span class="px-3 py-1 rounded-full bg-blush text-ink-soft text-xs font-semibold">Inactive</span></td>
+                <td class="px-6 py-4 text-end"><button type="button" data-row-menu-btn aria-label="Patient actions" class="text-primary w-9 h-9 rounded-full hover:bg-blush flex items-center justify-center ms-auto transition"><i class="fa-solid fa-ellipsis"></i></button></td>
+              </tr>
+              <tr>
+                <td class="px-6 py-4"><input type="checkbox" data-row-checkbox></td>
+                <td class="px-6 py-4"><div class="flex items-center gap-3"><img loading="lazy" class="w-9 h-9 rounded-full object-cover" src="https://images.unsplash.com/photo-1519823551278-64ac92734fb1?q=80&w=100&auto=format&fit=crop" alt="Leah M."><span class="font-semibold">Leah M.</span></div></td>
+                <td class="px-6 py-4 text-ink-soft">leah.m@example.com</td><td class="px-6 py-4">Sep 01, 2026</td><td class="px-6 py-4">Radiance</td>
+                <td class="px-6 py-4"><span class="px-3 py-1 rounded-full bg-primary/10 text-primary text-xs font-semibold">Active</span></td>
+                <td class="px-6 py-4 text-end"><button type="button" data-row-menu-btn aria-label="Patient actions" class="text-primary w-9 h-9 rounded-full hover:bg-blush flex items-center justify-center ms-auto transition"><i class="fa-solid fa-ellipsis"></i></button></td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        <div class="flex items-center justify-between mt-6 text-sm text-ink-soft">
+          <p data-patients-showing>Showing 1–5 of 2,318 patients</p>
+          <div class="flex items-center gap-2" data-static-pager>
+            <button type="button" data-pager-prev aria-label="Previous page" class="pager-btn"><i class="fa-solid fa-chevron-left rtl:rotate-180"></i></button>
+            <button type="button" data-pager-page="1" class="pager-btn is-active">1</button>
+            <button type="button" data-pager-page="2" class="pager-btn">2</button>
+            <button type="button" data-pager-next aria-label="Next page" class="pager-btn"><i class="fa-solid fa-chevron-right rtl:rotate-180"></i></button>
+          </div>
+        </div>
+      </div>
+
+      <!-- ============ ORDERS / APPOINTMENTS ============ -->
+      <div data-tab-panel="orders" class="hidden">
+        <div class="flex flex-wrap items-center justify-between gap-4 mb-6">
+          <h2 class="font-display text-xl font-bold">Appointments &amp; Orders</h2>
+          <div class="flex flex-wrap gap-3">
+            <select class="input-premium !py-2.5 !w-auto text-sm" data-orders-status-filter><option value="all">All Status</option><option value="Confirmed">Confirmed</option><option value="Pending">Pending</option><option value="Completed">Completed</option><option value="Cancelled">Cancelled</option></select>
+            <button type="button" data-open-modal="booking-modal" class="btn btn-primary !py-2.5 !px-5 text-sm shrink-0">+ New Booking</button>
+          </div>
+        </div>
+        <p class="hidden text-sm text-ink-soft mb-4" data-orders-empty>No appointments match this filter.</p>
+        <div class="card-premium overflow-x-auto">
+          <table class="w-full table-premium min-w-[720px]">
+            <thead><tr><th class="px-6 py-4">Order ID</th><th class="px-6 py-4">Patient</th><th class="px-6 py-4">Treatment</th><th class="px-6 py-4">Date</th><th class="px-6 py-4">Amount</th><th class="px-6 py-4">Status</th></tr></thead>
+            <tbody class="text-sm" data-orders-tbody>
+              <tr data-status="Confirmed"><td class="px-6 py-4 font-semibold">#SC-8841</td><td class="px-6 py-4">Hannah R.</td><td class="px-6 py-4">Laser Resurfacing</td><td class="px-6 py-4">Sep 18, 2026</td><td class="px-6 py-4 font-bold">$349.00</td><td class="px-6 py-4"><span class="px-3 py-1 rounded-full bg-primary/10 text-primary text-xs font-semibold">Confirmed</span></td></tr>
+              <tr data-status="Pending"><td class="px-6 py-4 font-semibold">#SC-8840</td><td class="px-6 py-4">Marcus T.</td><td class="px-6 py-4">Botox — Forehead</td><td class="px-6 py-4">Sep 16, 2026</td><td class="px-6 py-4 font-bold">$299.00</td><td class="px-6 py-4"><span class="px-3 py-1 rounded-full bg-accent/20 text-accent text-xs font-semibold">Pending</span></td></tr>
+              <tr data-status="Completed"><td class="px-6 py-4 font-semibold">#SC-8839</td><td class="px-6 py-4">David K.</td><td class="px-6 py-4">HydraFacial</td><td class="px-6 py-4">Sep 12, 2026</td><td class="px-6 py-4 font-bold">$89.00</td><td class="px-6 py-4"><span class="px-3 py-1 rounded-full bg-blush text-ink-soft text-xs font-semibold">Completed</span></td></tr>
+              <tr data-status="Completed"><td class="px-6 py-4 font-semibold">#SC-8838</td><td class="px-6 py-4">Leah M.</td><td class="px-6 py-4">Acne Consultation</td><td class="px-6 py-4">Sep 10, 2026</td><td class="px-6 py-4 font-bold">$129.00</td><td class="px-6 py-4"><span class="px-3 py-1 rounded-full bg-blush text-ink-soft text-xs font-semibold">Completed</span></td></tr>
+              <tr data-status="Cancelled"><td class="px-6 py-4 font-semibold">#SC-8837</td><td class="px-6 py-4">Priya S.</td><td class="px-6 py-4">Skin Cancer Screening</td><td class="px-6 py-4">Sep 08, 2026</td><td class="px-6 py-4 font-bold">$199.00</td><td class="px-6 py-4"><span class="px-3 py-1 rounded-full bg-red-500/10 text-red-500 text-xs font-semibold">Cancelled</span></td></tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+      <!-- ============ MESSAGES ============ -->
+      <div data-tab-panel="messages" class="hidden">
+        <h2 class="font-display text-xl font-bold mb-6">Patient Messages</h2>
+        <div class="card-premium grid lg:grid-cols-3 overflow-hidden" style="min-height:520px">
+          <div class="border-e border-primary/10 divide-y divide-primary/10 overflow-y-auto">
+            <div class="p-4 flex items-center gap-3 bg-blush cursor-pointer">
+              <img loading="lazy" class="w-10 h-10 rounded-full object-cover" src="https://images.unsplash.com/photo-1544005313-94ddf0286df2?q=80&w=100&auto=format&fit=crop" alt="Hannah R.">
+              <div class="flex-1 min-w-0"><p class="font-semibold text-sm">Hannah R.</p><p class="text-xs text-ink-soft truncate">Can I move my appointment to...</p></div>
+              <span class="w-2 h-2 rounded-full bg-accent shrink-0"></span>
+            </div>
+            <div class="p-4 flex items-center gap-3 cursor-pointer hover:bg-blush/60">
+              <img loading="lazy" class="w-10 h-10 rounded-full object-cover" src="https://images.unsplash.com/photo-1519345182560-3f2917c472ef?q=80&w=100&auto=format&fit=crop" alt="Marcus T.">
+              <div class="flex-1 min-w-0"><p class="font-semibold text-sm">Marcus T.</p><p class="text-xs text-ink-soft truncate">Thank you for the follow up!</p></div>
+            </div>
+            <div class="p-4 flex items-center gap-3 cursor-pointer hover:bg-blush/60">
+              <img loading="lazy" class="w-10 h-10 rounded-full object-cover" src="https://images.unsplash.com/photo-1487412720507-e7ab37603c6f?q=80&w=100&auto=format&fit=crop" alt="David K.">
+              <div class="flex-1 min-w-0"><p class="font-semibold text-sm">David K.</p><p class="text-xs text-ink-soft truncate">Question about my invoice</p></div>
+              <span class="w-2 h-2 rounded-full bg-accent shrink-0"></span>
+            </div>
+            <div class="p-4 flex items-center gap-3 cursor-pointer hover:bg-blush/60">
+              <img loading="lazy" class="w-10 h-10 rounded-full object-cover" src="https://images.unsplash.com/photo-1573497019940-1c28c88b4f3e?q=80&w=100&auto=format&fit=crop" alt="Priya S.">
+              <div class="flex-1 min-w-0"><p class="font-semibold text-sm">Priya S.</p><p class="text-xs text-ink-soft truncate">Rescheduling request</p></div>
+            </div>
+          </div>
+          <div class="lg:col-span-2 flex flex-col">
+            <div class="p-5 border-b border-primary/10 flex items-center gap-3">
+              <img loading="lazy" class="w-10 h-10 rounded-full object-cover" src="https://images.unsplash.com/photo-1544005313-94ddf0286df2?q=80&w=100&auto=format&fit=crop" alt="Hannah R.">
+              <div><p class="font-semibold text-sm">Hannah R.</p><p class="text-xs text-ink-soft">Patient ID #SC-20458</p></div>
+            </div>
+            <div class="flex-1 p-5 space-y-4 overflow-y-auto">
+              <div class="flex justify-start"><div class="bg-blush rounded-2xl rounded-ss-sm px-4 py-3 max-w-xs text-sm">Hi! Can I move my Sep 18 appointment to the following week?</div></div>
+              <div class="flex justify-end"><div class="bg-primary text-white rounded-2xl rounded-ee-sm px-4 py-3 max-w-xs text-sm">Of course — I have Sep 25 at 10:30 AM open, would that work?</div></div>
+              <div class="flex justify-start"><div class="bg-blush rounded-2xl rounded-ss-sm px-4 py-3 max-w-xs text-sm">Perfect, that works great. Thank you!</div></div>
+            </div>
+            <form data-demo-form="Message sent." class="p-4 border-t border-primary/10 flex items-center gap-3">
+              <input type="text" placeholder="Type a reply..." class="input-premium flex-1">
+              <button aria-label="Send message" class="w-11 h-11 rounded-full bg-primary text-white flex items-center justify-center shrink-0"><i class="fa-solid fa-paper-plane"></i></button>
+            </form>
+          </div>
+        </div>
+      </div>
+
+      <!-- ============ DOCTORS TAB ============ -->
+      <div data-tab-panel="doctors-tab" class="hidden">
+        <div class="flex flex-wrap items-center justify-between gap-3 mb-6">
+          <h2 class="font-display text-xl font-bold">Manage Doctors</h2>
+          <button type="button" data-open-modal="doctor-modal" class="btn btn-primary !py-2.5 !px-5 text-sm shrink-0">+ Add Doctor</button>
+        </div>
+        <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-6" data-doctors-grid>
+          <div class="card-premium p-6 flex items-center gap-4">
+            <img loading="lazy" class="w-14 h-14 rounded-2xl object-cover" src="https://images.unsplash.com/photo-1622253692010-333f2da6031d?q=80&w=200&auto=format&fit=crop" alt="Dr. Ava Bennett">
+            <div class="flex-1"><p class="font-bold text-sm" data-doctor-name>Dr. Ava Bennett</p><p class="text-xs text-ink-soft" data-doctor-specialty>Cosmetic Dermatology</p></div>
+            <button type="button" data-doctor-edit aria-label="Edit doctor" class="text-primary w-9 h-9 rounded-full hover:bg-blush flex items-center justify-center transition"><i class="fa-solid fa-pen"></i></button>
+          </div>
+          <div class="card-premium p-6 flex items-center gap-4">
+            <img loading="lazy" class="w-14 h-14 rounded-2xl object-cover" src="https://images.unsplash.com/photo-1580489944761-15a19d654956?q=80&w=200&auto=format&fit=crop" alt="Dr. James Whitfield">
+            <div class="flex-1"><p class="font-bold text-sm" data-doctor-name>Dr. James Whitfield</p><p class="text-xs text-ink-soft" data-doctor-specialty>Laser Specialist</p></div>
+            <button type="button" data-doctor-edit aria-label="Edit doctor" class="text-primary w-9 h-9 rounded-full hover:bg-blush flex items-center justify-center transition"><i class="fa-solid fa-pen"></i></button>
+          </div>
+          <div class="card-premium p-6 flex items-center gap-4">
+            <img loading="lazy" class="w-14 h-14 rounded-2xl object-cover" src="https://images.unsplash.com/photo-1607990281513-2c110a25bd8c?q=80&w=200&auto=format&fit=crop" alt="Dr. Maya Chen">
+            <div class="flex-1"><p class="font-bold text-sm" data-doctor-name>Dr. Maya Chen</p><p class="text-xs text-ink-soft" data-doctor-specialty>Pediatric Dermatology</p></div>
+            <button type="button" data-doctor-edit aria-label="Edit doctor" class="text-primary w-9 h-9 rounded-full hover:bg-blush flex items-center justify-center transition"><i class="fa-solid fa-pen"></i></button>
+          </div>
+        </div>
+      </div>
+
+      <!-- ============ SETTINGS TAB ============ -->
+      <div data-tab-panel="settings-tab" class="hidden">
+        <h2 class="font-display text-xl font-bold mb-6">Clinic Settings</h2>
+        <div class="card-premium p-7 max-w-2xl">
+          <form data-demo-form="Clinic settings updated." class="grid sm:grid-cols-2 gap-5">
+            <input type="text" value="Solene Dermatology & Skin Clinic" placeholder="Clinic Name" class="input-premium sm:col-span-2">
+            <input type="text" value="420 Wellness Avenue, Suite 200" placeholder="Address" class="input-premium sm:col-span-2">
+            <input type="text" value="+1 (555) 123-4567" placeholder="Phone" class="input-premium">
+            <input type="email" value="hello@soleneclinic.com" placeholder="Email" class="input-premium">
+            <button class="btn btn-primary sm:col-span-2">Save Settings</button>
+          </form>
+        </div>
+      </div>
+
+    </main>
+  </div>
+</div>
+
+<!-- ============ ADMIN MODALS (demo add / edit — client-side only, resets on reload) ============ -->
+<div id="admin-modal-overlay" class="hidden fixed inset-0 bg-black/60 z-[95] flex items-center justify-center p-4">
+
+  <form id="patient-modal" data-admin-modal class="hidden neu-flat rounded-[1.75rem] w-full max-w-md p-7 max-h-[90vh] overflow-y-auto">
+    <div class="flex items-center justify-between mb-6">
+      <h3 class="font-display text-lg font-bold" data-modal-title>Add Patient</h3>
+      <button type="button" data-modal-close aria-label="Close" class="w-8 h-8 rounded-full bg-blush flex items-center justify-center shrink-0"><i class="fa-solid fa-xmark"></i></button>
+    </div>
+    <div class="space-y-4">
+      <input required type="text" data-field="name" placeholder="Full Name" class="input-premium">
+      <input required type="email" data-field="email" placeholder="Email Address" class="input-premium">
+      <div class="grid grid-cols-2 gap-4">
+        <select data-field="plan" class="input-premium">
+          <option>Essential</option><option>Radiance</option><option>Prestige</option><option value="—">No Plan</option>
+        </select>
+        <select data-field="status" class="input-premium">
+          <option>Active</option><option>Inactive</option>
+        </select>
+      </div>
+    </div>
+    <button type="submit" class="btn btn-primary w-full mt-6" data-modal-submit-label>Add Patient</button>
+  </form>
+
+  <form id="doctor-modal" data-admin-modal class="hidden neu-flat rounded-[1.75rem] w-full max-w-md p-7 max-h-[90vh] overflow-y-auto">
+    <div class="flex items-center justify-between mb-6">
+      <h3 class="font-display text-lg font-bold" data-modal-title>Add Doctor</h3>
+      <button type="button" data-modal-close aria-label="Close" class="w-8 h-8 rounded-full bg-blush flex items-center justify-center shrink-0"><i class="fa-solid fa-xmark"></i></button>
+    </div>
+    <div class="space-y-4">
+      <input required type="text" data-field="name" placeholder="Full Name" class="input-premium">
+      <input required type="text" data-field="specialty" placeholder="Specialty" class="input-premium">
+    </div>
+    <button type="submit" class="btn btn-primary w-full mt-6" data-modal-submit-label>Add Doctor</button>
+  </form>
+
+  <form id="booking-modal" data-admin-modal class="hidden neu-flat rounded-[1.75rem] w-full max-w-md p-7 max-h-[90vh] overflow-y-auto">
+    <div class="flex items-center justify-between mb-6">
+      <h3 class="font-display text-lg font-bold">New Booking</h3>
+      <button type="button" data-modal-close aria-label="Close" class="w-8 h-8 rounded-full bg-blush flex items-center justify-center shrink-0"><i class="fa-solid fa-xmark"></i></button>
+    </div>
+    <div class="space-y-4">
+      <input required type="text" data-field="patient" placeholder="Patient Name" class="input-premium">
+      <input required type="text" data-field="treatment" placeholder="Treatment" class="input-premium">
+      <div class="grid grid-cols-2 gap-4">
+        <input required type="text" data-field="date" placeholder="e.g. Sep 20, 2026" class="input-premium">
+        <input required type="text" data-field="amount" placeholder="e.g. $199.00" class="input-premium">
+      </div>
+      <select data-field="status" class="input-premium">
+        <option>Confirmed</option><option>Pending</option><option>Completed</option>
+      </select>
+    </div>
+    <button type="submit" class="btn btn-primary w-full mt-6">Add Booking</button>
+  </form>
+</div>
+
+<!-- Row actions menu (Patients table) — fixed-position so it escapes the table's
+     horizontal-scroll container instead of being clipped by it. -->
+<div id="row-actions-menu" class="hidden fixed z-[96] w-44 neu-flat rounded-2xl p-2">
+  <button type="button" data-row-action="edit" class="dropdown-item w-full"><span class="icon-badge-inset !w-8 !h-8 !text-xs text-primary shrink-0"><i class="fa-solid fa-pen"></i></span> Edit</button>
+  <button type="button" data-row-action="view" class="dropdown-item w-full"><span class="icon-badge-inset !w-8 !h-8 !text-xs text-primary shrink-0"><i class="fa-solid fa-eye"></i></span> View</button>
+  <button type="button" data-row-action="delete" class="dropdown-item w-full"><span class="icon-badge-inset !w-8 !h-8 !text-xs !text-red-500 shrink-0"><i class="fa-solid fa-trash"></i></span> Delete</button>
+</div>
+
+<script src="js/main.js"></script>
+<script>
+/* ================================================================
+   Admin dashboard interactivity — patient/appointment search &
+   filter, add/edit/delete modals, row-actions menu, mobile search.
+   Everything here is client-side only (plain HTML/CSS/JS, no
+   backend): edits and deletions live only in this browser tab and
+   reset on reload, but the UI genuinely responds to every action.
+   ================================================================ */
+(function () {
+  const toast = (msg) => { if (window.soleneToast) window.soleneToast(msg); };
+
+  /* ---------- Patients: live search ---------- */
+  const patientsTbody = document.querySelector('[data-patients-tbody]');
+  const patientsSearch = document.querySelector('[data-patients-search]');
+  const patientsShowing = document.querySelector('[data-patients-showing]');
+  const patientsCount = document.querySelector('[data-patients-count]');
+  const patientsPagerWrap = document.querySelector('[data-static-pager]');
+
+  function filterPatients(query) {
+    if (!patientsTbody) return;
+    const q = query.trim().toLowerCase();
+    const rows = Array.from(patientsTbody.querySelectorAll('tr'));
+    let visible = 0;
+    rows.forEach((row) => {
+      const match = !q || row.textContent.toLowerCase().includes(q);
+      row.style.display = match ? '' : 'none';
+      if (match) visible++;
+    });
+    if (patientsShowing) {
+      patientsShowing.textContent = q
+        ? `Showing ${visible} of ${rows.length} patients matching "${query.trim()}"`
+        : `Showing 1–${rows.length} of 2,318 patients`;
+    }
+    // Pagination is a static demo (only 5 real rows exist) — hide it while a
+    // search narrows the table, since "page 2" has no matching connection to
+    // a text filter over this page's data.
+    if (patientsPagerWrap) patientsPagerWrap.style.display = q ? 'none' : '';
+    syncSelectAllState();
+  }
+
+  if (patientsSearch) {
+    patientsSearch.addEventListener('input', () => filterPatients(patientsSearch.value));
+  }
+
+  /* ---------- Patients: header "select all" checkbox ----------
+     Selects/clears every row checkbox that's currently visible (respects
+     an active search filter rather than reaching into hidden rows), and
+     stays in sync the other way too: checking/unchecking an individual row
+     updates the header checkbox to checked / unchecked / indeterminate. */
+  const selectAllPatients = document.querySelector('[data-select-all-patients]');
+  function visiblePatientCheckboxes() {
+    if (!patientsTbody) return [];
+    return Array.from(patientsTbody.querySelectorAll('[data-row-checkbox]'))
+      .filter((cb) => cb.closest('tr').style.display !== 'none');
+  }
+  function syncSelectAllState() {
+    if (!selectAllPatients) return;
+    const boxes = visiblePatientCheckboxes();
+    const checkedCount = boxes.filter((cb) => cb.checked).length;
+    selectAllPatients.checked = boxes.length > 0 && checkedCount === boxes.length;
+    selectAllPatients.indeterminate = checkedCount > 0 && checkedCount < boxes.length;
+  }
+  if (selectAllPatients) {
+    selectAllPatients.addEventListener('change', () => {
+      visiblePatientCheckboxes().forEach((cb) => { cb.checked = selectAllPatients.checked; });
+      selectAllPatients.indeterminate = false;
+    });
+  }
+  if (patientsTbody) {
+    patientsTbody.addEventListener('change', (e) => {
+      if (e.target.matches('[data-row-checkbox]')) syncSelectAllState();
+    });
+  }
+
+  /* ---------- Orders: status filter ---------- */
+  const ordersTbody = document.querySelector('[data-orders-tbody]');
+  const ordersFilter = document.querySelector('[data-orders-status-filter]');
+  const ordersEmpty = document.querySelector('[data-orders-empty]');
+
+  function filterOrders(status) {
+    if (!ordersTbody) return;
+    const rows = Array.from(ordersTbody.querySelectorAll('tr'));
+    let visible = 0;
+    rows.forEach((row) => {
+      const match = status === 'all' || row.getAttribute('data-status') === status;
+      row.style.display = match ? '' : 'none';
+      if (match) visible++;
+    });
+    if (ordersEmpty) ordersEmpty.classList.toggle('hidden', visible !== 0);
+  }
+
+  if (ordersFilter) {
+    ordersFilter.addEventListener('change', () => filterOrders(ordersFilter.value));
+  }
+
+  /* ---------- Generic modal open/close ---------- */
+  const modalOverlay = document.getElementById('admin-modal-overlay');
+  const modals = { 'patient-modal': document.getElementById('patient-modal'), 'doctor-modal': document.getElementById('doctor-modal'), 'booking-modal': document.getElementById('booking-modal') };
+  let editingPatientRow = null;
+  let editingDoctorCard = null;
+
+  function openModal(id) {
+    Object.values(modals).forEach((m) => m.classList.add('hidden'));
+    modals[id].classList.remove('hidden');
+    modalOverlay.classList.remove('hidden');
+    modals[id].querySelector('input,select')?.focus();
+  }
+  function closeModal() {
+    modalOverlay.classList.add('hidden');
+    Object.values(modals).forEach((m) => m.classList.add('hidden'));
+    editingPatientRow = null;
+    editingDoctorCard = null;
+  }
+  function resetForm(form) {
+    form.querySelectorAll('input').forEach((i) => { i.value = ''; });
+    form.querySelectorAll('select').forEach((s) => { s.selectedIndex = 0; });
+  }
+
+  document.querySelectorAll('[data-open-modal]').forEach((btn) => {
+    btn.addEventListener('click', () => {
+      const id = btn.getAttribute('data-open-modal');
+      resetForm(modals[id]);
+      const titleEl = modals[id].querySelector('[data-modal-title]');
+      const submitEl = modals[id].querySelector('[data-modal-submit-label]');
+      if (titleEl) titleEl.textContent = id === 'patient-modal' ? 'Add Patient' : 'Add Doctor';
+      if (submitEl) submitEl.textContent = id === 'patient-modal' ? 'Add Patient' : 'Add Doctor';
+      openModal(id);
+    });
+  });
+  document.querySelectorAll('[data-modal-close]').forEach((btn) => btn.addEventListener('click', closeModal));
+  modalOverlay.addEventListener('click', (e) => { if (e.target === modalOverlay) closeModal(); });
+  document.addEventListener('keydown', (e) => { if (e.key === 'Escape') closeModal(); });
+
+  const avatarPool = [
+    'photo-1544005313-94ddf0286df2', 'photo-1519345182560-3f2917c472ef', 'photo-1487412720507-e7ab37603c6f',
+    'photo-1573497019940-1c28c88b4f3e', 'photo-1519823551278-64ac92734fb1',
+  ];
+  function randomAvatar() {
+    const id = avatarPool[Math.floor(Math.random() * avatarPool.length)];
+    return `https://images.unsplash.com/${id}?q=80&w=100&auto=format&fit=crop`;
+  }
+
+  /* ---------- Patient modal submit (add or edit) ---------- */
+  const patientModal = modals['patient-modal'];
+  patientModal.addEventListener('submit', (e) => {
+    e.preventDefault();
+    const name = patientModal.querySelector('[data-field="name"]').value.trim();
+    const email = patientModal.querySelector('[data-field="email"]').value.trim();
+    const plan = patientModal.querySelector('[data-field="plan"]').value;
+    const status = patientModal.querySelector('[data-field="status"]').value;
+    if (!name || !email) return;
+    const statusClass = status === 'Active' ? 'bg-primary/10 text-primary' : 'bg-blush text-ink-soft';
+
+    if (editingPatientRow) {
+      editingPatientRow.querySelector('td:nth-child(2) span.font-semibold').textContent = name;
+      editingPatientRow.querySelector('td:nth-child(2) img').alt = name;
+      editingPatientRow.querySelector('td:nth-child(3)').textContent = email;
+      editingPatientRow.querySelector('td:nth-child(5)').textContent = plan;
+      const badge = editingPatientRow.querySelector('td:nth-child(6) span');
+      badge.textContent = status;
+      badge.className = `px-3 py-1 rounded-full ${statusClass} text-xs font-semibold`;
+      toast(`${name} updated.`);
+    } else {
+      const tr = document.createElement('tr');
+      const today = 'Just now';
+      tr.innerHTML = `
+        <td class="px-6 py-4"><input type="checkbox" data-row-checkbox></td>
+        <td class="px-6 py-4"><div class="flex items-center gap-3"><img loading="lazy" class="w-9 h-9 rounded-full object-cover" src="${randomAvatar()}" alt="${name}"><span class="font-semibold">${name}</span></div></td>
+        <td class="px-6 py-4 text-ink-soft">${email}</td><td class="px-6 py-4">${today}</td><td class="px-6 py-4">${plan}</td>
+        <td class="px-6 py-4"><span class="px-3 py-1 rounded-full ${statusClass} text-xs font-semibold">${status}</span></td>
+        <td class="px-6 py-4 text-end"><button type="button" data-row-menu-btn aria-label="Patient actions" class="text-primary w-9 h-9 rounded-full hover:bg-blush flex items-center justify-center ms-auto transition"><i class="fa-solid fa-ellipsis"></i></button></td>`;
+      patientsTbody.prepend(tr);
+      wireRowMenuBtn(tr.querySelector('[data-row-menu-btn]'));
+      if (patientsCount) patientsCount.textContent = '(2,319)';
+      if (patientsShowing) patientsShowing.textContent = `Showing 1–${patientsTbody.querySelectorAll('tr').length} of 2,319 patients`;
+      syncSelectAllState();
+      toast(`${name} added — this demo keeps new patients only in this browser tab.`);
+    }
+    closeModal();
+  });
+
+  /* ---------- Doctor modal submit (add or edit) ---------- */
+  const doctorModal = modals['doctor-modal'];
+  const doctorsGrid = document.querySelector('[data-doctors-grid]');
+  doctorModal.addEventListener('submit', (e) => {
+    e.preventDefault();
+    const name = doctorModal.querySelector('[data-field="name"]').value.trim();
+    const specialty = doctorModal.querySelector('[data-field="specialty"]').value.trim();
+    if (!name || !specialty) return;
+
+    if (editingDoctorCard) {
+      editingDoctorCard.querySelector('[data-doctor-name]').textContent = name;
+      editingDoctorCard.querySelector('[data-doctor-specialty]').textContent = specialty;
+      toast(`${name} updated.`);
+    } else {
+      const card = document.createElement('div');
+      card.className = 'card-premium p-6 flex items-center gap-4';
+      card.innerHTML = `
+        <img loading="lazy" class="w-14 h-14 rounded-2xl object-cover" src="${randomAvatar()}" alt="${name}">
+        <div class="flex-1"><p class="font-bold text-sm" data-doctor-name>${name}</p><p class="text-xs text-ink-soft" data-doctor-specialty>${specialty}</p></div>
+        <button type="button" data-doctor-edit aria-label="Edit doctor" class="text-primary w-9 h-9 rounded-full hover:bg-blush flex items-center justify-center transition"><i class="fa-solid fa-pen"></i></button>`;
+      doctorsGrid.appendChild(card);
+      wireDoctorEditBtn(card.querySelector('[data-doctor-edit]'));
+      toast(`${name} added — this demo keeps new doctors only in this browser tab.`);
+    }
+    closeModal();
+  });
+
+  function wireDoctorEditBtn(btn) {
+    btn.addEventListener('click', () => {
+      const card = btn.closest('.card-premium');
+      editingDoctorCard = card;
+      doctorModal.querySelector('[data-field="name"]').value = card.querySelector('[data-doctor-name]').textContent;
+      doctorModal.querySelector('[data-field="specialty"]').value = card.querySelector('[data-doctor-specialty]').textContent;
+      const titleEl = doctorModal.querySelector('[data-modal-title]');
+      const submitEl = doctorModal.querySelector('[data-modal-submit-label]');
+      if (titleEl) titleEl.textContent = 'Edit Doctor';
+      if (submitEl) submitEl.textContent = 'Save Changes';
+      openModal('doctor-modal');
+    });
+  }
+  document.querySelectorAll('[data-doctor-edit]').forEach(wireDoctorEditBtn);
+
+  /* ---------- Booking modal submit ---------- */
+  const bookingModal = modals['booking-modal'];
+  let orderCounter = 8836;
+  bookingModal.addEventListener('submit', (e) => {
+    e.preventDefault();
+    const patient = bookingModal.querySelector('[data-field="patient"]').value.trim();
+    const treatment = bookingModal.querySelector('[data-field="treatment"]').value.trim();
+    const date = bookingModal.querySelector('[data-field="date"]').value.trim();
+    const amount = bookingModal.querySelector('[data-field="amount"]').value.trim();
+    const status = bookingModal.querySelector('[data-field="status"]').value;
+    if (!patient || !treatment) return;
+    const statusClasses = { Confirmed: 'bg-primary/10 text-primary', Pending: 'bg-accent/20 text-accent', Completed: 'bg-blush text-ink-soft' };
+    const tr = document.createElement('tr');
+    tr.setAttribute('data-status', status);
+    tr.innerHTML = `
+      <td class="px-6 py-4 font-semibold">#SC-${orderCounter++}</td><td class="px-6 py-4">${patient}</td>
+      <td class="px-6 py-4">${treatment}</td><td class="px-6 py-4">${date || 'TBD'}</td>
+      <td class="px-6 py-4 font-bold">${amount || '—'}</td>
+      <td class="px-6 py-4"><span class="px-3 py-1 rounded-full ${statusClasses[status] || 'bg-blush text-ink-soft'} text-xs font-semibold">${status}</span></td>`;
+    ordersTbody.prepend(tr);
+    if (ordersFilter) filterOrders(ordersFilter.value);
+    toast(`Booking for ${patient} added — this demo keeps new bookings only in this browser tab.`);
+    closeModal();
+  });
+
+  /* ---------- Row actions menu (Patients table: Edit / View / Delete) ---------- */
+  const rowMenu = document.getElementById('row-actions-menu');
+  let activeRow = null;
+
+  function closeRowMenu() { rowMenu.classList.add('hidden'); activeRow = null; }
+
+  function wireRowMenuBtn(btn) {
+    btn.addEventListener('click', (e) => {
+      e.stopPropagation();
+      activeRow = btn.closest('tr');
+      const rect = btn.getBoundingClientRect();
+      const menuWidth = 176; // w-44
+      rowMenu.style.top = `${Math.min(rect.bottom + 6, window.innerHeight - 160)}px`;
+      rowMenu.style.left = `${Math.max(8, Math.min(rect.right - menuWidth, window.innerWidth - menuWidth - 8))}px`;
+      rowMenu.classList.remove('hidden');
+    });
+  }
+  document.querySelectorAll('[data-row-menu-btn]').forEach(wireRowMenuBtn);
+
+  document.addEventListener('click', (e) => {
+    if (!e.target.closest('#row-actions-menu') && !e.target.closest('[data-row-menu-btn]')) closeRowMenu();
+  });
+  document.addEventListener('keydown', (e) => { if (e.key === 'Escape') closeRowMenu(); });
+
+  rowMenu.querySelector('[data-row-action="view"]').addEventListener('click', () => {
+    if (activeRow) {
+      const name = activeRow.querySelector('td:nth-child(2) span')?.textContent || 'this patient';
+      toast(`Viewing ${name} — connect a real backend for full patient records.`);
+    }
+    closeRowMenu();
+  });
+  rowMenu.querySelector('[data-row-action="edit"]').addEventListener('click', () => {
+    if (activeRow) {
+      editingPatientRow = activeRow;
+      patientModal.querySelector('[data-field="name"]').value = activeRow.querySelector('td:nth-child(2) span')?.textContent || '';
+      patientModal.querySelector('[data-field="email"]').value = activeRow.querySelector('td:nth-child(3)')?.textContent || '';
+      patientModal.querySelector('[data-field="plan"]').value = activeRow.querySelector('td:nth-child(5)')?.textContent || 'Essential';
+      patientModal.querySelector('[data-field="status"]').value = activeRow.querySelector('td:nth-child(6) span')?.textContent.trim() || 'Active';
+      const titleEl = patientModal.querySelector('[data-modal-title]');
+      const submitEl = patientModal.querySelector('[data-modal-submit-label]');
+      if (titleEl) titleEl.textContent = 'Edit Patient';
+      if (submitEl) submitEl.textContent = 'Save Changes';
+      openModal('patient-modal');
+    }
+    closeRowMenu();
+  });
+  rowMenu.querySelector('[data-row-action="delete"]').addEventListener('click', () => {
+    if (activeRow) {
+      const name = activeRow.querySelector('td:nth-child(2) span')?.textContent || 'Patient';
+      activeRow.remove();
+      if (patientsShowing) patientsShowing.textContent = `Showing 1–${patientsTbody.querySelectorAll('tr').length} of 2,317 patients`;
+      syncSelectAllState();
+      toast(`${name} removed — this demo change only lives in this browser tab.`);
+    }
+    closeRowMenu();
+  });
+})();
+</script>
+<script>
+  function chartColors() {
+    const dark = document.documentElement.classList.contains('dark');
+    return { grid: dark ? 'rgba(255,255,255,.08)' : 'rgba(37,99,235,.08)', text: dark ? '#9CA0B8' : '#64687D' };
+  }
+  const c = chartColors();
+  Chart.defaults.font.family = "'Plus Jakarta Sans', sans-serif";
+  Chart.defaults.color = c.text;
+
+  const revenueDataSets = {
+    6: { labels: ['Apr','May','Jun','Jul','Aug','Sep'], data: [128000, 141000, 132500, 156000, 168400, 184320] },
+    12: { labels: ['Oct','Nov','Dec','Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep'], data: [96000, 101500, 118000, 109000, 112500, 121000, 128000, 141000, 132500, 156000, 168400, 184320] },
+  };
+
+  const revenueChart = new Chart(document.getElementById('revenueChart'), {
+    type: 'line',
+    data: {
+      labels: revenueDataSets[6].labels,
+      datasets: [{
+        label: 'Revenue',
+        data: revenueDataSets[6].data,
+        borderColor: '#2563EB',
+        backgroundColor: 'rgba(37,99,235,0.15)',
+        tension: 0.4, fill: true, pointRadius: 4, pointBackgroundColor: '#DB2777'
+      }]
+    },
+    options: { plugins: { legend: { display: false } }, scales: { y: { grid: { color: c.grid }, ticks: { callback: v => '$' + (v/1000) + 'k' } }, x: { grid: { display: false } } } }
+  });
+
+  const revenueRangeSelect = document.querySelector('[data-revenue-range]');
+  if (revenueRangeSelect) {
+    revenueRangeSelect.addEventListener('change', () => {
+      const set = revenueDataSets[revenueRangeSelect.value] || revenueDataSets[6];
+      revenueChart.data.labels = set.labels;
+      revenueChart.data.datasets[0].data = set.data;
+      revenueChart.update();
+    });
+  }
+
+  new Chart(document.getElementById('treatmentChart'), {
+    type: 'doughnut',
+    data: {
+      labels: ['Medical', 'Cosmetic', 'Laser', 'Pediatric', 'Surgical'],
+      datasets: [{ data: [32, 26, 22, 12, 8], backgroundColor: ['#2563EB', '#DB2777', '#818CF8', '#F472B6', '#64687D'], borderWidth: 0 }]
+    },
+    options: { plugins: { legend: { position: 'bottom', labels: { boxWidth: 10, padding: 14, font: { size: 11 } } } }, cutout: '68%' }
+  });
+
+  new Chart(document.getElementById('apptChart'), {
+    type: 'bar',
+    data: {
+      labels: ['Mon','Tue','Wed','Thu','Fri','Sat'],
+      datasets: [{ label: 'Appointments', data: [22, 28, 19, 31, 27, 19], backgroundColor: '#2563EB', borderRadius: 8, maxBarThickness: 34 }]
+    },
+    options: { plugins: { legend: { display: false } }, scales: { y: { grid: { color: c.grid } }, x: { grid: { display: false } } } }
+  });
+</script>
+</body>
+</html>

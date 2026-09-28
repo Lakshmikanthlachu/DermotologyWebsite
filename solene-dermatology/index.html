@@ -1,0 +1,556 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Solene Dermatology & Skin Clinic — Advanced Skin Care, Radiant Results</title>
+<meta name="description" content="Solene Dermatology & Skin Clinic offers board-certified dermatologists, laser therapy, acne care and cosmetic dermatology in a premium, patient-first environment.">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ccircle cx='50' cy='50' r='50' fill='%232563EB'/%3E%3Ctext x='50' y='68' font-size='58' fill='%23EC4899' text-anchor='middle' font-family='sans-serif'%3ES%3C/text%3E%3C/svg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:wght@500;600;700;800;900&family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+<script src="https://cdn.tailwindcss.com"></script>
+<script>
+  tailwind.config = { darkMode: 'class', theme: { extend: {
+    fontFamily: { display: ['Bricolage Grotesque','sans-serif'], sans: ['Plus Jakarta Sans','sans-serif'] },
+    boxShadow: { soft: '0 10px 30px -10px rgba(37,99,235,0.16)', premium: '0 20px 60px -15px rgba(37,99,235,0.32)' },
+    colors: {
+      ink: 'rgb(var(--color-ink) / <alpha-value>)',
+      'ink-soft': 'rgb(var(--color-ink-soft) / <alpha-value>)',
+      primary: 'rgb(var(--color-primary) / <alpha-value>)',
+      accent: 'rgb(var(--color-accent) / <alpha-value>)',
+      cream: 'rgb(var(--color-cream) / <alpha-value>)',
+      surface: 'rgb(var(--color-cream) / <alpha-value>)',
+      blush: 'rgb(var(--color-blush) / <alpha-value>)'
+    }
+  } } }
+</script>
+<link rel="stylesheet" href="css/style.css">
+</head>
+<body class="bg-surface text-ink font-sans antialiased overflow-x-hidden">
+<div id="page-loader" class="page-loader" role="status" aria-live="polite" aria-label="Loading">
+  <div class="loader-orbit"><span class="icon-badge !w-12 !h-12 text-primary"><i class="fa-solid fa-droplet"></i></span></div>
+</div>
+
+<!-- ================= HEADER ================= -->
+<header id="site-header" class="fixed top-0 inset-x-0 z-50">
+  <div class="max-w-7xl mx-auto px-3 sm:px-6 lg:px-8 pt-3 sm:pt-4">
+    <div class="nav-shell grid grid-cols-[auto_1fr_auto] items-center gap-2 sm:gap-3 h-16 lg:h-[70px] px-3 sm:px-4 lg:px-5 rounded-full">
+      <a href="index.html" class="group flex items-center gap-2.5 min-w-0">
+        <span class="icon-badge !w-11 !h-11 text-primary group-hover:scale-105 transition-transform shrink-0"><i class="fa-solid fa-droplet"></i></span>
+        <span class="font-display text-xl font-extrabold tracking-tight text-gradient whitespace-nowrap">Solene</span>
+      </a>
+
+      <nav class="hidden xl:flex items-center gap-0.5 min-w-0">
+          <div class="relative group shrink-0">
+            <button data-dropdown-btn aria-expanded="false" aria-haspopup="true" class="nav-link active flex items-center gap-1.5">Home <i class="fa-solid fa-chevron-down text-[9px] opacity-60 dropdown-chevron"></i></button>
+            <div data-dropdown-panel class="dropdown-panel absolute top-full start-0 pt-3 w-80 z-50 opacity-0 invisible">
+              <div class="neu-flat rounded-2xl p-3">
+                <a href="index.html" class="dropdown-item">
+                  <span class="icon-badge-inset !w-10 !h-10 !text-[.9rem] text-primary shrink-0"><i class="fa-solid fa-house-medical"></i></span>
+                  <span><span class="block text-sm font-bold">Home — General</span><span class="block text-xs text-ink-soft mt-0.5">Full-service dermatology &amp; skin health</span></span>
+                </a>
+                <a href="home-2.html" class="dropdown-item">
+                  <span class="icon-badge-inset !w-10 !h-10 !text-[.9rem] text-primary shrink-0"><i class="fa-solid fa-wand-magic-sparkles"></i></span>
+                  <span><span class="block text-sm font-bold">Home — Laser &amp; Cosmetic</span><span class="block text-xs text-ink-soft mt-0.5">Precision laser &amp; injectable artistry</span></span>
+                </a>
+                <div class="mt-1 pt-3 border-t border-primary/10 px-2 pb-1">
+                  <a href="gallery.html" class="pill-link w-full !text-xs justify-between"><span>View Before &amp; After Gallery</span><span class="pill-link-icon"><i class="fa-solid fa-arrow-right text-[10px]"></i></span></a>
+                </div>
+              </div>
+            </div>
+          </div>
+          <a href="dashboard.html" class="nav-link shrink-0">Dashboard</a>
+          <a href="about.html" class="nav-link shrink-0">About</a>
+          <div class="relative group shrink-0">
+            <button data-dropdown-btn aria-expanded="false" aria-haspopup="true" class="nav-link flex items-center gap-1.5">Treatments <i class="fa-solid fa-chevron-down text-[9px] opacity-60 dropdown-chevron"></i></button>
+            <div data-dropdown-panel class="dropdown-panel absolute top-full start-0 pt-3 w-80 z-50 opacity-0 invisible">
+              <div class="neu-flat rounded-2xl p-3">
+                <a href="services.html" class="dropdown-item">
+                  <span class="icon-badge-inset !w-10 !h-10 !text-[.9rem] text-primary shrink-0"><i class="fa-solid fa-layer-group"></i></span>
+                  <span><span class="block text-sm font-bold">All Treatments</span><span class="block text-xs text-ink-soft mt-0.5">Browse our full treatment menu</span></span>
+                </a>
+                <a href="service-details.html" class="dropdown-item">
+                  <span class="icon-badge-inset !w-10 !h-10 !text-[.9rem] text-primary shrink-0"><i class="fa-solid fa-file-medical"></i></span>
+                  <span><span class="block text-sm font-bold">Treatment Details</span><span class="block text-xs text-ink-soft mt-0.5">Procedure, benefits &amp; aftercare</span></span>
+                </a>
+                <a href="pricing.html" class="dropdown-item">
+                  <span class="icon-badge-inset !w-10 !h-10 !text-[.9rem] text-primary shrink-0"><i class="fa-solid fa-tag"></i></span>
+                  <span><span class="block text-sm font-bold">Pricing Plans</span><span class="block text-xs text-ink-soft mt-0.5">Transparent membership tiers</span></span>
+                </a>
+                <div class="mt-1 pt-3 border-t border-primary/10 px-2 pb-1">
+                  <a href="contact.html" class="pill-link w-full !text-xs justify-between"><span>Book A Consultation</span><span class="pill-link-icon"><i class="fa-solid fa-arrow-right text-[10px]"></i></span></a>
+                </div>
+              </div>
+            </div>
+          </div>
+          <a href="doctors.html" class="nav-link shrink-0">Doctors</a>
+          <a href="gallery.html" class="nav-link shrink-0">Gallery</a>
+          <a href="contact.html" class="nav-link shrink-0">Contact</a>
+      </nav>
+
+      <div class="flex items-center gap-1.5 sm:gap-2.5 min-w-0 justify-end">
+        <button data-theme-toggle aria-label="Toggle dark mode" class="neu-btn w-10 h-10 sm:w-11 sm:h-11 rounded-full hidden sm:flex items-center justify-center text-primary shrink-0"><i class="fa-solid fa-moon text-sm"></i></button>
+        <button data-dir-toggle title="Toggle demo Arabic / RTL layout" aria-label="Toggle RTL layout" class="neu-btn w-10 h-10 sm:w-11 sm:h-11 rounded-full hidden lg:flex items-center justify-center text-primary shrink-0"><i class="fa-solid fa-arrow-right-arrow-left text-sm"></i></button>
+        <a href="login.html" aria-label="Login or Register" class="neu-btn w-10 h-10 sm:hidden rounded-full flex items-center justify-center text-primary shrink-0"><i class="fa-solid fa-user text-sm"></i></a>
+        <a href="login.html" class="!hidden sm:!inline-flex xl:!hidden btn btn-outline !py-2.5 !px-4 text-[.72rem] shrink-0 whitespace-nowrap">Login</a>
+        <a href="login.html" class="!hidden xl:!inline-flex btn btn-outline !py-2.5 !px-5 text-[.72rem] shrink-0 whitespace-nowrap">Login / Register</a>
+        <button data-menu-open aria-label="Open menu" class="xl:hidden neu-btn w-10 h-10 sm:w-11 sm:h-11 rounded-full flex items-center justify-center text-primary shrink-0"><i class="fa-solid fa-bars"></i></button>
+      </div>
+    </div>
+  </div>
+</header>
+
+<!-- Mobile menu -->
+<div id="mobile-menu-overlay" class="hidden fixed inset-0 bg-black/50 z-[60]"></div>
+<aside id="mobile-menu" class="fixed top-0 bottom-0 end-0 w-[85%] max-w-sm z-[70] shadow-2xl p-6 overflow-y-auto">
+  <div class="flex items-center justify-between mb-8">
+    <span class="font-display text-lg font-bold text-gradient">Menu</span>
+    <button data-menu-close aria-label="Close menu" class="neu-btn w-10 h-10 flex items-center justify-center rounded-full text-primary"><i class="fa-solid fa-xmark"></i></button>
+  </div>
+  <nav class="flex flex-col gap-1 text-base font-semibold">
+    <a href="index.html" class="py-3 border-b border-current/10">Home — General</a>
+    <a href="home-2.html" class="py-3 border-b border-current/10">Home — Laser &amp; Cosmetic</a>
+    <a href="dashboard.html" class="py-3 border-b border-current/10">Dashboard</a>
+    <a href="about.html" class="py-3 border-b border-current/10">About</a>
+    <a href="services.html" class="py-3 border-b border-current/10">Treatments</a>
+    <a href="service-details.html" class="py-3 border-b border-current/10">Treatment Details</a>
+    <a href="doctors.html" class="py-3 border-b border-current/10">Doctors</a>
+    <a href="gallery.html" class="py-3 border-b border-current/10">Gallery</a>
+    <a href="pricing.html" class="py-3 border-b border-current/10">Pricing</a>
+    <a href="contact.html" class="py-3">Contact</a>
+  </nav>
+  <div class="flex items-center gap-3 mt-6">
+    <button data-theme-toggle class="toggle-track"><span class="toggle-thumb"></span></button>
+    <span class="text-sm text-ink-soft font-semibold">Dark mode</span>
+  </div>
+  <button data-dir-toggle class="mt-4 neu-btn inline-flex items-center gap-1.5 text-xs font-bold rounded-full px-4 py-2.5 text-primary"><i class="fa-solid fa-arrow-right-arrow-left"></i> Toggle EN / AR (RTL demo)</button>
+  <div class="flex flex-col gap-3 mt-6">
+    <a href="login.html" class="btn btn-outline w-full">Login / Register</a>
+    <a href="contact.html" class="btn btn-primary w-full">Book Now</a>
+  </div>
+</aside>
+
+<!-- ================= HERO ================= -->
+<section class="relative pt-28 pb-16 lg:pt-32 px-3 sm:px-6 lg:px-8 overflow-hidden gradient-wash">
+  <div class="max-w-7xl mx-auto relative z-10">
+    <div class="text-center max-w-2xl mx-auto mb-8 reveal">
+      <span class="eyebrow">Board-Certified Dermatology</span>
+    </div>
+
+    <div class="relative reveal">
+      <div class="rounded-[2rem] md:rounded-[3rem] overflow-hidden neu-flat min-h-[500px] md:h-[640px] flex items-center justify-center text-center p-4 md:p-6 relative bg-cover bg-center" style="background-image:url('https://images.unsplash.com/photo-1629909613654-28e377c37b09?q=80&w=1600&auto=format&fit=crop')">
+        <div class="absolute inset-0 bg-ink-scrim"></div>
+        <div class="relative z-10 max-w-3xl min-w-0 backdrop-blur-md bg-white/10 border border-white/20 p-8 md:p-14 rounded-[2rem] md:rounded-[2.5rem] shadow-[0_8px_32px_0_rgba(31,38,135,0.37)]">
+          <h1 class="font-display text-4xl sm:text-5xl md:text-7xl font-black text-white leading-[1.05] tracking-tight drop-shadow-md">
+            Embark On Your Skin's <span class="bg-gradient-to-r from-blue-300 via-purple-300 to-pink-300 bg-clip-text text-transparent">Radiant Journey</span>
+          </h1>
+          <p class="mt-6 text-white/90 text-base md:text-xl font-semibold leading-relaxed max-w-xl mx-auto drop-shadow-md">
+            From acne care to advanced laser therapy and cosmetic dermatology — Solene blends clinical precision with a spa-like experience.
+          </p>
+          <div class="flex flex-wrap items-center justify-center gap-4 mt-9">
+            <a href="contact.html" class="btn btn-primary">Book an Appointment <i class="fa-solid fa-arrow-right rtl:rotate-180"></i></a>
+            <a href="services.html" class="btn btn-white">Explore Treatments</a>
+          </div>
+        </div>
+      </div>
+
+      <div class="hidden md:flex absolute -bottom-8 -start-6 neu-flat rounded-[1.5rem] p-5 items-center gap-4 max-w-[240px] z-20">
+        <div class="icon-badge text-primary text-xl"><i class="fa-solid fa-award"></i></div>
+        <div>
+          <p class="font-bold text-sm text-ink">18+ Years</p>
+          <p class="text-xs text-ink-soft">Of clinical excellence</p>
+        </div>
+      </div>
+      <div class="hidden md:flex absolute -top-6 -end-6 neu-flat rounded-[1.5rem] p-4 items-center gap-3 z-20">
+        <i class="fa-solid fa-calendar-check text-accent text-lg"></i>
+        <div>
+          <p class="font-bold text-sm text-ink">Same-week</p>
+          <p class="text-[11px] text-ink-soft">appointments available</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Rating + trust row -->
+    <div class="flex flex-col lg:flex-row items-center justify-between gap-8 mt-14 reveal">
+      <div class="flex items-center gap-6">
+        <div class="flex -space-x-3 rtl:space-x-reverse avatar-stack">
+          <img loading="lazy" class="w-11 h-11 rounded-full object-cover" src="https://images.unsplash.com/photo-1544005313-94ddf0286df2?q=80&w=100&auto=format&fit=crop" alt="Patient">
+          <img loading="lazy" class="w-11 h-11 rounded-full object-cover" src="https://images.unsplash.com/photo-1519345182560-3f2917c472ef?q=80&w=100&auto=format&fit=crop" alt="Patient">
+          <img loading="lazy" class="w-11 h-11 rounded-full object-cover" src="https://images.unsplash.com/photo-1487412720507-e7ab37603c6f?q=80&w=100&auto=format&fit=crop" alt="Patient">
+          <span class="w-11 h-11 rounded-full border-2 border-surface bg-primary text-white text-xs font-bold flex items-center justify-center">5k+</span>
+        </div>
+        <div>
+          <div class="stars text-sm"><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i></div>
+          <p class="text-sm text-ink-soft mt-1">Rated 4.9/5 from 2,300+ patients</p>
+        </div>
+      </div>
+      <div class="flex flex-wrap items-center justify-center gap-x-10 gap-y-3 text-ink-soft font-semibold text-sm">
+        <span><i class="fa-solid fa-certificate me-2 text-primary"></i>American Board of Dermatology</span>
+        <span><i class="fa-solid fa-shield-heart me-2 text-primary"></i>ISO 9001 Certified</span>
+        <span><i class="fa-solid fa-star me-2 text-primary"></i>Healthgrades Top Clinic</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ================= STATS ================= -->
+<section class="bg-gradient-to-br from-blue-600 via-indigo-600 to-purple-600 text-white py-14 relative overflow-hidden">
+  <div class="max-w-7xl mx-auto px-6 lg:px-8 grid grid-cols-2 lg:grid-cols-4 gap-8 text-center relative z-10">
+    <div class="reveal"><p class="font-display text-4xl font-bold"><span data-counter="24" data-suffix="k+">0</span></p><p class="text-white/70 text-sm mt-2">Patients Treated</p></div>
+    <div class="reveal"><p class="font-display text-4xl font-bold"><span data-counter="18" data-suffix="+">0</span></p><p class="text-white/70 text-sm mt-2">Years of Practice</p></div>
+    <div class="reveal"><p class="font-display text-4xl font-bold"><span data-counter="97" data-suffix="%">0</span></p><p class="text-white/70 text-sm mt-2">Satisfaction Rate</p></div>
+    <div class="reveal"><p class="font-display text-4xl font-bold"><span data-counter="12" data-suffix="">0</span></p><p class="text-white/70 text-sm mt-2">Specialist Doctors</p></div>
+  </div>
+</section>
+
+<!-- ================= SPECIALTIES ================= -->
+<section class="py-16 lg:py-24">
+  <div class="max-w-7xl mx-auto px-6 lg:px-8">
+    <div class="text-center max-w-2xl mx-auto reveal">
+      <span class="eyebrow">Our Specialties</span>
+      <h2 class="font-display text-3xl sm:text-4xl lg:text-5xl font-bold mt-5">Comprehensive Skin Care, Under One Roof</h2>
+      <p class="text-ink-soft mt-4">Every specialty is led by a dedicated, board-certified dermatologist supported by state-of-the-art diagnostic technology.</p>
+    </div>
+
+    <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-7 mt-16">
+      <div class="card-premium p-8 reveal">
+        <div class="icon-badge text-2xl mb-6"><i class="fa-solid fa-face-smile"></i></div>
+        <h3 class="font-display text-xl font-bold mb-3">Acne &amp; Medical Dermatology</h3>
+        <p class="text-ink-soft text-sm leading-relaxed">Personalized protocols for acne, eczema, psoriasis and rosacea using evidence-based dermatology.</p>
+        <a href="service-details.html" class="inline-flex items-center gap-2 text-primary font-semibold text-sm mt-5 hover:gap-3 transition-all">Learn more <i class="fa-solid fa-arrow-right rtl:rotate-180"></i></a>
+      </div>
+      <div class="card-premium p-8 reveal" style="transition-delay:.05s">
+        <div class="icon-badge text-2xl mb-6"><i class="fa-solid fa-bolt"></i></div>
+        <h3 class="font-display text-xl font-bold mb-3">Laser Therapy</h3>
+        <p class="text-ink-soft text-sm leading-relaxed">Hair removal, resurfacing and pigmentation correction with the latest FDA-cleared laser platforms.</p>
+        <a href="service-details.html" class="inline-flex items-center gap-2 text-primary font-semibold text-sm mt-5 hover:gap-3 transition-all">Learn more <i class="fa-solid fa-arrow-right rtl:rotate-180"></i></a>
+      </div>
+      <div class="card-premium p-8 reveal" style="transition-delay:.1s">
+        <div class="icon-badge text-2xl mb-6"><i class="fa-solid fa-gem"></i></div>
+        <h3 class="font-display text-xl font-bold mb-3">Cosmetic Dermatology</h3>
+        <p class="text-ink-soft text-sm leading-relaxed">Botox, fillers, chemical peels and microneedling designed to enhance your natural features.</p>
+        <a href="service-details.html" class="inline-flex items-center gap-2 text-primary font-semibold text-sm mt-5 hover:gap-3 transition-all">Learn more <i class="fa-solid fa-arrow-right rtl:rotate-180"></i></a>
+      </div>
+      <div class="card-premium p-8 reveal">
+        <div class="icon-badge text-2xl mb-6"><i class="fa-solid fa-child-reaching"></i></div>
+        <h3 class="font-display text-xl font-bold mb-3">Pediatric Dermatology</h3>
+        <p class="text-ink-soft text-sm leading-relaxed">Gentle, specialized skin care for infants, children and teens in a comforting environment.</p>
+        <a href="service-details.html" class="inline-flex items-center gap-2 text-primary font-semibold text-sm mt-5 hover:gap-3 transition-all">Learn more <i class="fa-solid fa-arrow-right rtl:rotate-180"></i></a>
+      </div>
+      <div class="card-premium p-8 reveal" style="transition-delay:.05s">
+        <div class="icon-badge text-2xl mb-6"><i class="fa-solid fa-scissors"></i></div>
+        <h3 class="font-display text-xl font-bold mb-3">Skin Cancer &amp; Surgery</h3>
+        <p class="text-ink-soft text-sm leading-relaxed">Early detection screening and precision Mohs micrographic surgery for skin cancer treatment.</p>
+        <a href="service-details.html" class="inline-flex items-center gap-2 text-primary font-semibold text-sm mt-5 hover:gap-3 transition-all">Learn more <i class="fa-solid fa-arrow-right rtl:rotate-180"></i></a>
+      </div>
+      <div class="card-premium p-8 reveal" style="transition-delay:.1s">
+        <div class="icon-badge text-2xl mb-6"><i class="fa-solid fa-droplet"></i></div>
+        <h3 class="font-display text-xl font-bold mb-3">Skin Health &amp; Wellness</h3>
+        <p class="text-ink-soft text-sm leading-relaxed">Hydrafacials, medical-grade peels and personalized skincare regimens for long-term radiance.</p>
+        <a href="service-details.html" class="inline-flex items-center gap-2 text-primary font-semibold text-sm mt-5 hover:gap-3 transition-all">Learn more <i class="fa-solid fa-arrow-right rtl:rotate-180"></i></a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ================= ABOUT TEASER ================= -->
+<section class="py-16 lg:py-24 bg-blush/60">
+  <div class="max-w-7xl mx-auto px-6 lg:px-8 grid lg:grid-cols-2 gap-16 items-center">
+    <div class="relative reveal order-2 lg:order-1">
+      <div class="grid grid-cols-2 gap-4">
+        <img loading="lazy" class="rounded-3xl shadow-soft w-full h-64 object-cover mt-10" src="https://images.unsplash.com/photo-1512290923902-8a9f81dc236c?q=80&w=800&auto=format&fit=crop" alt="Premium skincare products">
+        <img loading="lazy" class="rounded-3xl shadow-soft w-full h-64 object-cover" src="https://images.unsplash.com/photo-1571019613454-1cb2f99b2d8b?q=80&w=800&auto=format&fit=crop" alt="Dermatologist consulting a patient">
+        <img loading="lazy" class="rounded-3xl shadow-soft w-full h-64 object-cover" src="https://images.unsplash.com/photo-1600334129128-685c5582fd35?q=80&w=800&auto=format&fit=crop" alt="Relaxing skin treatment room">
+        <img loading="lazy" class="rounded-3xl shadow-soft w-full h-64 object-cover mt-10" src="https://images.unsplash.com/photo-1620916566398-39f1143ab7be?q=80&w=800&auto=format&fit=crop" alt="Laser therapy equipment">
+      </div>
+    </div>
+    <div class="reveal order-1 lg:order-2">
+      <span class="eyebrow">About Solene</span>
+      <h2 class="font-display text-3xl sm:text-4xl font-bold mt-5 leading-tight">A Clinic Built Around <span class="text-gradient italic">You</span></h2>
+      <p class="text-ink-soft mt-5 leading-relaxed">Founded in 2007, Solene Dermatology & Skin Clinic was created to close the gap between clinical-grade dermatology and a genuinely warm patient experience. Every treatment room is designed to feel like a retreat, not a hospital.</p>
+      <ul class="mt-7 space-y-4">
+        <li class="flex items-start gap-3"><span class="w-6 h-6 rounded-full bg-primary text-white text-xs flex items-center justify-center mt-0.5 shrink-0"><i class="fa-solid fa-check"></i></span><span class="text-ink-soft text-sm"><strong class="text-ink">Board-certified specialists</strong> across every subspecialty of dermatology.</span></li>
+        <li class="flex items-start gap-3"><span class="w-6 h-6 rounded-full bg-primary text-white text-xs flex items-center justify-center mt-0.5 shrink-0"><i class="fa-solid fa-check"></i></span><span class="text-ink-soft text-sm"><strong class="text-ink">Advanced diagnostic technology</strong> including AI-assisted skin mapping.</span></li>
+        <li class="flex items-start gap-3"><span class="w-6 h-6 rounded-full bg-primary text-white text-xs flex items-center justify-center mt-0.5 shrink-0"><i class="fa-solid fa-check"></i></span><span class="text-ink-soft text-sm"><strong class="text-ink">Private, judgment-free care</strong> with flexible scheduling and telehealth.</span></li>
+      </ul>
+      <a href="about.html" class="btn btn-primary mt-8">Discover Our Story</a>
+    </div>
+  </div>
+</section>
+
+<!-- ================= BEFORE / AFTER TEASER ================= -->
+<section class="py-16 lg:py-24">
+  <div class="max-w-7xl mx-auto px-6 lg:px-8">
+    <div class="flex flex-wrap items-end justify-between gap-6 reveal">
+      <div class="max-w-xl">
+        <span class="eyebrow">Real Results</span>
+        <h2 class="font-display text-3xl sm:text-4xl font-bold mt-5">See The Transformation — Drag To Compare</h2>
+      </div>
+      <a href="gallery.html" class="btn btn-outline shrink-0">View Full Gallery</a>
+    </div>
+    <div class="grid md:grid-cols-3 gap-7 mt-14">
+      <div class="reveal">
+        <div class="ba-slider shadow-soft">
+          <img class="ba-before" style="filter:grayscale(.35) brightness(.82) contrast(.95)" src="https://images.unsplash.com/photo-1544005313-94ddf0286df2?q=80&w=800&auto=format&fit=crop" alt="Before acne treatment">
+          <img class="ba-after" src="https://images.unsplash.com/photo-1544005313-94ddf0286df2?q=80&w=800&auto=format&fit=crop" alt="After acne treatment">
+          <span class="ba-label start-4">Before</span>
+          <span class="ba-label end-4">After</span>
+          <div class="ba-handle"></div>
+        </div>
+        <p class="text-center font-semibold mt-4">Acne Scar Treatment — 8 weeks</p>
+      </div>
+      <div class="reveal" style="transition-delay:.05s">
+        <div class="ba-slider shadow-soft">
+          <img class="ba-before" style="filter:grayscale(.35) brightness(.82) contrast(.95)" src="https://images.unsplash.com/photo-1519823551278-64ac92734fb1?q=80&w=800&auto=format&fit=crop" alt="Before laser resurfacing">
+          <img class="ba-after" src="https://images.unsplash.com/photo-1519823551278-64ac92734fb1?q=80&w=800&auto=format&fit=crop" alt="After laser resurfacing">
+          <span class="ba-label start-4">Before</span>
+          <span class="ba-label end-4">After</span>
+          <div class="ba-handle"></div>
+        </div>
+        <p class="text-center font-semibold mt-4">Laser Resurfacing — 3 sessions</p>
+      </div>
+      <div class="reveal" style="transition-delay:.1s">
+        <div class="ba-slider shadow-soft">
+          <img class="ba-before" style="filter:grayscale(.35) brightness(.82) contrast(.95)" src="https://images.unsplash.com/photo-1573497019940-1c28c88b4f3e?q=80&w=800&auto=format&fit=crop" alt="Before rejuvenation">
+          <img class="ba-after" src="https://images.unsplash.com/photo-1573497019940-1c28c88b4f3e?q=80&w=800&auto=format&fit=crop" alt="After rejuvenation">
+          <span class="ba-label start-4">Before</span>
+          <span class="ba-label end-4">After</span>
+          <div class="ba-handle"></div>
+        </div>
+        <p class="text-center font-semibold mt-4">Skin Rejuvenation — 6 weeks</p>
+      </div>
+    </div>
+    <p class="text-xs text-ink-soft text-center mt-6">Simulated demo comparisons for template preview purposes.</p>
+  </div>
+</section>
+
+<!-- ================= WHY CHOOSE US ================= -->
+<section class="py-16 lg:py-24 bg-gradient-to-br from-blue-600 via-indigo-600 to-purple-600 text-white relative overflow-hidden">
+  <div class="blob-shape w-[420px] h-[420px] -top-20 -start-32 opacity-20"></div>
+  <div class="max-w-7xl mx-auto px-6 lg:px-8 grid lg:grid-cols-2 gap-16 items-center relative z-10">
+    <div class="reveal">
+      <span class="eyebrow eyebrow-frost">Why Choose Solene</span>
+      <h2 class="font-display text-3xl sm:text-4xl font-bold mt-5 leading-tight">Precision Dermatology Meets Genuine Care</h2>
+      <p class="text-white/70 mt-5 leading-relaxed">We combine deep clinical expertise with an unhurried, personal approach — because your skin's story deserves more than a five-minute appointment.</p>
+      <div class="grid sm:grid-cols-2 gap-6 mt-10">
+        <div class="flex items-start gap-4"><i class="fa-solid fa-user-doctor text-accent text-2xl mt-1"></i><div><p class="font-bold">Expert Specialists</p><p class="text-sm text-white/60 mt-1">Fellowship-trained dermatologists.</p></div></div>
+        <div class="flex items-start gap-4"><i class="fa-solid fa-microscope text-accent text-2xl mt-1"></i><div><p class="font-bold">Modern Technology</p><p class="text-sm text-white/60 mt-1">Latest diagnostic &amp; laser devices.</p></div></div>
+        <div class="flex items-start gap-4"><i class="fa-solid fa-hand-holding-heart text-accent text-2xl mt-1"></i><div><p class="font-bold">Patient-First Care</p><p class="text-sm text-white/60 mt-1">Unhurried, judgment-free visits.</p></div></div>
+        <div class="flex items-start gap-4"><i class="fa-solid fa-lock text-accent text-2xl mt-1"></i><div><p class="font-bold">Private &amp; Secure</p><p class="text-sm text-white/60 mt-1">Confidential digital records.</p></div></div>
+      </div>
+    </div>
+    <div class="relative reveal">
+      <img loading="lazy" class="rounded-[2rem] shadow-premium w-full aspect-[4/5] object-cover" src="https://images.unsplash.com/photo-1580489944761-15a19d654956?q=80&w=1000&auto=format&fit=crop" alt="Dermatologist smiling in clinic">
+      <div class="absolute bottom-6 start-6 end-6 bg-white/95 backdrop-blur rounded-2xl p-5 !text-slate-800 flex items-center gap-4">
+        <div class="stars"><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i></div>
+        <p class="text-sm font-semibold">"Best dermatology experience I've ever had."</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ================= DOCTORS PREVIEW ================= -->
+<section class="py-16 lg:py-24">
+  <div class="max-w-7xl mx-auto px-6 lg:px-8">
+    <div class="text-center max-w-2xl mx-auto reveal">
+      <span class="eyebrow">Meet Our Team</span>
+      <h2 class="font-display text-3xl sm:text-4xl lg:text-5xl font-bold mt-5">Dermatologists You Can Trust</h2>
+    </div>
+    <div class="grid sm:grid-cols-2 lg:grid-cols-4 gap-7 mt-16">
+      <div class="card-premium overflow-hidden reveal">
+        <div class="aspect-portrait overflow-hidden"><img loading="lazy" class="w-full h-full object-cover" src="https://images.unsplash.com/photo-1622253692010-333f2da6031d?q=80&w=600&auto=format&fit=crop" alt="Dr. Ava Bennett"></div>
+        <div class="p-5 text-center">
+          <h3 class="font-display font-bold text-lg">Dr. Ava Bennett</h3>
+          <p class="text-accent text-sm font-medium mt-1">Cosmetic Dermatology</p>
+          <div class="flex justify-center gap-3 mt-4 text-primary"><i class="fa-brands fa-linkedin"></i><i class="fa-brands fa-instagram"></i><i class="fa-solid fa-envelope"></i></div>
+        </div>
+      </div>
+      <div class="card-premium overflow-hidden reveal" style="transition-delay:.05s">
+        <div class="aspect-portrait overflow-hidden"><img loading="lazy" class="w-full h-full object-cover" src="https://images.unsplash.com/photo-1580489944761-15a19d654956?q=80&w=600&auto=format&fit=crop" alt="Dr. James Whitfield"></div>
+        <div class="p-5 text-center">
+          <h3 class="font-display font-bold text-lg">Dr. James Whitfield</h3>
+          <p class="text-accent text-sm font-medium mt-1">Laser Specialist</p>
+          <div class="flex justify-center gap-3 mt-4 text-primary"><i class="fa-brands fa-linkedin"></i><i class="fa-brands fa-instagram"></i><i class="fa-solid fa-envelope"></i></div>
+        </div>
+      </div>
+      <div class="card-premium overflow-hidden reveal" style="transition-delay:.1s">
+        <div class="aspect-portrait overflow-hidden"><img loading="lazy" class="w-full h-full object-cover" src="https://images.unsplash.com/photo-1607990281513-2c110a25bd8c?q=80&w=600&auto=format&fit=crop" alt="Dr. Maya Chen"></div>
+        <div class="p-5 text-center">
+          <h3 class="font-display font-bold text-lg">Dr. Maya Chen</h3>
+          <p class="text-accent text-sm font-medium mt-1">Pediatric Dermatology</p>
+          <div class="flex justify-center gap-3 mt-4 text-primary"><i class="fa-brands fa-linkedin"></i><i class="fa-brands fa-instagram"></i><i class="fa-solid fa-envelope"></i></div>
+        </div>
+      </div>
+      <div class="card-premium overflow-hidden reveal" style="transition-delay:.15s">
+        <div class="aspect-portrait overflow-hidden"><img loading="lazy" class="w-full h-full object-cover" src="https://images.unsplash.com/photo-1559839734-2b71ea197ec2?q=80&w=600&auto=format&fit=crop" alt="Dr. Omar Haddad"></div>
+        <div class="p-5 text-center">
+          <h3 class="font-display font-bold text-lg">Dr. Omar Haddad</h3>
+          <p class="text-accent text-sm font-medium mt-1">Surgical Dermatology</p>
+          <div class="flex justify-center gap-3 mt-4 text-primary"><i class="fa-brands fa-linkedin"></i><i class="fa-brands fa-instagram"></i><i class="fa-solid fa-envelope"></i></div>
+        </div>
+      </div>
+    </div>
+    <div class="text-center mt-12 reveal"><a href="doctors.html" class="btn btn-outline">Meet The Full Team</a></div>
+  </div>
+</section>
+
+<!-- ================= TESTIMONIALS ================= -->
+<section class="py-16 lg:py-24 bg-blush/60">
+  <div class="max-w-4xl mx-auto px-6 lg:px-8 text-center reveal">
+    <span class="eyebrow">Patient Stories</span>
+    <h2 class="font-display text-3xl sm:text-4xl font-bold mt-5">Loved By Thousands Of Patients</h2>
+  </div>
+  <div class="max-w-3xl mx-auto px-6 mt-14 reveal" data-carousel>
+    <div class="overflow-hidden">
+      <div class="flex transition-transform duration-700 ease-out" data-carousel-track>
+        <div class="w-full shrink-0 text-center px-4">
+          <div class="stars justify-center flex mb-5"><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i></div>
+          <p class="font-display text-xl sm:text-2xl leading-relaxed italic">"Dr. Bennett listened to every concern and designed a plan that finally cleared my adult acne. The clinic feels more like a spa than a hospital."</p>
+          <div class="flex items-center justify-center gap-3 mt-7">
+            <img loading="lazy" class="w-12 h-12 rounded-full object-cover" src="https://images.unsplash.com/photo-1544005313-94ddf0286df2?q=80&w=100&auto=format&fit=crop" alt="Patient Hannah R.">
+            <div class="text-start"><p class="font-bold text-sm">Hannah R.</p><p class="text-xs text-ink-soft">Acne Treatment Patient</p></div>
+          </div>
+        </div>
+        <div class="w-full shrink-0 text-center px-4">
+          <div class="stars justify-center flex mb-5"><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i></div>
+          <p class="font-display text-xl sm:text-2xl leading-relaxed italic">"The laser resurfacing results exceeded what I imagined. Professional, gentle, and genuinely caring staff from check-in to follow-up."</p>
+          <div class="flex items-center justify-center gap-3 mt-7">
+            <img loading="lazy" class="w-12 h-12 rounded-full object-cover" src="https://images.unsplash.com/photo-1519345182560-3f2917c472ef?q=80&w=100&auto=format&fit=crop" alt="Patient Marcus T.">
+            <div class="text-start"><p class="font-bold text-sm">Marcus T.</p><p class="text-xs text-ink-soft">Laser Therapy Patient</p></div>
+          </div>
+        </div>
+        <div class="w-full shrink-0 text-center px-4">
+          <div class="stars justify-center flex mb-5"><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i></div>
+          <p class="font-display text-xl sm:text-2xl leading-relaxed italic">"From the online booking to the follow-up messages on my patient dashboard, everything about Solene feels effortless and premium."</p>
+          <div class="flex items-center justify-center gap-3 mt-7">
+            <img loading="lazy" class="w-12 h-12 rounded-full object-cover" src="https://images.unsplash.com/photo-1487412720507-e7ab37603c6f?q=80&w=100&auto=format&fit=crop" alt="Patient David K.">
+            <div class="text-start"><p class="font-bold text-sm">David K.</p><p class="text-xs text-ink-soft">Cosmetic Dermatology Patient</p></div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="flex items-center justify-center gap-2 mt-8" data-carousel-dots></div>
+  </div>
+</section>
+
+<!-- ================= BLOG PREVIEW ================= -->
+<section class="py-16 lg:py-24">
+  <div class="max-w-7xl mx-auto px-6 lg:px-8">
+    <div class="flex flex-wrap items-end justify-between gap-6 reveal">
+      <div class="max-w-xl">
+        <span class="eyebrow">Skin Journal</span>
+        <h2 class="font-display text-3xl sm:text-4xl font-bold mt-5">Insights From Our Dermatologists</h2>
+      </div>
+      <a href="about.html#skin-journal" class="btn btn-outline shrink-0">Visit The Skin Journal</a>
+    </div>
+    <div class="grid md:grid-cols-3 gap-7 mt-14">
+      <a href="blog-details.html" class="card-premium overflow-hidden block reveal">
+        <img loading="lazy" class="w-full h-52 object-cover" src="https://images.unsplash.com/photo-1512290923902-8a9f81dc236c?q=80&w=800&auto=format&fit=crop" alt="Skincare routine article">
+        <div class="p-6">
+          <span class="text-xs font-bold text-accent uppercase tracking-wide">Skincare</span>
+          <h3 class="font-display font-bold text-lg mt-2 line-clamp-2">Building A Dermatologist-Approved Morning Routine</h3>
+          <p class="text-xs text-ink-soft mt-3"><i class="fa-regular fa-calendar me-1"></i> Aug 12, 2026 · 5 min read</p>
+        </div>
+      </a>
+      <a href="blog-details.html" class="card-premium overflow-hidden block reveal" style="transition-delay:.05s">
+        <img loading="lazy" class="w-full h-52 object-cover" src="https://images.unsplash.com/photo-1620916566398-39f1143ab7be?q=80&w=800&auto=format&fit=crop" alt="Laser therapy article">
+        <div class="p-6">
+          <span class="text-xs font-bold text-accent uppercase tracking-wide">Laser Therapy</span>
+          <h3 class="font-display font-bold text-lg mt-2 line-clamp-2">What To Expect From Your First Laser Session</h3>
+          <p class="text-xs text-ink-soft mt-3"><i class="fa-regular fa-calendar me-1"></i> Jul 29, 2026 · 4 min read</p>
+        </div>
+      </a>
+      <a href="blog-details.html" class="card-premium overflow-hidden block reveal" style="transition-delay:.1s">
+        <img loading="lazy" class="w-full h-52 object-cover" src="https://images.unsplash.com/photo-1600334129128-685c5582fd35?q=80&w=800&auto=format&fit=crop" alt="Spa treatment article">
+        <div class="p-6">
+          <span class="text-xs font-bold text-accent uppercase tracking-wide">Wellness</span>
+          <h3 class="font-display font-bold text-lg mt-2 line-clamp-2">Sun Protection: Myths Every Patient Should Know</h3>
+          <p class="text-xs text-ink-soft mt-3"><i class="fa-regular fa-calendar me-1"></i> Jul 14, 2026 · 6 min read</p>
+        </div>
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- ================= CTA ================= -->
+<section class="pb-16">
+  <div class="max-w-6xl mx-auto px-6 lg:px-8">
+    <div class="rounded-[2.5rem] bg-gradient-to-br from-blue-600 via-indigo-600 to-purple-600 text-white p-10 sm:p-16 relative overflow-hidden reveal">
+      <div class="blob-shape w-[380px] h-[380px] -top-24 -end-24"></div>
+      <div class="relative z-10 grid lg:grid-cols-2 gap-8 items-center">
+        <div class="min-w-0">
+          <h2 class="font-display text-3xl sm:text-4xl font-bold leading-tight">Your Best Skin Starts With One Visit</h2>
+          <p class="text-white/70 mt-4">Book a consultation today and get a personalized treatment plan from a board-certified dermatologist.</p>
+        </div>
+        <div class="flex flex-wrap gap-4 lg:justify-end min-w-0">
+          <a href="contact.html" class="btn btn-accent">Book Appointment</a>
+          <a href="tel:+15551234567" class="btn border border-white/30 text-white hover:bg-white/10"><i class="fa-solid fa-phone"></i> +1 (555) 123-4567</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ================= FOOTER ================= -->
+<footer class="relative z-10 mt-16 md:mt-24 neu-flat rounded-t-[2.5rem] md:rounded-t-[3.5rem] pt-14 md:pt-16 pb-8">
+  <div class="max-w-7xl mx-auto px-6 lg:px-8 grid sm:grid-cols-2 lg:grid-cols-5 gap-10">
+    <div class="lg:col-span-2">
+      <a href="index.html" class="flex items-center gap-2.5 mb-5">
+        <span class="icon-badge !w-11 !h-11 text-primary"><i class="fa-solid fa-droplet"></i></span>
+        <span class="font-display text-xl font-extrabold tracking-tight text-gradient">Solene</span>
+      </a>
+      <p class="text-ink-soft text-sm leading-relaxed max-w-sm">Premium dermatology and skin care with a patient-first philosophy — advanced treatments, warm expertise, real results.</p>
+      <div class="flex gap-3 mt-6">
+        <a href="https://www.facebook.com/" target="_blank" rel="noopener" aria-label="Solene on Facebook" class="neu-btn w-10 h-10 rounded-full flex items-center justify-center text-primary hover:text-accent transition"><i class="fa-brands fa-facebook-f"></i></a>
+        <a href="https://www.instagram.com/" target="_blank" rel="noopener" aria-label="Solene on Instagram" class="neu-btn w-10 h-10 rounded-full flex items-center justify-center text-primary hover:text-accent transition"><i class="fa-brands fa-instagram"></i></a>
+        <a href="https://www.linkedin.com/" target="_blank" rel="noopener" aria-label="Solene on LinkedIn" class="neu-btn w-10 h-10 rounded-full flex items-center justify-center text-primary hover:text-accent transition"><i class="fa-brands fa-linkedin-in"></i></a>
+        <a href="https://www.youtube.com/" target="_blank" rel="noopener" aria-label="Solene on YouTube" class="neu-btn w-10 h-10 rounded-full flex items-center justify-center text-primary hover:text-accent transition"><i class="fa-brands fa-youtube"></i></a>
+      </div>
+      <form data-demo-form="Thanks for subscribing to the Skin Journal." class="mt-7 flex max-w-sm gap-2">
+        <input type="email" required placeholder="Your email" class="input-premium !rounded-full">
+        <button class="btn btn-primary !rounded-full !px-5 shrink-0" aria-label="Subscribe"><i class="fa-solid fa-paper-plane"></i></button>
+      </form>
+    </div>
+    <div>
+      <h4 class="font-display font-bold mb-5">Explore</h4>
+      <ul class="space-y-3 text-sm text-ink-soft font-medium">
+        <li><a href="about.html" class="hover:text-primary transition">About Us</a></li>
+        <li><a href="services.html" class="hover:text-primary transition">Treatments</a></li>
+        <li><a href="doctors.html" class="hover:text-primary transition">Our Doctors</a></li>
+        <li><a href="gallery.html" class="hover:text-primary transition">Before &amp; After</a></li>
+        <li><a href="pricing.html" class="hover:text-primary transition">Pricing</a></li>
+      </ul>
+    </div>
+    <div>
+      <h4 class="font-display font-bold mb-5">Patient</h4>
+      <ul class="space-y-3 text-sm text-ink-soft font-medium">
+        <li><a href="login.html" class="hover:text-primary transition">Login / Register</a></li>
+        <li><a href="dashboard.html" class="hover:text-primary transition">Patient Dashboard</a></li>
+        <li><a href="contact.html" class="hover:text-primary transition">Book Appointment</a></li>
+        <li><a href="404.html" class="hover:text-primary transition">404 Page</a></li>
+        <li><a href="coming-soon.html" class="hover:text-primary transition">Coming Soon</a></li>
+      </ul>
+    </div>
+    <div>
+      <h4 class="font-display font-bold mb-5">Contact</h4>
+      <ul class="space-y-4 text-sm text-ink-soft font-medium">
+        <li><a href="https://www.google.com/maps/search/?api=1&amp;query=420+Wellness+Avenue%2C+Suite+200%2C+San+Diego%2C+CA" target="_blank" rel="noopener" class="flex items-start gap-3 hover:text-primary transition"><i class="fa-solid fa-location-dot text-primary mt-1"></i>420 Wellness Avenue, Suite 200, San Diego, CA</a></li>
+        <li><a href="tel:+15551234567" class="flex items-start gap-3 hover:text-primary transition"><i class="fa-solid fa-phone text-primary mt-1"></i>+1 (555) 123-4567</a></li>
+        <li><a href="mailto:hello@soleneclinic.com" class="flex items-start gap-3 hover:text-primary transition"><i class="fa-solid fa-envelope text-primary mt-1"></i>hello@soleneclinic.com</a></li>
+        <li class="flex items-start gap-3"><i class="fa-solid fa-clock text-primary mt-1"></i>Mon – Sat: 8:00 AM – 7:00 PM</li>
+      </ul>
+    </div>
+  </div>
+  <div class="max-w-7xl mx-auto px-6 lg:px-8 mt-14 pt-8 border-t border-current/10 flex flex-wrap items-center justify-between gap-4 text-xs text-ink-soft">
+    <p>© <span data-year></span> Solene Dermatology &amp; Skin Clinic. All rights reserved.</p>
+    <div class="flex gap-6"><a href="#" class="hover:text-primary transition">Privacy Policy</a><a href="#" class="hover:text-primary transition">Terms of Service</a></div>
+  </div>
+</footer>
+
+<button onclick="window.scrollTo({top:0,behavior:'smooth'})" aria-label="Back to top" class="neu-btn fixed bottom-6 end-6 w-12 h-12 rounded-full text-primary flex items-center justify-center z-40"><i class="fa-solid fa-arrow-up"></i></button>
+
+<script src="js/main.js"></script>
+</body>
+</html>

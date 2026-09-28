@@ -1,0 +1,477 @@
+/* ============================================================
+   Solene Dermatology & Skin Clinic — Design System v3
+   Dark-first neumorphic "soft-UI" aesthetic: single-tone surfaces,
+   dual-tone ambient shadows for depth (no borders, no flat cards),
+   bold blue -> indigo primary with a rose/pink secondary accent,
+   pill navigation and buttons, oversized black-weight headlines.
+   Works with Tailwind CDN utility classes + these components/tokens.
+   ============================================================ */
+
+:root {
+  /* Tells the browser which palette to use for NATIVE widgets it renders
+     itself — <select> dropdown popups, checkboxes/radios, date pickers,
+     scrollbars. Without this, those popups ignore the site's own JS-driven
+     dark-mode toggle and fall back to guessing from the OS theme, which can
+     land on a washed-out/illegible combo (e.g. a white dropdown list with
+     near-white text) even though every other themed element on the page is
+     correct. Keeping it in sync with html.dark below fixes that everywhere
+     a native popup can appear (modals' Plan/Status selects, Orders status
+     filter, Revenue range selector, etc.) with zero markup changes needed. */
+  color-scheme: light;
+  --color-primary: 37 99 235;        /* blue-600   #2563EB (light-mode accent/text) */
+  --color-primary-2: 96 165 250;     /* blue-400   #60A5FA (dark-mode accent/text)  */
+  --color-accent: 219 39 119;        /* pink-600   #DB2777 (light-mode secondary)   */
+  --color-accent-2: 244 114 182;     /* pink-400   #F472B6 (dark-mode secondary)    */
+  --color-cream: 224 229 236;        /* surface    #E0E5EC (neumorphic light base)  */
+  --color-blush: 234 238 252;        /* tinted chip bg, light                       */
+  --color-ink: 31 41 55;             /* gray-800   #1F2937                          */
+  --color-ink-soft: 100 108 125;     /* muted slate                                 */
+
+  --shadow-d: rgba(163, 177, 198, 0.6);   /* neumorphic "shade" side  */
+  --shadow-l: rgba(255, 255, 255, 0.75);  /* neumorphic "light" side  */
+  --shadow-premium: 0 24px 60px -18px rgba(37, 99, 235, 0.30);
+  --shadow-soft: 0 10px 30px -12px rgba(37, 99, 235, 0.18);
+}
+
+html.dark {
+  color-scheme: dark;
+  --color-primary: 96 165 250;       /* blue-400 for dark-mode text/icons */
+  --color-accent: 244 114 182;       /* pink-400 for dark-mode text/icons */
+  --color-cream: 26 26 46;           /* #1A1A2E deep navy-ink surface */
+  --color-blush: 46 46 74;           /* raised navy chip tint */
+  --color-ink: 237 237 246;          /* near-white */
+  --color-ink-soft: 156 160 184;     /* muted periwinkle-gray */
+
+  --shadow-d: rgba(9, 9, 20, 0.8);
+  --shadow-l: rgba(48, 48, 78, 0.75);
+  --shadow-premium: 0 24px 60px -18px rgba(0, 0, 0, 0.6);
+  --shadow-soft: 0 10px 30px -12px rgba(0, 0, 0, 0.45);
+}
+
+* { scroll-behavior: smooth; }
+
+canvas { max-width: 100%; }
+
+body {
+  font-family: 'Plus Jakarta Sans', ui-sans-serif, system-ui, sans-serif;
+  background-color: rgb(var(--color-cream));
+  color: rgb(var(--color-ink));
+  transition: background-color .35s ease, color .35s ease;
+}
+
+.font-display { font-family: 'Bricolage Grotesque', ui-sans-serif, system-ui, sans-serif; letter-spacing: -0.015em; }
+
+/* ---------- Utility surface tokens ---------- */
+.bg-surface { background-color: rgb(var(--color-cream)); }
+/* .bg-ink-fixed (not "bg-ink"): a permanently-dark background regardless of
+   theme, e.g. the always-dark dashboard sidebars. Deliberately NOT named
+   "bg-ink" — Tailwind's own config also registers an "ink" color (used by
+   text-ink, which correctly flips light/dark with the theme), so a
+   same-named "bg-ink" utility class here would race the CDN's live-injected
+   stylesheet: whichever one loads/re-injects last wins, and in production
+   (unlike this repo's static-build test harness) that was intermittently
+   Tailwind's own flipping version, turning the sidebar white in dark mode. */
+.bg-ink-fixed { background-color: rgb(17 17 30); }
+.text-ink { color: rgb(var(--color-ink)); }
+.text-ink-soft { color: rgb(var(--color-ink-soft)); }
+.text-primary { color: rgb(var(--color-primary)); }
+.bg-primary { background-color: rgb(var(--color-primary)); }
+.border-primary { border-color: rgb(var(--color-primary)); }
+.text-accent { color: rgb(var(--color-accent)); }
+.bg-accent { background-color: rgb(var(--color-accent)); }
+.bg-blush { background-color: rgb(var(--color-blush)); }
+
+/* ============================================================
+   NEUMORPHISM CORE — soft-UI raised / pressed surfaces.
+   Every neu-* element shares the page's own surface color; depth
+   comes only from the dual offset shadow, never from a border or
+   a different fill. This is what the reference site's whole visual
+   language is built on, so it is the foundation here too.
+   ============================================================ */
+.neu-flat {
+  background: rgb(var(--color-cream));
+  box-shadow: 14px 14px 28px var(--shadow-d), -14px -14px 28px var(--shadow-l);
+}
+.neu-inset {
+  background: rgb(var(--color-cream));
+  box-shadow: inset 8px 8px 16px var(--shadow-d), inset -8px -8px 16px var(--shadow-l);
+}
+.neu-btn {
+  background: rgb(var(--color-cream));
+  box-shadow: 6px 6px 12px var(--shadow-d), -6px -6px 12px var(--shadow-l);
+  transition: box-shadow .2s ease, transform .2s ease;
+}
+.neu-btn:hover { box-shadow: 3px 3px 7px var(--shadow-d), -3px -3px 7px var(--shadow-l); }
+.neu-btn:active { box-shadow: inset 4px 4px 8px var(--shadow-d), inset -4px -4px 8px var(--shadow-l); }
+.neu-btn.is-active {
+  box-shadow: inset 4px 4px 8px var(--shadow-d), inset -4px -4px 8px var(--shadow-l);
+  color: rgb(var(--color-primary));
+}
+
+/* ---------- Buttons ---------- */
+.btn {
+  display: inline-flex; align-items: center; justify-content: center; gap: .6rem;
+  padding: .9rem 1.85rem; border-radius: 999px; font-weight: 800; font-size: .85rem;
+  text-transform: uppercase; letter-spacing: .03em;
+  transition: all .3s cubic-bezier(.4,0,.2,1); white-space: nowrap;
+}
+.btn > i {
+  width: 1.5rem; height: 1.5rem; border-radius: 50%; font-size: .68rem;
+  display: inline-flex; align-items: center; justify-content: center; flex-shrink: 0;
+  background: rgba(255,255,255,.25);
+}
+.btn-outline > i, .btn-white > i { background: rgba(37,99,235,.12); }
+.btn-primary {
+  background: linear-gradient(135deg, #2563EB 0%, #4F46E5 100%);
+  color: #fff; box-shadow: 0 10px 24px -8px rgba(37,99,235,.55);
+}
+.btn-primary:hover { transform: translateY(-2px) scale(1.02); box-shadow: 0 16px 34px -10px rgba(37,99,235,.6); }
+.btn-accent {
+  background: linear-gradient(135deg, #DB2777 0%, #A855F7 100%);
+  color: #fff; box-shadow: 0 10px 24px -8px rgba(219,39,119,.5);
+}
+.btn-accent > i { background: rgba(255,255,255,.25); }
+.btn-accent:hover { transform: translateY(-2px) scale(1.02); box-shadow: 0 16px 34px -10px rgba(219,39,119,.55); }
+.btn-outline {
+  background: rgb(var(--color-cream)); color: rgb(var(--color-primary));
+  border: 1.5px solid rgb(var(--color-primary) / .28);
+  box-shadow: 6px 6px 12px var(--shadow-d), -6px -6px 12px var(--shadow-l);
+}
+.btn-outline:hover { box-shadow: inset 4px 4px 8px var(--shadow-d), inset -4px -4px 8px var(--shadow-l); border-color: rgb(var(--color-primary) / .45); }
+.btn-white { background: rgb(var(--color-cream)); color: rgb(var(--color-primary)); box-shadow: 6px 6px 12px var(--shadow-d), -6px -6px 12px var(--shadow-l); }
+.btn-white:hover { transform: translateY(-2px); }
+
+/* ---------- Cards ---------- */
+.card-premium {
+  background: rgb(var(--color-cream)); border-radius: 1.75rem;
+  box-shadow: 14px 14px 28px var(--shadow-d), -14px -14px 28px var(--shadow-l);
+  transition: all .4s cubic-bezier(.4,0,.2,1);
+}
+.card-premium:hover { transform: translateY(-8px); }
+
+/* ---------- "More details" pill link (photo-card CTA) ---------- */
+.pill-link {
+  display: inline-flex; align-items: center; gap: .6rem;
+  padding: .4rem .4rem .4rem 1rem; border-radius: 999px;
+  background: rgb(var(--color-cream));
+  box-shadow: 6px 6px 12px var(--shadow-d), -6px -6px 12px var(--shadow-l);
+  font-size: .82rem; font-weight: 700; color: rgb(var(--color-ink));
+  transition: all .3s ease;
+}
+.pill-link .pill-link-icon {
+  width: 1.9rem; height: 1.9rem; border-radius: 50%;
+  background: linear-gradient(135deg, #2563EB, #4F46E5); color: #fff;
+  display: inline-flex; align-items: center; justify-content: center; font-size: .75rem; flex-shrink: 0;
+  transition: transform .3s ease;
+}
+.pill-link:hover { box-shadow: inset 3px 3px 7px var(--shadow-d), inset -3px -3px 7px var(--shadow-l); }
+.pill-link:hover .pill-link-icon { transform: rotate(45deg); }
+
+/* ---------- Step / index numbering (e.g. /01, /02) ---------- */
+.step-index {
+  font-family: 'Bricolage Grotesque', sans-serif; font-weight: 800; font-size: .8rem;
+  color: rgb(var(--color-accent)); letter-spacing: .04em;
+}
+
+/* ---------- Section labels ---------- */
+.eyebrow {
+  display: inline-flex; align-items: center; gap: .55rem;
+  font-size: .76rem; font-weight: 800; letter-spacing: .07em; text-transform: uppercase;
+  color: rgb(var(--color-primary)); background: rgb(var(--color-cream));
+  box-shadow: inset 4px 4px 8px var(--shadow-d), inset -4px -4px 8px var(--shadow-l);
+  padding: .5rem 1.15rem .5rem .85rem; border-radius: 999px;
+}
+.eyebrow::before {
+  content: ''; width: .4rem; height: .4rem; border-radius: 50%;
+  background: linear-gradient(135deg, #2563EB, #DB2777); flex-shrink: 0;
+}
+
+/* Frosted variant for eyebrow labels sitting on photos / colorful gradients
+   (not the neutral page surface) — fixed light-on-dark styling so it stays
+   legible regardless of the light/dark theme toggle. */
+.eyebrow-frost {
+  background: rgba(255, 255, 255, .14);
+  box-shadow: none;
+  border: 1px solid rgba(255, 255, 255, .22);
+  color: #F9A8D4;
+}
+.eyebrow-frost::before { background: linear-gradient(135deg, #93C5FD, #F9A8D4); }
+
+/* ---------- Gradient text ---------- */
+.text-gradient {
+  background: linear-gradient(120deg, #2563EB 0%, #4F46E5 55%, #A855F7 100%);
+  -webkit-background-clip: text; background-clip: text; color: transparent;
+}
+html.dark .text-gradient {
+  background: linear-gradient(120deg, #60A5FA 0%, #818CF8 55%, #C084FC 100%);
+  -webkit-background-clip: text; background-clip: text; color: transparent;
+}
+.text-gradient-warm {
+  background: linear-gradient(120deg, #A855F7 0%, #EC4899 100%);
+  -webkit-background-clip: text; background-clip: text; color: transparent;
+}
+
+/* ---------- Oversized wordmark (hero decorative type) ---------- */
+.hero-wordmark {
+  font-family: 'Bricolage Grotesque', sans-serif; font-weight: 800; text-transform: lowercase;
+  color: rgb(var(--color-primary)); opacity: .08; letter-spacing: -0.02em;
+  line-height: 1; user-select: none; pointer-events: none;
+}
+
+/* ---------- Ambient gradient wash (glow blobs on the neumorphic base) ---------- */
+.gradient-wash { background: rgb(var(--color-cream)); position: relative; }
+.gradient-wash::before, .gradient-wash::after {
+  content: ''; position: absolute; border-radius: 50%; filter: blur(90px); z-index: 0; pointer-events: none;
+}
+.gradient-wash::before {
+  width: 480px; height: 480px; top: -160px; inset-inline-end: -120px;
+  background: radial-gradient(circle, rgba(37,99,235,.20), transparent 70%);
+}
+.gradient-wash::after {
+  width: 420px; height: 420px; bottom: -160px; inset-inline-start: -100px;
+  background: radial-gradient(circle, rgba(219,39,119,.16), transparent 70%);
+}
+html.dark .gradient-wash::before { background: radial-gradient(circle, rgba(96,165,250,.16), transparent 70%); }
+html.dark .gradient-wash::after { background: radial-gradient(circle, rgba(244,114,182,.13), transparent 70%); }
+
+/* ---------- Avatar stack ---------- */
+.avatar-stack img { border: 3px solid rgb(var(--color-cream)); }
+
+/* ---------- Nav ---------- */
+#site-header { transition: all .35s ease; }
+.nav-shell {
+  background: rgb(var(--color-cream));
+  box-shadow: 10px 10px 22px var(--shadow-d), -10px -10px 22px var(--shadow-l);
+}
+.nav-link {
+  position: relative; font-weight: 700; font-size: .74rem; text-transform: uppercase; letter-spacing: .02em;
+  padding: .6rem .8rem; border-radius: 999px; color: rgb(var(--color-ink-soft)); transition: all .25s ease;
+  white-space: nowrap;
+}
+.nav-link:hover { color: rgb(var(--color-primary)); }
+.nav-link.active {
+  color: rgb(var(--color-primary));
+  box-shadow: inset 4px 4px 8px var(--shadow-d), inset -4px -4px 8px var(--shadow-l);
+}
+
+/* Hide scrollbar but keep scroll functionality (safety net for the header nav
+   and any other row that may need to scroll instead of overflowing/overlapping) */
+.no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
+.no-scrollbar::-webkit-scrollbar { display: none; }
+
+/* ---------- Hero blob / decorative shapes ---------- */
+.blob-shape {
+  position: absolute; border-radius: 50%; filter: blur(80px); opacity: .28; z-index: 0;
+  background: radial-gradient(circle at 30% 30%, #A855F7, #2563EB);
+}
+html.dark .blob-shape { opacity: .22; }
+
+/* ---------- Before / After slider ---------- */
+.ba-slider { position: relative; overflow: hidden; border-radius: 1.5rem; aspect-ratio: 4/5; cursor: ew-resize; user-select: none; }
+.ba-slider img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; }
+.ba-slider .ba-after { clip-path: inset(0 0 0 50%); }
+.ba-slider .ba-handle {
+  position: absolute; top: 0; bottom: 0; inset-inline-start: 50%; width: 3px; background: #fff;
+  transform: translateX(-50%); box-shadow: 0 0 0 4px rgba(255,255,255,.35);
+}
+.ba-slider .ba-handle::after {
+  content: '\f337'; font-family: 'Font Awesome 6 Free'; font-weight: 900;
+  position: absolute; top: 50%; left: 50%; transform: translate(-50%,-50%);
+  width: 42px; height: 42px; background: #fff; color: #2563EB;
+  border-radius: 50%; display: flex; align-items: center; justify-content: center;
+  box-shadow: var(--shadow-soft); font-size: .9rem;
+}
+.ba-label { position: absolute; top: 1rem; padding: .25rem .75rem; border-radius: 999px; font-size: .7rem; font-weight: 700; letter-spacing: .05em; text-transform: uppercase; background: rgba(0,0,0,.55); color: #fff; }
+
+/* ---------- Image fallback shimmer (used before load / on error) ---------- */
+img.img-fallback { background: linear-gradient(135deg, rgba(37,99,235,.20), rgba(219,39,119,.20)); object-fit: cover; }
+
+/* ---------- Marquee (trust logos) ---------- */
+.marquee-track { display: flex; animation: marquee 28s linear infinite; }
+@keyframes marquee { from { transform: translateX(0); } to { transform: translateX(-50%); } }
+
+/* ---------- Star rating ---------- */
+.stars i { color: rgb(var(--color-accent)); }
+
+/* ---------- Scrollbar ---------- */
+::-webkit-scrollbar { width: 10px; }
+::-webkit-scrollbar-track { background: rgb(var(--color-cream)); }
+::-webkit-scrollbar-thumb { background: rgb(var(--color-primary)); border-radius: 999px; }
+
+/* ---------- Reveal-on-scroll (lightweight, no AOS dependency needed) ---------- */
+.reveal { opacity: 0; transform: translateY(24px); transition: opacity .7s ease, transform .7s ease; }
+.reveal.in-view { opacity: 1; transform: translateY(0); }
+
+/* ---------- Mobile menu ---------- */
+#mobile-menu { transform: translateX(100%); transition: transform .4s cubic-bezier(.4,0,.2,1); background: rgb(var(--color-cream)); }
+#mobile-menu.open { transform: translateX(0); }
+[dir="rtl"] #mobile-menu { transform: translateX(-100%); }
+[dir="rtl"] #mobile-menu.open { transform: translateX(0); }
+
+/* ---------- Toggle switch (dark mode) ---------- */
+.toggle-track {
+  width: 46px; height: 26px; border-radius: 999px; position: relative; transition: box-shadow .3s;
+  background: rgb(var(--color-cream));
+  box-shadow: inset 4px 4px 8px var(--shadow-d), inset -4px -4px 8px var(--shadow-l);
+}
+.toggle-thumb {
+  position: absolute; top: 3px; inset-inline-start: 3px; width: 20px; height: 20px; border-radius: 50%;
+  background: linear-gradient(135deg, #2563EB, #4F46E5); transition: inset-inline-start .3s;
+  box-shadow: 0 2px 6px rgba(0,0,0,.3);
+}
+html.dark .toggle-thumb { inset-inline-start: 23px; background: linear-gradient(135deg, #60A5FA, #818CF8); }
+
+/* ---------- Pricing table highlight ---------- */
+.pricing-featured {
+  box-shadow: 18px 18px 36px var(--shadow-d), -18px -18px 36px var(--shadow-l);
+  transform: scale(1.04);
+}
+
+/* ---------- Form inputs ---------- */
+.input-premium {
+  width: 100%; padding: .9rem 1.1rem; border-radius: 1rem; border: none;
+  background: rgb(var(--color-cream)); color: rgb(var(--color-ink));
+  box-shadow: inset 6px 6px 12px var(--shadow-d), inset -6px -6px 12px var(--shadow-l);
+  transition: all .25s ease;
+}
+.input-premium::placeholder { color: rgb(var(--color-ink-soft)); }
+.input-premium:focus { outline: none; box-shadow: inset 6px 6px 12px var(--shadow-d), inset -6px -6px 12px var(--shadow-l), 0 0 0 3px rgba(37,99,235,.35); }
+
+/* ---------- Table ---------- */
+.table-premium th { text-align: start; font-size: .72rem; letter-spacing: .08em; text-transform: uppercase; color: rgb(var(--color-ink-soft)); font-weight: 700; }
+.table-premium tr:not(:last-child) td { border-bottom: 1px solid rgba(120,120,150,.16); }
+
+/* ---------- Filter chips (category/tab pills — services, gallery, blog, doctors, service-details) ---------- */
+.filter-chip {
+  padding: .65rem 1.35rem; border-radius: 999px; font-size: .875rem; font-weight: 700;
+  background: rgb(var(--color-blush)); color: rgb(var(--color-ink)); transition: all .25s ease;
+}
+.filter-chip:hover { background: rgb(var(--color-primary)); color: #fff; }
+.filter-chip.is-active { background: linear-gradient(135deg, #2563EB 0%, #4F46E5 100%); color: #fff; box-shadow: 0 8px 18px -6px rgba(37,99,235,.5); }
+
+/* ---------- Pagination number buttons ---------- */
+.page-btn {
+  width: 2.5rem; height: 2.5rem; border-radius: 999px; font-weight: 700; font-size: .9rem;
+  display: inline-flex; align-items: center; justify-content: center;
+  background: rgb(var(--color-blush)); color: rgb(var(--color-ink)); transition: all .2s ease;
+}
+.page-btn:hover:not(:disabled) { background: rgb(var(--color-primary)); color: #fff; }
+.page-btn.is-active { background: linear-gradient(135deg, #2563EB 0%, #4F46E5 100%); color: #fff; }
+.page-btn:disabled { opacity: .4; cursor: not-allowed; }
+
+/* ---------- Fixed-opacity dark scrim (always dark, does NOT flip with theme —
+   used over hero/banner photos so text stays legible regardless of light/dark mode) ---------- */
+.bg-ink-scrim { background-color: rgba(17, 17, 30, .55); }
+.bg-ink-scrim-strong { background-color: rgba(17, 17, 30, .72); }
+
+/* ---------- Dark gradient scrims over photos ----------
+   Tailwind's from-ink/via-ink/to-ink utilities never generated any CSS ("ink"
+   is not registered in tailwind.config's color palette, so the gradient
+   color-stop classes silently no-op) which left several hero/card/portrait
+   photos with zero darkening and, in turn, low-contrast or invisible text.
+   These fixed, always-on gradients replace those utilities everywhere. */
+.scrim-hero   { background: linear-gradient(to top, rgba(17,17,30,1) 0%, rgba(17,17,30,.72) 42%, rgba(17,17,30,.22) 100%); }
+.scrim-card   { background: linear-gradient(to top, rgba(17,17,30,.92) 0%, rgba(17,17,30,.22) 55%, transparent 100%); }
+.scrim-side   { background: linear-gradient(to top, rgba(17,17,30,.92) 0%, rgba(17,17,30,.42) 50%, rgba(17,17,30,.10) 100%); }
+.scrim-solid  { background: linear-gradient(to bottom, rgba(17,17,30,1) 0%, rgba(17,17,30,.95) 50%, rgba(17,17,30,1) 100%); }
+
+/* ---------- Auth tab pill switcher (login / register) ---------- */
+.auth-tab-btn { color: rgb(var(--color-ink-soft)); }
+.auth-tab-btn.is-active { background: rgb(var(--color-primary)); color: #fff; box-shadow: 0 10px 24px -10px rgba(37,99,235,.5); }
+
+/* ---------- Dark-sidebar nav links (patient + admin dashboards) ----------
+   Always sits on the permanently-dark .bg-ink-fixed sidebar, so its base/hover/active
+   states are self-contained here rather than relying on JS to juggle raw
+   Tailwind utility classes (which previously used light-surface tokens that
+   didn't match this dark context once a tab was deactivated). */
+.sidebar-link { color: rgba(255,255,255,.68); transition: all .2s ease; }
+.sidebar-link:hover { background: rgba(255,255,255,.06); color: #fff; }
+.sidebar-link.is-active {
+  background: linear-gradient(135deg, #2563EB 0%, #4F46E5 100%);
+  color: #fff; box-shadow: 0 10px 24px -8px rgba(37,99,235,.55);
+}
+
+/* ---------- Table / list pagination controls (e.g. admin dashboard) ---------- */
+.pager-btn {
+  width: 2.25rem; height: 2.25rem; border-radius: 999px;
+  display: flex; align-items: center; justify-content: center;
+  font-weight: 600; font-size: .85rem;
+  background: rgb(var(--color-blush)); color: rgb(var(--color-ink));
+  transition: all .2s ease;
+}
+.pager-btn:hover:not(:disabled):not(.is-active) { background: rgb(var(--color-primary) / .16); }
+.pager-btn.is-active { background: rgb(var(--color-primary)); color: #fff; }
+.pager-btn:disabled { opacity: .4; cursor: not-allowed; }
+
+/* ---------- Header dropdown menus (Home / Treatments) ----------
+   Opens on hover (desktop mouse, via the existing group-hover utilities)
+   AND on click (JS toggles .is-open) so it also works on touch devices and
+   for keyboard/click users. The !important pairing guarantees the open
+   state always wins regardless of stylesheet load order. */
+.dropdown-panel { transition: opacity .2s ease, visibility .2s ease, transform .2s ease; transform: translateY(-6px); }
+.group:hover .dropdown-panel,
+.dropdown-panel.is-open { opacity: 1 !important; visibility: visible !important; transform: translateY(0); }
+.dropdown-chevron { transition: transform .2s ease; }
+.group:hover .dropdown-chevron,
+[data-dropdown-btn][aria-expanded="true"] .dropdown-chevron { transform: rotate(180deg); }
+.dropdown-item { display: flex; align-items: flex-start; gap: .75rem; padding: .65rem .75rem; border-radius: .9rem; transition: background .2s ease; }
+.dropdown-item:hover { background: rgb(var(--color-blush)); }
+
+/* ---------- Icon badge (feature/service circular icons) ---------- */
+.icon-badge {
+  width: 3.25rem; height: 3.25rem; border-radius: 50%; flex-shrink: 0;
+  display: inline-flex; align-items: center; justify-content: center; font-size: 1.1rem;
+  background: rgb(var(--color-cream)); color: rgb(var(--color-primary));
+  box-shadow: 6px 6px 12px var(--shadow-d), -6px -6px 12px var(--shadow-l);
+}
+.icon-badge-inset {
+  width: 3.25rem; height: 3.25rem; border-radius: 50%; flex-shrink: 0;
+  display: inline-flex; align-items: center; justify-content: center; font-size: 1.1rem;
+  background: rgb(var(--color-cream)); color: rgb(var(--color-primary));
+  box-shadow: inset 5px 5px 10px var(--shadow-d), inset -5px -5px 10px var(--shadow-l);
+}
+/* Accent-colored variant of .icon-badge (pink/purple), used to add visual
+   rhythm to rows of stat cards so they aren't all the same primary blue. */
+.icon-badge-accent {
+  width: 3.25rem; height: 3.25rem; border-radius: 50%; flex-shrink: 0;
+  display: inline-flex; align-items: center; justify-content: center; font-size: 1.1rem;
+  background: rgb(var(--color-cream)); color: rgb(var(--color-accent));
+  box-shadow: 6px 6px 12px var(--shadow-d), -6px -6px 12px var(--shadow-l);
+}
+/* Icon chip used on the dark patient-dashboard sidebar (frosted circle on
+   the always-dark .bg-ink-fixed background, independent of theme toggle). */
+.icon-chip-dark {
+  width: 2.75rem; height: 2.75rem; border-radius: 50%; flex-shrink: 0;
+  display: inline-flex; align-items: center; justify-content: center; font-size: 1rem;
+  background: rgba(255,255,255,.08); color: #fff; border: 1px solid rgba(255,255,255,.12);
+}
+
+/* ---------- Misc ---------- */
+.aspect-portrait { aspect-ratio: 3/4; }
+.line-clamp-2 { display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; }
+.line-clamp-3 { display: -webkit-box; -webkit-line-clamp: 3; -webkit-box-orient: vertical; overflow: hidden; }
+
+/* ---------- Print-safe / RTL helpers ---------- */
+[dir="rtl"] .flip-rtl { transform: scaleX(-1); }
+
+/* ---------- Page loading buffer ----------
+   A brief full-screen loader shown on every page while fonts/CDN styles/images
+   finish loading, so visitors see a smooth branded transition instead of a
+   flash of unstyled content. js/main.js fades it out (adds .is-hidden). */
+.page-loader {
+  position: fixed; inset: 0; z-index: 9999;
+  display: flex; align-items: center; justify-content: center;
+  background: rgb(var(--color-cream));
+  transition: opacity .45s ease, visibility .45s ease;
+}
+.page-loader.is-hidden { opacity: 0; visibility: hidden; pointer-events: none; }
+.page-loader.page-loader-dark { background: rgb(17 17 30); }
+.loader-orbit { position: relative; width: 4.5rem; height: 4.5rem; display: flex; align-items: center; justify-content: center; }
+.loader-orbit::before {
+  content: ""; position: absolute; inset: 0; border-radius: 50%;
+  border: 4px solid rgb(var(--color-primary) / .18);
+  border-top-color: rgb(var(--color-primary));
+  animation: loader-spin .8s linear infinite;
+}
+.page-loader-dark .loader-orbit::before { border-color: rgb(255 255 255 / .15); border-top-color: rgb(var(--color-accent)); }
+@keyframes loader-spin { to { transform: rotate(360deg); } }
