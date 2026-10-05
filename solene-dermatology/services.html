@@ -120,31 +120,30 @@
     <a href="pricing.html" class="py-3 border-b border-current/10">Pricing</a>
     <a href="contact.html" class="py-3">Contact</a>
   </nav>
-  <div class="flex items-center gap-3 mt-6">
+  <div class="flex items-center gap-3 mt-6 sm:hidden">
     <button data-theme-toggle class="toggle-track"><span class="toggle-thumb"></span></button>
     <span class="text-sm text-ink-soft font-semibold">Dark mode</span>
   </div>
-  <button data-dir-toggle class="mt-4 neu-btn inline-flex items-center gap-1.5 text-xs font-bold rounded-full px-4 py-2.5 text-primary"><i class="fa-solid fa-arrow-right-arrow-left"></i> Toggle EN / AR (RTL demo)</button>
+  <button data-dir-toggle class="mt-4 lg:hidden neu-btn inline-flex items-center gap-1.5 text-xs font-bold rounded-full px-4 py-2.5 text-primary"><i class="fa-solid fa-arrow-right-arrow-left"></i> Toggle EN / AR (RTL demo)</button>
   <div class="flex flex-col gap-3 mt-6">
-    <a href="login.html" class="btn btn-outline w-full">Login / Register</a>
     <a href="contact.html" class="btn btn-primary w-full">Book Now</a>
   </div>
 </aside>
 <!-- ================= PAGE HERO ================= -->
-<section class="relative pt-40 pb-16 overflow-hidden gradient-wash">
-  <div class="blob-shape w-[420px] h-[420px] -top-32 -start-32"></div>
-  <div class="max-w-7xl mx-auto px-6 lg:px-8 relative z-10 text-center reveal">
-    <span class="eyebrow">Our Treatments</span>
-    <h1 class="font-display text-4xl sm:text-5xl font-bold mt-6">Every Treatment Your Skin Needs</h1>
-    <p class="text-ink-soft mt-5 max-w-xl mx-auto">From everyday medical dermatology to advanced cosmetic and laser procedures — filter by specialty to find your fit.</p>
-    <div class="flex items-center justify-center gap-2 text-sm text-ink-soft mt-6">
-      <a href="index.html" class="hover:text-primary">Home</a><span>/</span><span class="text-primary font-semibold">Treatments</span>
+<section class="relative pt-40 pb-20 min-h-[420px] lg:min-h-[480px] flex items-center overflow-hidden bg-cover bg-center" style="background-image:url('https://images.unsplash.com/photo-1600334129128-685c5582fd35?q=80&w=1800&auto=format&fit=crop')">
+  <div class="absolute inset-0 scrim-solid"></div>
+  <div class="max-w-7xl mx-auto px-6 lg:px-8 relative z-10 text-center reveal w-full">
+    <span class="eyebrow eyebrow-frost">Our Treatments</span>
+    <h1 class="font-display text-4xl sm:text-5xl font-bold mt-6 text-white">Every Treatment Your Skin Needs</h1>
+    <p class="text-white/75 mt-5 max-w-xl mx-auto">From everyday medical dermatology to advanced cosmetic and laser procedures — filter by specialty to find your fit.</p>
+    <div class="flex items-center justify-center gap-2 text-sm text-white/65 mt-6">
+      <a href="index.html" class="hover:text-white transition">Home</a><span>/</span><span class="text-white font-semibold">Treatments</span>
     </div>
   </div>
 </section>
 
 <!-- ================= FILTER + GRID ================= -->
-<section class="pb-16 lg:pb-24">
+<section class="pt-10 pb-16 lg:pt-16 lg:pb-24">
   <div class="max-w-7xl mx-auto px-6 lg:px-8">
     <div class="flex flex-wrap justify-center gap-3 reveal" data-filter-group="#services-grid">
       <button data-filter="all" class="filter-chip is-active">All Treatments</button>
@@ -157,117 +156,117 @@
 
     <div id="services-grid" class="grid sm:grid-cols-2 lg:grid-cols-3 gap-7 mt-14">
 
-      <div data-filter-item data-cats="medical" class="card-premium overflow-hidden reveal">
+      <div data-filter-item data-cats="medical" class="card-premium overflow-hidden reveal flex flex-col h-full">
         <img loading="lazy" class="w-full h-52 object-cover" src="https://images.unsplash.com/photo-1616394584738-fc6e612e71b9?q=80&w=800&auto=format&fit=crop" alt="Acne treatment consultation">
-        <div class="p-7">
+        <div class="p-7 flex flex-col flex-1">
           <span class="text-xs font-bold text-accent uppercase tracking-wide">Medical Dermatology</span>
           <h3 class="font-display text-xl font-bold mt-2">Acne &amp; Blemish Care</h3>
           <p class="text-sm text-ink-soft mt-3 line-clamp-2">Customized protocols combining topical, oral and in-office therapies for lasting clarity.</p>
-          <div class="flex items-center justify-between mt-6">
+          <div class="flex items-center justify-between mt-auto pt-6">
             <span class="font-display font-bold text-primary">From $129</span>
             <a href="service-details.html" class="text-sm font-semibold text-primary hover:gap-2 inline-flex items-center gap-1">Details <i class="fa-solid fa-arrow-right rtl:rotate-180"></i></a>
           </div>
         </div>
       </div>
 
-      <div data-filter-item data-cats="laser,cosmetic" class="card-premium overflow-hidden reveal" style="transition-delay:.05s">
+      <div data-filter-item data-cats="laser,cosmetic" class="card-premium overflow-hidden reveal flex flex-col h-full" style="transition-delay:.05s">
         <img loading="lazy" class="w-full h-52 object-cover" src="https://images.unsplash.com/photo-1620916566398-39f1143ab7be?q=80&w=800&auto=format&fit=crop" alt="Laser resurfacing device">
-        <div class="p-7">
+        <div class="p-7 flex flex-col flex-1">
           <span class="text-xs font-bold text-accent uppercase tracking-wide">Laser Therapy</span>
           <h3 class="font-display text-xl font-bold mt-2">Laser Skin Resurfacing</h3>
           <p class="text-sm text-ink-soft mt-3 line-clamp-2">Fractional laser technology that improves tone, texture and fine lines.</p>
-          <div class="flex items-center justify-between mt-6">
+          <div class="flex items-center justify-between mt-auto pt-6">
             <span class="font-display font-bold text-primary">From $349</span>
             <a href="service-details.html" class="text-sm font-semibold text-primary hover:gap-2 inline-flex items-center gap-1">Details <i class="fa-solid fa-arrow-right rtl:rotate-180"></i></a>
           </div>
         </div>
       </div>
 
-      <div data-filter-item data-cats="cosmetic" class="card-premium overflow-hidden reveal" style="transition-delay:.1s">
+      <div data-filter-item data-cats="cosmetic" class="card-premium overflow-hidden reveal flex flex-col h-full" style="transition-delay:.1s">
         <img loading="lazy" class="w-full h-52 object-cover" src="https://images.unsplash.com/photo-1600334129128-685c5582fd35?q=80&w=800&auto=format&fit=crop" alt="Cosmetic injectable treatment room">
-        <div class="p-7">
+        <div class="p-7 flex flex-col flex-1">
           <span class="text-xs font-bold text-accent uppercase tracking-wide">Cosmetic Dermatology</span>
           <h3 class="font-display text-xl font-bold mt-2">Botox &amp; Dermal Fillers</h3>
           <p class="text-sm text-ink-soft mt-3 line-clamp-2">Natural-looking volume restoration and wrinkle reduction by licensed injectors.</p>
-          <div class="flex items-center justify-between mt-6">
+          <div class="flex items-center justify-between mt-auto pt-6">
             <span class="font-display font-bold text-primary">From $299</span>
             <a href="service-details.html" class="text-sm font-semibold text-primary hover:gap-2 inline-flex items-center gap-1">Details <i class="fa-solid fa-arrow-right rtl:rotate-180"></i></a>
           </div>
         </div>
       </div>
 
-      <div data-filter-item data-cats="pediatric,medical" class="card-premium overflow-hidden reveal">
+      <div data-filter-item data-cats="pediatric,medical" class="card-premium overflow-hidden reveal flex flex-col h-full">
         <img loading="lazy" class="w-full h-52 object-cover" src="https://images.unsplash.com/photo-1607990281513-2c110a25bd8c?q=80&w=800&auto=format&fit=crop" alt="Pediatric dermatology consultation">
-        <div class="p-7">
+        <div class="p-7 flex flex-col flex-1">
           <span class="text-xs font-bold text-accent uppercase tracking-wide">Pediatric</span>
           <h3 class="font-display text-xl font-bold mt-2">Pediatric Skin Care</h3>
           <p class="text-sm text-ink-soft mt-3 line-clamp-2">Gentle diagnosis and treatment of eczema, birthmarks and rashes for children.</p>
-          <div class="flex items-center justify-between mt-6">
+          <div class="flex items-center justify-between mt-auto pt-6">
             <span class="font-display font-bold text-primary">From $109</span>
             <a href="service-details.html" class="text-sm font-semibold text-primary hover:gap-2 inline-flex items-center gap-1">Details <i class="fa-solid fa-arrow-right rtl:rotate-180"></i></a>
           </div>
         </div>
       </div>
 
-      <div data-filter-item data-cats="surgical,medical" class="card-premium overflow-hidden reveal" style="transition-delay:.05s">
+      <div data-filter-item data-cats="surgical,medical" class="card-premium overflow-hidden reveal flex flex-col h-full" style="transition-delay:.05s">
         <img loading="lazy" class="w-full h-52 object-cover" src="https://images.unsplash.com/photo-1571019613454-1cb2f99b2d8b?q=80&w=800&auto=format&fit=crop" alt="Skin cancer screening">
-        <div class="p-7">
+        <div class="p-7 flex flex-col flex-1">
           <span class="text-xs font-bold text-accent uppercase tracking-wide">Surgical</span>
           <h3 class="font-display text-xl font-bold mt-2">Skin Cancer Screening &amp; Mohs Surgery</h3>
           <p class="text-sm text-ink-soft mt-3 line-clamp-2">Full-body screening and precision surgical removal with minimal scarring.</p>
-          <div class="flex items-center justify-between mt-6">
+          <div class="flex items-center justify-between mt-auto pt-6">
             <span class="font-display font-bold text-primary">From $199</span>
             <a href="service-details.html" class="text-sm font-semibold text-primary hover:gap-2 inline-flex items-center gap-1">Details <i class="fa-solid fa-arrow-right rtl:rotate-180"></i></a>
           </div>
         </div>
       </div>
 
-      <div data-filter-item data-cats="cosmetic,medical" class="card-premium overflow-hidden reveal" style="transition-delay:.1s">
+      <div data-filter-item data-cats="cosmetic,medical" class="card-premium overflow-hidden reveal flex flex-col h-full" style="transition-delay:.1s">
         <img loading="lazy" class="w-full h-52 object-cover" src="https://images.unsplash.com/photo-1570172619644-dfd03ed5d881?q=80&w=800&auto=format&fit=crop" alt="Hydrafacial treatment">
-        <div class="p-7">
+        <div class="p-7 flex flex-col flex-1">
           <span class="text-xs font-bold text-accent uppercase tracking-wide">Skin Wellness</span>
           <h3 class="font-display font-bold text-xl mt-2">HydraFacial &amp; Medical Peels</h3>
           <p class="text-sm text-ink-soft mt-3 line-clamp-2">Deep cleansing, exfoliation and hydration for an instant radiance boost.</p>
-          <div class="flex items-center justify-between mt-6">
+          <div class="flex items-center justify-between mt-auto pt-6">
             <span class="font-display font-bold text-primary">From $89</span>
             <a href="service-details.html" class="text-sm font-semibold text-primary hover:gap-2 inline-flex items-center gap-1">Details <i class="fa-solid fa-arrow-right rtl:rotate-180"></i></a>
           </div>
         </div>
       </div>
 
-      <div data-filter-item data-cats="laser" class="card-premium overflow-hidden reveal">
+      <div data-filter-item data-cats="laser" class="card-premium overflow-hidden reveal flex flex-col h-full">
         <img loading="lazy" class="w-full h-52 object-cover" src="https://images.unsplash.com/photo-1666214280391-8ff5bd3c0bf0?q=80&w=800&auto=format&fit=crop" alt="Laser hair removal treatment">
-        <div class="p-7">
+        <div class="p-7 flex flex-col flex-1">
           <span class="text-xs font-bold text-accent uppercase tracking-wide">Laser Therapy</span>
           <h3 class="font-display font-bold text-xl mt-2">Laser Hair Removal</h3>
           <p class="text-sm text-ink-soft mt-3 line-clamp-2">Long-lasting hair reduction safe for all skin tones with cooling technology.</p>
-          <div class="flex items-center justify-between mt-6">
+          <div class="flex items-center justify-between mt-auto pt-6">
             <span class="font-display font-bold text-primary">From $79</span>
             <a href="service-details.html" class="text-sm font-semibold text-primary hover:gap-2 inline-flex items-center gap-1">Details <i class="fa-solid fa-arrow-right rtl:rotate-180"></i></a>
           </div>
         </div>
       </div>
 
-      <div data-filter-item data-cats="medical" class="card-premium overflow-hidden reveal" style="transition-delay:.05s">
+      <div data-filter-item data-cats="medical" class="card-premium overflow-hidden reveal flex flex-col h-full" style="transition-delay:.05s">
         <img loading="lazy" class="w-full h-52 object-cover" src="https://images.unsplash.com/photo-1598440947619-2c35fc9aa908?q=80&w=800&auto=format&fit=crop" alt="Eczema and psoriasis treatment">
-        <div class="p-7">
+        <div class="p-7 flex flex-col flex-1">
           <span class="text-xs font-bold text-accent uppercase tracking-wide">Medical Dermatology</span>
           <h3 class="font-display font-bold text-xl mt-2">Eczema &amp; Psoriasis Management</h3>
           <p class="text-sm text-ink-soft mt-3 line-clamp-2">Long-term relief plans combining biologics, topicals and lifestyle guidance.</p>
-          <div class="flex items-center justify-between mt-6">
+          <div class="flex items-center justify-between mt-auto pt-6">
             <span class="font-display font-bold text-primary">From $139</span>
             <a href="service-details.html" class="text-sm font-semibold text-primary hover:gap-2 inline-flex items-center gap-1">Details <i class="fa-solid fa-arrow-right rtl:rotate-180"></i></a>
           </div>
         </div>
       </div>
 
-      <div data-filter-item data-cats="cosmetic" class="card-premium overflow-hidden reveal" style="transition-delay:.1s">
+      <div data-filter-item data-cats="cosmetic" class="card-premium overflow-hidden reveal flex flex-col h-full" style="transition-delay:.1s">
         <img loading="lazy" class="w-full h-52 object-cover" src="https://images.unsplash.com/photo-1512290923902-8a9f81dc236c?q=80&w=800&auto=format&fit=crop" alt="Microneedling skincare treatment">
-        <div class="p-7">
+        <div class="p-7 flex flex-col flex-1">
           <span class="text-xs font-bold text-accent uppercase tracking-wide">Cosmetic Dermatology</span>
           <h3 class="font-display font-bold text-xl mt-2">Microneedling &amp; RF Skin Tightening</h3>
           <p class="text-sm text-ink-soft mt-3 line-clamp-2">Stimulate natural collagen for firmer, more even-toned skin.</p>
-          <div class="flex items-center justify-between mt-6">
+          <div class="flex items-center justify-between mt-auto pt-6">
             <span class="font-display font-bold text-primary">From $229</span>
             <a href="service-details.html" class="text-sm font-semibold text-primary hover:gap-2 inline-flex items-center gap-1">Details <i class="fa-solid fa-arrow-right rtl:rotate-180"></i></a>
           </div>

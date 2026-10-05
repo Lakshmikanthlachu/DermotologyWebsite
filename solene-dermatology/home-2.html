@@ -121,13 +121,12 @@
     <a href="pricing.html" class="py-3 border-b border-current/10">Pricing</a>
     <a href="contact.html" class="py-3">Contact</a>
   </nav>
-  <div class="flex items-center gap-3 mt-6">
+  <div class="flex items-center gap-3 mt-6 sm:hidden">
     <button data-theme-toggle class="toggle-track"><span class="toggle-thumb"></span></button>
     <span class="text-sm text-ink-soft font-semibold">Dark mode</span>
   </div>
-  <button data-dir-toggle class="mt-4 neu-btn inline-flex items-center gap-1.5 text-xs font-bold rounded-full px-4 py-2.5 text-primary"><i class="fa-solid fa-arrow-right-arrow-left"></i> Toggle EN / AR (RTL demo)</button>
+  <button data-dir-toggle class="mt-4 lg:hidden neu-btn inline-flex items-center gap-1.5 text-xs font-bold rounded-full px-4 py-2.5 text-primary"><i class="fa-solid fa-arrow-right-arrow-left"></i> Toggle EN / AR (RTL demo)</button>
   <div class="flex flex-col gap-3 mt-6">
-    <a href="login.html" class="btn btn-outline w-full">Login / Register</a>
     <a href="contact.html" class="btn btn-primary w-full">Book Now</a>
   </div>
 </aside>
@@ -313,7 +312,7 @@
   </div>
 </section>
 
-<section class="pb-16">
+<section class="py-16 lg:py-20">
   <div class="max-w-6xl mx-auto px-6 lg:px-8">
     <div class="rounded-[2.5rem] bg-gradient-to-br from-blue-600 via-indigo-600 to-purple-600 text-white p-6 sm:p-10 lg:p-16 relative overflow-hidden reveal grid lg:grid-cols-2 gap-8 items-center">
       <div class="blob-shape w-[380px] h-[380px] -bottom-24 -start-24"></div>

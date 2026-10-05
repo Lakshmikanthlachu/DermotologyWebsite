@@ -1,9 +1,12 @@
 /* ============================================================
-   Solene Dermatology & Skin Clinic — Design System v3
-   Dark-first neumorphic "soft-UI" aesthetic: single-tone surfaces,
-   dual-tone ambient shadows for depth (no borders, no flat cards),
-   bold blue -> indigo primary with a rose/pink secondary accent,
-   pill navigation and buttons, oversized black-weight headlines.
+   Solene Dermatology & Skin Clinic — Design System v4
+   Modern flat/bordered aesthetic: crisp near-white surfaces, thin
+   hairline borders for structure, restrained single-direction
+   elevation shadows (no embossed/dual-shadow neumorphism), tinted-
+   fill icon badges for contrast. Same brand blue -> indigo primary
+   with a rose/pink secondary accent, pill navigation and buttons,
+   oversized black-weight headlines — only the surface language
+   changed, not the brand.
    Works with Tailwind CDN utility classes + these components/tokens.
    ============================================================ */
 
@@ -22,13 +25,26 @@
   --color-primary-2: 96 165 250;     /* blue-400   #60A5FA (dark-mode accent/text)  */
   --color-accent: 219 39 119;        /* pink-600   #DB2777 (light-mode secondary)   */
   --color-accent-2: 244 114 182;     /* pink-400   #F472B6 (dark-mode secondary)    */
-  --color-cream: 224 229 236;        /* surface    #E0E5EC (neumorphic light base)  */
-  --color-blush: 234 238 252;        /* tinted chip bg, light                       */
-  --color-ink: 31 41 55;             /* gray-800   #1F2937                          */
-  --color-ink-soft: 100 108 125;     /* muted slate                                 */
+  --color-cream: 250 251 253;        /* surface    near-white, crisp (not grayed)   */
+  --color-blush: 238 242 255;        /* tinted chip bg, light                       */
+  --color-ink: 23 32 46;             /* near-black, strong reading contrast         */
+  --color-ink-soft: 71 85 105;       /* slate-600, legible secondary text           */
 
-  --shadow-d: rgba(163, 177, 198, 0.6);   /* neumorphic "shade" side  */
-  --shadow-l: rgba(255, 255, 255, 0.75);  /* neumorphic "light" side  */
+  /* New flat-design tokens: a hairline border for structure, a filled
+     "recessed" tone for inputs/tracks, and three single-direction
+     elevation shadows (xs/md/lg) that replace the old dual-blur
+     neumorphic box-shadow formula everywhere below. */
+  --border-soft: rgba(15, 23, 42, 0.09);
+  --surface-raised: rgb(241 244 249);
+  --shadow-xs: 0 1px 2px rgba(15, 23, 42, .05);
+  --shadow-md: 0 6px 20px -6px rgba(15, 23, 42, .12), 0 2px 6px -2px rgba(15, 23, 42, .06);
+  --shadow-lg: 0 20px 45px -15px rgba(15, 23, 42, .18), 0 4px 10px -4px rgba(15, 23, 42, .08);
+
+  --shadow-d: rgba(163, 177, 198, 0.6);   /* legacy neumorphic tokens — kept defined so any
+                                               stray var() reference still resolves to
+                                               something reasonable, but no component below
+                                               reads these anymore. */
+  --shadow-l: rgba(255, 255, 255, 0.75);
   --shadow-premium: 0 24px 60px -18px rgba(37, 99, 235, 0.30);
   --shadow-soft: 0 10px 30px -12px rgba(37, 99, 235, 0.18);
 }
@@ -37,10 +53,16 @@ html.dark {
   color-scheme: dark;
   --color-primary: 96 165 250;       /* blue-400 for dark-mode text/icons */
   --color-accent: 244 114 182;       /* pink-400 for dark-mode text/icons */
-  --color-cream: 26 26 46;           /* #1A1A2E deep navy-ink surface */
-  --color-blush: 46 46 74;           /* raised navy chip tint */
-  --color-ink: 237 237 246;          /* near-white */
-  --color-ink-soft: 156 160 184;     /* muted periwinkle-gray */
+  --color-cream: 17 20 33;           /* deep near-black ink surface */
+  --color-blush: 36 40 62;           /* raised navy chip tint */
+  --color-ink: 237 240 246;          /* near-white */
+  --color-ink-soft: 162 170 196;     /* muted periwinkle-gray, still AA-legible */
+
+  --border-soft: rgba(255, 255, 255, 0.09);
+  --surface-raised: rgb(27 31 48);
+  --shadow-xs: 0 1px 2px rgba(0, 0, 0, .35);
+  --shadow-md: 0 6px 20px -6px rgba(0, 0, 0, .5), 0 2px 6px -2px rgba(0, 0, 0, .3);
+  --shadow-lg: 0 24px 50px -16px rgba(0, 0, 0, .65), 0 4px 10px -4px rgba(0, 0, 0, .35);
 
   --shadow-d: rgba(9, 9, 20, 0.8);
   --shadow-l: rgba(48, 48, 78, 0.75);
@@ -82,29 +104,34 @@ body {
 .bg-blush { background-color: rgb(var(--color-blush)); }
 
 /* ============================================================
-   NEUMORPHISM CORE — soft-UI raised / pressed surfaces.
-   Every neu-* element shares the page's own surface color; depth
-   comes only from the dual offset shadow, never from a border or
-   a different fill. This is what the reference site's whole visual
-   language is built on, so it is the foundation here too.
+   SURFACE CORE — flat, bordered, lightly elevated.
+   Every raised element shares the page's own surface color; structure
+   comes from a hairline border plus a restrained single-direction
+   shadow, never an embossed dual-light-source blur. This is the
+   foundation the rest of the component layer below builds on.
    ============================================================ */
 .neu-flat {
   background: rgb(var(--color-cream));
-  box-shadow: 14px 14px 28px var(--shadow-d), -14px -14px 28px var(--shadow-l);
+  border: 1px solid var(--border-soft);
+  box-shadow: var(--shadow-lg);
 }
 .neu-inset {
-  background: rgb(var(--color-cream));
-  box-shadow: inset 8px 8px 16px var(--shadow-d), inset -8px -8px 16px var(--shadow-l);
+  background: var(--surface-raised);
+  border: 1px solid var(--border-soft);
+  box-shadow: inset 0 1px 3px rgba(0, 0, 0, .08);
 }
 .neu-btn {
   background: rgb(var(--color-cream));
-  box-shadow: 6px 6px 12px var(--shadow-d), -6px -6px 12px var(--shadow-l);
-  transition: box-shadow .2s ease, transform .2s ease;
+  border: 1px solid var(--border-soft);
+  box-shadow: var(--shadow-xs);
+  transition: box-shadow .2s ease, transform .2s ease, background .2s ease, border-color .2s ease;
 }
-.neu-btn:hover { box-shadow: 3px 3px 7px var(--shadow-d), -3px -3px 7px var(--shadow-l); }
-.neu-btn:active { box-shadow: inset 4px 4px 8px var(--shadow-d), inset -4px -4px 8px var(--shadow-l); }
+.neu-btn:hover { box-shadow: var(--shadow-md); border-color: rgb(var(--color-primary) / .3); }
+.neu-btn:active { background: var(--surface-raised); box-shadow: inset 0 1px 3px rgba(0,0,0,.1); }
 .neu-btn.is-active {
-  box-shadow: inset 4px 4px 8px var(--shadow-d), inset -4px -4px 8px var(--shadow-l);
+  background: rgb(var(--color-primary) / .1);
+  border-color: rgb(var(--color-primary) / .3);
+  box-shadow: none;
   color: rgb(var(--color-primary));
 }
 
@@ -113,7 +140,7 @@ body {
   display: inline-flex; align-items: center; justify-content: center; gap: .6rem;
   padding: .9rem 1.85rem; border-radius: 999px; font-weight: 800; font-size: .85rem;
   text-transform: uppercase; letter-spacing: .03em;
-  transition: all .3s cubic-bezier(.4,0,.2,1); white-space: nowrap;
+  transition: all .25s cubic-bezier(.4,0,.2,1); white-space: nowrap;
 }
 .btn > i {
   width: 1.5rem; height: 1.5rem; border-radius: 50%; font-size: .68rem;
@@ -123,40 +150,41 @@ body {
 .btn-outline > i, .btn-white > i { background: rgba(37,99,235,.12); }
 .btn-primary {
   background: linear-gradient(135deg, #2563EB 0%, #4F46E5 100%);
-  color: #fff; box-shadow: 0 10px 24px -8px rgba(37,99,235,.55);
+  color: #fff; box-shadow: 0 8px 20px -8px rgba(37,99,235,.55);
 }
-.btn-primary:hover { transform: translateY(-2px) scale(1.02); box-shadow: 0 16px 34px -10px rgba(37,99,235,.6); }
+.btn-primary:hover { transform: translateY(-2px); box-shadow: 0 12px 26px -8px rgba(37,99,235,.6); }
 .btn-accent {
   background: linear-gradient(135deg, #DB2777 0%, #A855F7 100%);
-  color: #fff; box-shadow: 0 10px 24px -8px rgba(219,39,119,.5);
+  color: #fff; box-shadow: 0 8px 20px -8px rgba(219,39,119,.5);
 }
 .btn-accent > i { background: rgba(255,255,255,.25); }
-.btn-accent:hover { transform: translateY(-2px) scale(1.02); box-shadow: 0 16px 34px -10px rgba(219,39,119,.55); }
+.btn-accent:hover { transform: translateY(-2px); box-shadow: 0 12px 26px -8px rgba(219,39,119,.55); }
 .btn-outline {
   background: rgb(var(--color-cream)); color: rgb(var(--color-primary));
-  border: 1.5px solid rgb(var(--color-primary) / .28);
-  box-shadow: 6px 6px 12px var(--shadow-d), -6px -6px 12px var(--shadow-l);
+  border: 1.5px solid rgb(var(--color-primary) / .35);
 }
-.btn-outline:hover { box-shadow: inset 4px 4px 8px var(--shadow-d), inset -4px -4px 8px var(--shadow-l); border-color: rgb(var(--color-primary) / .45); }
-.btn-white { background: rgb(var(--color-cream)); color: rgb(var(--color-primary)); box-shadow: 6px 6px 12px var(--shadow-d), -6px -6px 12px var(--shadow-l); }
-.btn-white:hover { transform: translateY(-2px); }
+.btn-outline:hover { background: rgb(var(--color-primary) / .07); border-color: rgb(var(--color-primary) / .55); }
+.btn-white { background: rgb(var(--color-cream)); color: rgb(var(--color-primary)); border: 1px solid var(--border-soft); box-shadow: var(--shadow-xs); }
+.btn-white:hover { transform: translateY(-2px); box-shadow: var(--shadow-md); }
 
 /* ---------- Cards ---------- */
 .card-premium {
-  background: rgb(var(--color-cream)); border-radius: 1.75rem;
-  box-shadow: 14px 14px 28px var(--shadow-d), -14px -14px 28px var(--shadow-l);
-  transition: all .4s cubic-bezier(.4,0,.2,1);
+  background: rgb(var(--color-cream)); border-radius: 1.5rem;
+  border: 1px solid var(--border-soft);
+  box-shadow: var(--shadow-md);
+  transition: transform .3s cubic-bezier(.4,0,.2,1), box-shadow .3s cubic-bezier(.4,0,.2,1);
 }
-.card-premium:hover { transform: translateY(-8px); }
+.card-premium:hover { transform: translateY(-4px); box-shadow: var(--shadow-lg); }
 
 /* ---------- "More details" pill link (photo-card CTA) ---------- */
 .pill-link {
   display: inline-flex; align-items: center; gap: .6rem;
   padding: .4rem .4rem .4rem 1rem; border-radius: 999px;
   background: rgb(var(--color-cream));
-  box-shadow: 6px 6px 12px var(--shadow-d), -6px -6px 12px var(--shadow-l);
+  border: 1px solid var(--border-soft);
+  box-shadow: var(--shadow-xs);
   font-size: .82rem; font-weight: 700; color: rgb(var(--color-ink));
-  transition: all .3s ease;
+  transition: all .25s ease;
 }
 .pill-link .pill-link-icon {
   width: 1.9rem; height: 1.9rem; border-radius: 50%;
@@ -164,7 +192,7 @@ body {
   display: inline-flex; align-items: center; justify-content: center; font-size: .75rem; flex-shrink: 0;
   transition: transform .3s ease;
 }
-.pill-link:hover { box-shadow: inset 3px 3px 7px var(--shadow-d), inset -3px -3px 7px var(--shadow-l); }
+.pill-link:hover { background: rgb(var(--color-primary) / .06); box-shadow: var(--shadow-md); }
 .pill-link:hover .pill-link-icon { transform: rotate(45deg); }
 
 /* ---------- Step / index numbering (e.g. /01, /02) ---------- */
@@ -177,8 +205,8 @@ body {
 .eyebrow {
   display: inline-flex; align-items: center; gap: .55rem;
   font-size: .76rem; font-weight: 800; letter-spacing: .07em; text-transform: uppercase;
-  color: rgb(var(--color-primary)); background: rgb(var(--color-cream));
-  box-shadow: inset 4px 4px 8px var(--shadow-d), inset -4px -4px 8px var(--shadow-l);
+  color: rgb(var(--color-primary)); background: rgb(var(--color-primary) / .08);
+  border: 1px solid rgb(var(--color-primary) / .16);
   padding: .5rem 1.15rem .5rem .85rem; border-radius: 999px;
 }
 .eyebrow::before {
@@ -218,7 +246,7 @@ html.dark .text-gradient {
   line-height: 1; user-select: none; pointer-events: none;
 }
 
-/* ---------- Ambient gradient wash (glow blobs on the neumorphic base) ---------- */
+/* ---------- Ambient gradient wash (glow blobs on the flat surface) ---------- */
 .gradient-wash { background: rgb(var(--color-cream)); position: relative; }
 .gradient-wash::before, .gradient-wash::after {
   content: ''; position: absolute; border-radius: 50%; filter: blur(90px); z-index: 0; pointer-events: none;
@@ -240,18 +268,20 @@ html.dark .gradient-wash::after { background: radial-gradient(circle, rgba(244,1
 /* ---------- Nav ---------- */
 #site-header { transition: all .35s ease; }
 .nav-shell {
-  background: rgb(var(--color-cream));
-  box-shadow: 10px 10px 22px var(--shadow-d), -10px -10px 22px var(--shadow-l);
+  background: rgb(var(--color-cream) / .92);
+  backdrop-filter: blur(14px); -webkit-backdrop-filter: blur(14px);
+  border: 1px solid var(--border-soft);
+  box-shadow: var(--shadow-md);
 }
 .nav-link {
   position: relative; font-weight: 700; font-size: .74rem; text-transform: uppercase; letter-spacing: .02em;
-  padding: .6rem .8rem; border-radius: 999px; color: rgb(var(--color-ink-soft)); transition: all .25s ease;
+  padding: .6rem .8rem; border-radius: 999px; color: rgb(var(--color-ink-soft)); transition: all .2s ease;
   white-space: nowrap;
 }
-.nav-link:hover { color: rgb(var(--color-primary)); }
+.nav-link:hover { color: rgb(var(--color-primary)); background: rgb(var(--color-primary) / .06); }
 .nav-link.active {
   color: rgb(var(--color-primary));
-  box-shadow: inset 4px 4px 8px var(--shadow-d), inset -4px -4px 8px var(--shadow-l);
+  background: rgb(var(--color-primary) / .1);
 }
 
 /* Hide scrollbar but keep scroll functionality (safety net for the header nav
@@ -311,8 +341,8 @@ img.img-fallback { background: linear-gradient(135deg, rgba(37,99,235,.20), rgba
 /* ---------- Toggle switch (dark mode) ---------- */
 .toggle-track {
   width: 46px; height: 26px; border-radius: 999px; position: relative; transition: box-shadow .3s;
-  background: rgb(var(--color-cream));
-  box-shadow: inset 4px 4px 8px var(--shadow-d), inset -4px -4px 8px var(--shadow-l);
+  background: var(--surface-raised);
+  border: 1px solid var(--border-soft);
 }
 .toggle-thumb {
   position: absolute; top: 3px; inset-inline-start: 3px; width: 20px; height: 20px; border-radius: 50%;
@@ -323,40 +353,43 @@ html.dark .toggle-thumb { inset-inline-start: 23px; background: linear-gradient(
 
 /* ---------- Pricing table highlight ---------- */
 .pricing-featured {
-  box-shadow: 18px 18px 36px var(--shadow-d), -18px -18px 36px var(--shadow-l);
+  border: 2px solid rgb(var(--color-primary) / .4);
+  box-shadow: var(--shadow-lg);
   transform: scale(1.04);
 }
 
 /* ---------- Form inputs ---------- */
 .input-premium {
-  width: 100%; padding: .9rem 1.1rem; border-radius: 1rem; border: none;
-  background: rgb(var(--color-cream)); color: rgb(var(--color-ink));
-  box-shadow: inset 6px 6px 12px var(--shadow-d), inset -6px -6px 12px var(--shadow-l);
-  transition: all .25s ease;
+  width: 100%; padding: .9rem 1.1rem; border-radius: 1rem;
+  border: 1.5px solid var(--border-soft);
+  background: var(--surface-raised); color: rgb(var(--color-ink));
+  transition: all .2s ease;
 }
 .input-premium::placeholder { color: rgb(var(--color-ink-soft)); }
-.input-premium:focus { outline: none; box-shadow: inset 6px 6px 12px var(--shadow-d), inset -6px -6px 12px var(--shadow-l), 0 0 0 3px rgba(37,99,235,.35); }
+.input-premium:focus { outline: none; border-color: rgb(var(--color-primary) / .55); box-shadow: 0 0 0 3px rgba(37,99,235,.18); }
 
 /* ---------- Table ---------- */
 .table-premium th { text-align: start; font-size: .72rem; letter-spacing: .08em; text-transform: uppercase; color: rgb(var(--color-ink-soft)); font-weight: 700; }
-.table-premium tr:not(:last-child) td { border-bottom: 1px solid rgba(120,120,150,.16); }
+.table-premium tr:not(:last-child) td { border-bottom: 1px solid var(--border-soft); }
 
 /* ---------- Filter chips (category/tab pills — services, gallery, blog, doctors, service-details) ---------- */
 .filter-chip {
   padding: .65rem 1.35rem; border-radius: 999px; font-size: .875rem; font-weight: 700;
-  background: rgb(var(--color-blush)); color: rgb(var(--color-ink)); transition: all .25s ease;
+  background: var(--surface-raised); border: 1px solid var(--border-soft);
+  color: rgb(var(--color-ink)); transition: all .2s ease;
 }
-.filter-chip:hover { background: rgb(var(--color-primary)); color: #fff; }
-.filter-chip.is-active { background: linear-gradient(135deg, #2563EB 0%, #4F46E5 100%); color: #fff; box-shadow: 0 8px 18px -6px rgba(37,99,235,.5); }
+.filter-chip:hover { background: rgb(var(--color-primary) / .12); color: rgb(var(--color-primary)); border-color: rgb(var(--color-primary) / .3); }
+.filter-chip.is-active { background: linear-gradient(135deg, #2563EB 0%, #4F46E5 100%); color: #fff; border-color: transparent; box-shadow: 0 6px 16px -6px rgba(37,99,235,.5); }
 
 /* ---------- Pagination number buttons ---------- */
 .page-btn {
   width: 2.5rem; height: 2.5rem; border-radius: 999px; font-weight: 700; font-size: .9rem;
   display: inline-flex; align-items: center; justify-content: center;
-  background: rgb(var(--color-blush)); color: rgb(var(--color-ink)); transition: all .2s ease;
+  background: var(--surface-raised); border: 1px solid var(--border-soft);
+  color: rgb(var(--color-ink)); transition: all .2s ease;
 }
-.page-btn:hover:not(:disabled) { background: rgb(var(--color-primary)); color: #fff; }
-.page-btn.is-active { background: linear-gradient(135deg, #2563EB 0%, #4F46E5 100%); color: #fff; }
+.page-btn:hover:not(:disabled) { background: rgb(var(--color-primary) / .12); color: rgb(var(--color-primary)); }
+.page-btn.is-active { background: linear-gradient(135deg, #2563EB 0%, #4F46E5 100%); color: #fff; border-color: transparent; }
 .page-btn:disabled { opacity: .4; cursor: not-allowed; }
 
 /* ---------- Fixed-opacity dark scrim (always dark, does NOT flip with theme —
@@ -396,11 +429,12 @@ html.dark .toggle-thumb { inset-inline-start: 23px; background: linear-gradient(
   width: 2.25rem; height: 2.25rem; border-radius: 999px;
   display: flex; align-items: center; justify-content: center;
   font-weight: 600; font-size: .85rem;
-  background: rgb(var(--color-blush)); color: rgb(var(--color-ink));
+  background: var(--surface-raised); border: 1px solid var(--border-soft);
+  color: rgb(var(--color-ink));
   transition: all .2s ease;
 }
-.pager-btn:hover:not(:disabled):not(.is-active) { background: rgb(var(--color-primary) / .16); }
-.pager-btn.is-active { background: rgb(var(--color-primary)); color: #fff; }
+.pager-btn:hover:not(:disabled):not(.is-active) { background: rgb(var(--color-primary) / .12); color: rgb(var(--color-primary)); }
+.pager-btn.is-active { background: rgb(var(--color-primary)); color: #fff; border-color: transparent; }
 .pager-btn:disabled { opacity: .4; cursor: not-allowed; }
 
 /* ---------- Header dropdown menus (Home / Treatments) ----------
@@ -421,25 +455,22 @@ html.dark .toggle-thumb { inset-inline-start: 23px; background: linear-gradient(
 .icon-badge {
   width: 3.25rem; height: 3.25rem; border-radius: 50%; flex-shrink: 0;
   display: inline-flex; align-items: center; justify-content: center; font-size: 1.1rem;
-  background: rgb(var(--color-cream)); color: rgb(var(--color-primary));
-  box-shadow: 6px 6px 12px var(--shadow-d), -6px -6px 12px var(--shadow-l);
+  background: rgb(var(--color-primary) / .1); color: rgb(var(--color-primary));
 }
 .icon-badge-inset {
   width: 3.25rem; height: 3.25rem; border-radius: 50%; flex-shrink: 0;
   display: inline-flex; align-items: center; justify-content: center; font-size: 1.1rem;
-  background: rgb(var(--color-cream)); color: rgb(var(--color-primary));
-  box-shadow: inset 5px 5px 10px var(--shadow-d), inset -5px -5px 10px var(--shadow-l);
+  background: var(--surface-raised); border: 1px solid var(--border-soft); color: rgb(var(--color-primary));
 }
 /* Accent-colored variant of .icon-badge (pink/purple), used to add visual
    rhythm to rows of stat cards so they aren't all the same primary blue. */
 .icon-badge-accent {
   width: 3.25rem; height: 3.25rem; border-radius: 50%; flex-shrink: 0;
   display: inline-flex; align-items: center; justify-content: center; font-size: 1.1rem;
-  background: rgb(var(--color-cream)); color: rgb(var(--color-accent));
-  box-shadow: 6px 6px 12px var(--shadow-d), -6px -6px 12px var(--shadow-l);
+  background: rgb(var(--color-accent) / .1); color: rgb(var(--color-accent));
 }
-/* Icon chip used on the dark patient-dashboard sidebar (frosted circle on
-   the always-dark .bg-ink-fixed background, independent of theme toggle). */
+/* Icon chip used on a permanently-dark surface (e.g. .bg-ink-fixed panels),
+   independent of the theme toggle. */
 .icon-chip-dark {
   width: 2.75rem; height: 2.75rem; border-radius: 50%; flex-shrink: 0;
   display: inline-flex; align-items: center; justify-content: center; font-size: 1rem;

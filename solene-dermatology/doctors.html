@@ -120,31 +120,30 @@
     <a href="pricing.html" class="py-3 border-b border-current/10">Pricing</a>
     <a href="contact.html" class="py-3">Contact</a>
   </nav>
-  <div class="flex items-center gap-3 mt-6">
+  <div class="flex items-center gap-3 mt-6 sm:hidden">
     <button data-theme-toggle class="toggle-track"><span class="toggle-thumb"></span></button>
     <span class="text-sm text-ink-soft font-semibold">Dark mode</span>
   </div>
-  <button data-dir-toggle class="mt-4 neu-btn inline-flex items-center gap-1.5 text-xs font-bold rounded-full px-4 py-2.5 text-primary"><i class="fa-solid fa-arrow-right-arrow-left"></i> Toggle EN / AR (RTL demo)</button>
+  <button data-dir-toggle class="mt-4 lg:hidden neu-btn inline-flex items-center gap-1.5 text-xs font-bold rounded-full px-4 py-2.5 text-primary"><i class="fa-solid fa-arrow-right-arrow-left"></i> Toggle EN / AR (RTL demo)</button>
   <div class="flex flex-col gap-3 mt-6">
-    <a href="login.html" class="btn btn-outline w-full">Login / Register</a>
     <a href="contact.html" class="btn btn-primary w-full">Book Now</a>
   </div>
 </aside>
 <!-- ================= PAGE HERO ================= -->
-<section class="relative pt-40 pb-16 overflow-hidden gradient-wash">
-  <div class="blob-shape w-[420px] h-[420px] -top-32 -end-32"></div>
-  <div class="max-w-7xl mx-auto px-6 lg:px-8 relative z-10 text-center reveal">
-    <span class="eyebrow">Our Doctors</span>
-    <h1 class="font-display text-4xl sm:text-5xl font-bold mt-6">Meet Our Board-Certified Dermatologists</h1>
-    <p class="text-ink-soft mt-5 max-w-xl mx-auto">Twelve fellowship-trained specialists across every subspecialty — each dedicated to unhurried, individualized care.</p>
-    <div class="flex items-center justify-center gap-2 text-sm text-ink-soft mt-6">
-      <a href="index.html" class="hover:text-primary">Home</a><span>/</span><span class="text-primary font-semibold">Doctors</span>
+<section class="relative pt-40 pb-20 min-h-[420px] lg:min-h-[480px] flex items-center overflow-hidden bg-cover bg-center" style="background-image:url('https://images.unsplash.com/photo-1571019613454-1cb2f99b2d8b?q=80&w=1800&auto=format&fit=crop')">
+  <div class="absolute inset-0 scrim-solid"></div>
+  <div class="max-w-7xl mx-auto px-6 lg:px-8 relative z-10 text-center reveal w-full">
+    <span class="eyebrow eyebrow-frost">Our Doctors</span>
+    <h1 class="font-display text-4xl sm:text-5xl font-bold mt-6 text-white">Meet Our Board-Certified Dermatologists</h1>
+    <p class="text-white/75 mt-5 max-w-xl mx-auto">Twelve fellowship-trained specialists across every subspecialty — each dedicated to unhurried, individualized care.</p>
+    <div class="flex items-center justify-center gap-2 text-sm text-white/65 mt-6">
+      <a href="index.html" class="hover:text-white transition">Home</a><span>/</span><span class="text-white font-semibold">Doctors</span>
     </div>
   </div>
 </section>
 
 <!-- ================= FILTER + GRID ================= -->
-<section class="pb-16 lg:pb-24">
+<section class="pt-10 pb-16 lg:pt-16 lg:pb-24">
   <div class="max-w-7xl mx-auto px-6 lg:px-8">
     <div class="flex flex-wrap justify-center gap-3 reveal" data-filter-group="#doctors-grid">
       <button data-filter="all" class="filter-chip is-active">All Doctors</button>
@@ -157,79 +156,79 @@
 
     <div id="doctors-grid" class="grid sm:grid-cols-2 lg:grid-cols-3 gap-8 mt-14">
 
-      <div data-filter-item data-cats="cosmetic" class="card-premium overflow-hidden reveal">
+      <div data-filter-item data-cats="cosmetic" class="card-premium overflow-hidden reveal flex flex-col h-full">
         <div class="aspect-[4/3] overflow-hidden"><img loading="lazy" class="w-full h-full object-cover" src="https://images.unsplash.com/photo-1622253692010-333f2da6031d?q=80&w=700&auto=format&fit=crop" alt="Dr. Ava Bennett"></div>
-        <div class="p-6">
+        <div class="p-6 flex flex-col flex-1">
           <h3 class="font-display font-bold text-xl">Dr. Ava Bennett</h3>
           <p class="text-accent text-sm font-medium mt-1">Cosmetic Dermatology, MD, FAAD</p>
           <p class="text-sm text-ink-soft mt-3">15 years experience in injectables, laser resurfacing and non-surgical facial rejuvenation.</p>
-          <div class="flex items-center justify-between mt-5">
+          <div class="flex items-center justify-between mt-auto pt-5">
             <div class="flex gap-3 text-primary"><i class="fa-brands fa-linkedin"></i><i class="fa-brands fa-instagram"></i><i class="fa-solid fa-envelope"></i></div>
             <a href="contact.html" class="text-sm font-semibold text-primary">Book →</a>
           </div>
         </div>
       </div>
 
-      <div data-filter-item data-cats="laser" class="card-premium overflow-hidden reveal" style="transition-delay:.05s">
+      <div data-filter-item data-cats="laser" class="card-premium overflow-hidden reveal flex flex-col h-full" style="transition-delay:.05s">
         <div class="aspect-[4/3] overflow-hidden"><img loading="lazy" class="w-full h-full object-cover" src="https://images.unsplash.com/photo-1580489944761-15a19d654956?q=80&w=700&auto=format&fit=crop" alt="Dr. James Whitfield"></div>
-        <div class="p-6">
+        <div class="p-6 flex flex-col flex-1">
           <h3 class="font-display font-bold text-xl">Dr. James Whitfield</h3>
           <p class="text-accent text-sm font-medium mt-1">Laser Specialist, MD</p>
           <p class="text-sm text-ink-soft mt-3">Leads our laser division with expertise in resurfacing, hair removal and pigmentation correction.</p>
-          <div class="flex items-center justify-between mt-5">
+          <div class="flex items-center justify-between mt-auto pt-5">
             <div class="flex gap-3 text-primary"><i class="fa-brands fa-linkedin"></i><i class="fa-brands fa-instagram"></i><i class="fa-solid fa-envelope"></i></div>
             <a href="contact.html" class="text-sm font-semibold text-primary">Book →</a>
           </div>
         </div>
       </div>
 
-      <div data-filter-item data-cats="pediatric,medical" class="card-premium overflow-hidden reveal" style="transition-delay:.1s">
+      <div data-filter-item data-cats="pediatric,medical" class="card-premium overflow-hidden reveal flex flex-col h-full" style="transition-delay:.1s">
         <div class="aspect-[4/3] overflow-hidden"><img loading="lazy" class="w-full h-full object-cover" src="https://images.unsplash.com/photo-1607990281513-2c110a25bd8c?q=80&w=700&auto=format&fit=crop" alt="Dr. Maya Chen"></div>
-        <div class="p-6">
+        <div class="p-6 flex flex-col flex-1">
           <h3 class="font-display font-bold text-xl">Dr. Maya Chen</h3>
           <p class="text-accent text-sm font-medium mt-1">Pediatric Dermatology, MD</p>
           <p class="text-sm text-ink-soft mt-3">Specializes in gentle, family-centered care for infants, children and teens.</p>
-          <div class="flex items-center justify-between mt-5">
+          <div class="flex items-center justify-between mt-auto pt-5">
             <div class="flex gap-3 text-primary"><i class="fa-brands fa-linkedin"></i><i class="fa-brands fa-instagram"></i><i class="fa-solid fa-envelope"></i></div>
             <a href="contact.html" class="text-sm font-semibold text-primary">Book →</a>
           </div>
         </div>
       </div>
 
-      <div data-filter-item data-cats="surgical,medical" class="card-premium overflow-hidden reveal">
+      <div data-filter-item data-cats="surgical,medical" class="card-premium overflow-hidden reveal flex flex-col h-full">
         <div class="aspect-[4/3] overflow-hidden"><img loading="lazy" class="w-full h-full object-cover" src="https://images.unsplash.com/photo-1559839734-2b71ea197ec2?q=80&w=700&auto=format&fit=crop" alt="Dr. Omar Haddad"></div>
-        <div class="p-6">
+        <div class="p-6 flex flex-col flex-1">
           <h3 class="font-display font-bold text-xl">Dr. Omar Haddad</h3>
           <p class="text-accent text-sm font-medium mt-1">Surgical Dermatology, MD, FACMS</p>
           <p class="text-sm text-ink-soft mt-3">Fellowship-trained Mohs surgeon focused on skin cancer treatment and reconstruction.</p>
-          <div class="flex items-center justify-between mt-5">
+          <div class="flex items-center justify-between mt-auto pt-5">
             <div class="flex gap-3 text-primary"><i class="fa-brands fa-linkedin"></i><i class="fa-brands fa-instagram"></i><i class="fa-solid fa-envelope"></i></div>
             <a href="contact.html" class="text-sm font-semibold text-primary">Book →</a>
           </div>
         </div>
       </div>
 
-      <div data-filter-item data-cats="medical" class="card-premium overflow-hidden reveal" style="transition-delay:.05s">
+      <div data-filter-item data-cats="medical" class="card-premium overflow-hidden reveal flex flex-col h-full" style="transition-delay:.05s">
         <div class="aspect-[4/3] overflow-hidden"><img loading="lazy" class="w-full h-full object-cover" src="https://images.unsplash.com/photo-1537368910025-700350fe46c7?q=80&w=700&auto=format&fit=crop" alt="Dr. Sofia Reyes"></div>
-        <div class="p-6">
+        <div class="p-6 flex flex-col flex-1">
           <h3 class="font-display font-bold text-xl">Dr. Sofia Reyes</h3>
           <p class="text-accent text-sm font-medium mt-1">Medical Dermatology, MD</p>
           <p class="text-sm text-ink-soft mt-3">Expert in acne, eczema, psoriasis and complex medical skin conditions.</p>
-          <div class="flex items-center justify-between mt-5">
+          <div class="flex items-center justify-between mt-auto pt-5">
             <div class="flex gap-3 text-primary"><i class="fa-brands fa-linkedin"></i><i class="fa-brands fa-instagram"></i><i class="fa-solid fa-envelope"></i></div>
             <a href="contact.html" class="text-sm font-semibold text-primary">Book →</a>
           </div>
         </div>
       </div>
 
-      <div data-filter-item data-cats="cosmetic,laser" class="card-premium overflow-hidden reveal" style="transition-delay:.1s">
+      <div data-filter-item data-cats="cosmetic,laser" class="card-premium overflow-hidden reveal flex flex-col h-full" style="transition-delay:.1s">
         <div class="aspect-[4/3] overflow-hidden"><img loading="lazy" class="w-full h-full object-cover" src="https://images.unsplash.com/photo-1573497019940-1c28c88b4f3e?q=80&w=700&auto=format&fit=crop" alt="Dr. Nora Ahmadi">
         </div>
-        <div class="p-6">
+        <div class="p-6 flex flex-col flex-1">
           <h3 class="font-display font-bold text-xl">Dr. Nora Ahmadi</h3>
           <p class="text-accent text-sm font-medium mt-1">Cosmetic &amp; Laser Dermatology, MD</p>
           <p class="text-sm text-ink-soft mt-3">Combines cosmetic and laser expertise for comprehensive facial rejuvenation plans.</p>
-          <div class="flex items-center justify-between mt-5">
+          <div class="flex items-center justify-between mt-auto pt-5">
             <div class="flex gap-3 text-primary"><i class="fa-brands fa-linkedin"></i><i class="fa-brands fa-instagram"></i><i class="fa-solid fa-envelope"></i></div>
             <a href="contact.html" class="text-sm font-semibold text-primary">Book →</a>
           </div>

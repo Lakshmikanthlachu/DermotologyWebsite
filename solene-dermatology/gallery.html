@@ -120,30 +120,29 @@
     <a href="pricing.html" class="py-3 border-b border-current/10">Pricing</a>
     <a href="contact.html" class="py-3">Contact</a>
   </nav>
-  <div class="flex items-center gap-3 mt-6">
+  <div class="flex items-center gap-3 mt-6 sm:hidden">
     <button data-theme-toggle class="toggle-track"><span class="toggle-thumb"></span></button>
     <span class="text-sm text-ink-soft font-semibold">Dark mode</span>
   </div>
-  <button data-dir-toggle class="mt-4 neu-btn inline-flex items-center gap-1.5 text-xs font-bold rounded-full px-4 py-2.5 text-primary"><i class="fa-solid fa-arrow-right-arrow-left"></i> Toggle EN / AR (RTL demo)</button>
+  <button data-dir-toggle class="mt-4 lg:hidden neu-btn inline-flex items-center gap-1.5 text-xs font-bold rounded-full px-4 py-2.5 text-primary"><i class="fa-solid fa-arrow-right-arrow-left"></i> Toggle EN / AR (RTL demo)</button>
   <div class="flex flex-col gap-3 mt-6">
-    <a href="login.html" class="btn btn-outline w-full">Login / Register</a>
     <a href="contact.html" class="btn btn-primary w-full">Book Now</a>
   </div>
 </aside>
 <!-- ================= PAGE HERO ================= -->
-<section class="relative pt-40 pb-16 overflow-hidden gradient-wash">
-  <div class="blob-shape w-[420px] h-[420px] -top-32 -start-32"></div>
-  <div class="max-w-7xl mx-auto px-6 lg:px-8 relative z-10 text-center reveal">
-    <span class="eyebrow">Before &amp; After</span>
-    <h1 class="font-display text-4xl sm:text-5xl font-bold mt-6">Real Patients, Real Results</h1>
-    <p class="text-ink-soft mt-5 max-w-xl mx-auto">Drag the slider on each case to see the transformation. All results shown with patient consent.</p>
-    <div class="flex items-center justify-center gap-2 text-sm text-ink-soft mt-6">
-      <a href="index.html" class="hover:text-primary">Home</a><span>/</span><span class="text-primary font-semibold">Before &amp; After</span>
+<section class="relative pt-40 pb-20 min-h-[420px] lg:min-h-[480px] flex items-center overflow-hidden bg-cover bg-center" style="background-image:url('https://images.unsplash.com/photo-1570172619644-dfd03ed5d881?q=80&w=1800&auto=format&fit=crop')">
+  <div class="absolute inset-0 scrim-solid"></div>
+  <div class="max-w-7xl mx-auto px-6 lg:px-8 relative z-10 text-center reveal w-full">
+    <span class="eyebrow eyebrow-frost">Before &amp; After</span>
+    <h1 class="font-display text-4xl sm:text-5xl font-bold mt-6 text-white">Real Patients, Real Results</h1>
+    <p class="text-white/75 mt-5 max-w-xl mx-auto">Drag the slider on each case to see the transformation. All results shown with patient consent.</p>
+    <div class="flex items-center justify-center gap-2 text-sm text-white/65 mt-6">
+      <a href="index.html" class="hover:text-white transition">Home</a><span>/</span><span class="text-white font-semibold">Before &amp; After</span>
     </div>
   </div>
 </section>
 
-<section class="pb-16 lg:pb-24">
+<section class="pt-10 pb-16 lg:pt-16 lg:pb-24">
   <div class="max-w-7xl mx-auto px-6 lg:px-8">
     <div class="flex flex-wrap justify-center gap-3 reveal" data-filter-group="#gallery-grid">
       <button data-filter="all" class="filter-chip is-active">All Cases</button>
