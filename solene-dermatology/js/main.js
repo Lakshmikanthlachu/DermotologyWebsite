@@ -467,8 +467,9 @@
   document.querySelectorAll("[data-tab-btn]").forEach((btn) => {
     btn.addEventListener("click", () => {
       const target = btn.getAttribute("data-tab-btn");
-      document.querySelectorAll("[data-tab-btn]").forEach((b) => b.classList.remove("is-active"));
-      btn.classList.add("is-active");
+      document.querySelectorAll("[data-tab-btn]").forEach((b) => {
+        b.classList.toggle("is-active", b.getAttribute("data-tab-btn") === target);
+      });
       document.querySelectorAll("[data-tab-panel]").forEach((p) => p.classList.add("hidden"));
       document.querySelector(`[data-tab-panel="${target}"]`)?.classList.remove("hidden");
       // On mobile the sidebar is an off-canvas overlay opened via the hamburger
@@ -522,8 +523,43 @@
   document.querySelectorAll("form[data-demo-form]").forEach((form) => {
     form.addEventListener("submit", (e) => {
       e.preventDefault();
+      const nameFields = form.querySelectorAll("input[data-validate-name]");
+      const emailFields = form.querySelectorAll('input[type="email"]');
+      const phoneFields = form.querySelectorAll('input[type="tel"]');
+      const validName = (value) => /^[A-Za-zÀ-ÿ][A-Za-zÀ-ÿ' -]{1,}$/.test(value.trim());
+      const validEmail = (value) => /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(value.trim());
+      const validPhone = (value) => /^[+]?\d[\d\s().-]{6,}$/.test(value.trim());
+      const invalid = [
+        ...[...nameFields].filter((field) => !validName(field.value)),
+        ...[...emailFields].filter((field) => !validEmail(field.value)),
+        ...[...phoneFields].filter((field) => field.value.trim() && !validPhone(field.value)),
+      ];
+      if (invalid.length) {
+        invalid.forEach((field) => field.setAttribute("aria-invalid", "true"));
+        invalid[0].focus();
+        window.soleneToast("Please enter a valid name, email address, and phone number.");
+        return;
+      }
       window.soleneToast(form.getAttribute("data-demo-form") || "Submitted successfully.");
       form.reset();
+    });
+  });
+
+  /* Make field feedback immediate as well as enforcing it on submission. */
+  document.querySelectorAll('input[type="email"]').forEach((field) => {
+    field.addEventListener("input", () => {
+      const valid = /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(field.value.trim());
+      field.setCustomValidity(field.value && !valid ? "Enter a complete email address, for example name@example.com." : "");
+      field.toggleAttribute("aria-invalid", Boolean(field.value) && !valid);
+    });
+  });
+  document.querySelectorAll('input[type="tel"]').forEach((field) => {
+    field.addEventListener("input", () => {
+      const cleaned = field.value.replace(/[^\d+\s().-]/g, "");
+      if (field.value !== cleaned) field.value = cleaned;
+      const valid = !field.value.trim() || /^[+]?\d[\d\s().-]{6,}$/.test(field.value.trim());
+      field.setCustomValidity(valid ? "" : "Enter a valid phone number using digits only.");
+      field.toggleAttribute("aria-invalid", !valid);
     });
   });
 

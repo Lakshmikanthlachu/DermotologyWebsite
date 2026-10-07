@@ -176,9 +176,9 @@
       <p class="text-ink-soft text-sm mb-8">Fill out the form and our care coordinators will get back to you shortly.</p>
       <form data-demo-form="Thank you — your message has been sent. We'll respond within one business day." class="flex flex-col gap-5 flex-1">
         <div class="grid sm:grid-cols-2 gap-5">
-          <input required type="text" placeholder="Full Name" class="input-premium">
+          <input required data-validate-name minlength="2" type="text" placeholder="Full Name" class="input-premium">
           <input required type="email" placeholder="Email Address" class="input-premium">
-          <input type="tel" placeholder="Phone Number" class="input-premium">
+          <input type="tel" inputmode="tel" placeholder="Phone Number" class="input-premium">
           <select class="input-premium">
             <option>General Inquiry</option>
             <option>Book an Appointment</option>
@@ -190,7 +190,7 @@
         <label class="flex items-start gap-3 text-sm text-ink-soft">
           <input type="checkbox" required class="mt-1"> I consent to Solene Clinic contacting me regarding my inquiry.
         </label>
-        <button class="btn btn-primary w-full">Send Message <i class="fa-solid fa-paper-plane"></i></button>
+        <button class="btn btn-primary w-full auth-submit">Send Message <i class="fa-solid fa-paper-plane"></i></button>
       </form>
     </div>
 

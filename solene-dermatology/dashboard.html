@@ -170,7 +170,25 @@
     </div>
   </div>
 
-  <main class="max-w-7xl mx-auto px-3 sm:px-6 lg:px-8 py-6 sm:py-8">
+  <div class="max-w-7xl mx-auto px-3 sm:px-6 lg:px-8 py-6 sm:py-8 lg:flex lg:gap-8">
+    <aside class="hidden lg:flex lg:w-60 xl:w-64 shrink-0 self-start sticky top-[7rem] flex-col card-premium p-4">
+      <div class="flex items-center gap-3 px-2 pb-5 mb-3 border-b border-primary/10">
+        <img loading="lazy" class="w-11 h-11 rounded-full object-cover" src="https://images.unsplash.com/photo-1544005313-94ddf0286df2?q=80&w=200&auto=format&fit=crop" alt="Hannah R.">
+        <div class="min-w-0"><p class="font-bold text-sm truncate">Hannah Reyes</p><p class="text-xs text-ink-soft truncate">Patient ID SC-20458</p></div>
+      </div>
+      <p class="px-2 mb-2 text-[.65rem] font-bold uppercase tracking-widest text-ink-soft">My portal</p>
+      <nav class="space-y-1" aria-label="Patient dashboard navigation">
+        <button data-tab-btn="overview" class="dashboard-side-link is-active"><i class="fa-solid fa-grid-2 w-4 text-center"></i> Overview</button>
+        <button data-tab-btn="appointments" class="dashboard-side-link"><i class="fa-solid fa-calendar-days w-4 text-center"></i> Appointments</button>
+        <button data-tab-btn="records" class="dashboard-side-link"><i class="fa-solid fa-folder-open w-4 text-center"></i> Health Records</button>
+        <button data-tab-btn="billing" class="dashboard-side-link"><i class="fa-solid fa-credit-card w-4 text-center"></i> Billing &amp; Payments</button>
+        <button data-tab-btn="settings" class="dashboard-side-link"><i class="fa-solid fa-gear w-4 text-center"></i> Account Settings</button>
+      </nav>
+      <a href="contact.html" class="btn btn-primary w-full !py-3 !px-3 !text-xs mt-6">Book Appointment</a>
+      <a href="index.html" class="mt-4 px-2 text-sm font-semibold text-ink-soft hover:text-primary transition"><i class="fa-solid fa-arrow-right-from-bracket me-2"></i> Log out</a>
+    </aside>
+
+  <main class="min-w-0 flex-1">
 
       <!-- ============ OVERVIEW ============ -->
       <div data-tab-panel="overview">
@@ -385,10 +403,10 @@
             </div>
           </div>
           <form data-demo-form="Profile updated successfully." class="grid sm:grid-cols-2 gap-5">
-            <input type="text" value="Hannah" placeholder="First Name" class="input-premium">
-            <input type="text" value="Reyes" placeholder="Last Name" class="input-premium">
-            <input type="email" value="hannah.r@example.com" placeholder="Email" class="input-premium sm:col-span-2">
-            <input type="tel" value="+1 (555) 987-6543" placeholder="Phone" class="input-premium sm:col-span-2">
+            <input data-validate-name minlength="2" type="text" value="Hannah" placeholder="First Name" class="input-premium">
+            <input data-validate-name minlength="2" type="text" value="Reyes" placeholder="Last Name" class="input-premium">
+            <input data-validate-email type="email" value="hannah.r@example.com" placeholder="Email" class="input-premium sm:col-span-2">
+            <input data-validate-phone type="tel" inputmode="tel" value="+1 (555) 987-6543" placeholder="Phone" class="input-premium sm:col-span-2">
             <label class="sm:col-span-2 flex items-center gap-3 text-sm text-ink-soft"><input type="checkbox" checked class="rounded shrink-0"> Email me appointment reminders</label>
             <button class="btn btn-primary sm:col-span-2">Save Changes</button>
           </form>
@@ -397,6 +415,7 @@
       </div>
 
   </main>
+  </div>
 </div>
 
 <!-- ============ DASHBOARD MODALS (demo — client-side only) ============ -->
